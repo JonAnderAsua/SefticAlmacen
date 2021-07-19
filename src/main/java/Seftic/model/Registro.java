@@ -20,21 +20,20 @@ public class Registro {
     private String trab;
     private int cantMod;
 
-    public Registro(String serial, String desc, String coment, String tipo, String fEntrada, String fSalida, String cliente, String nTrab, String aTrab, int cantModif) throws ParseException {
+    public Registro(String serial, String desc, String coment, String tipo, String fEntrada, String fSalida, String cliente, String trab, int cantModif) throws ParseException {
         this.serial = serial;
         this.desc = desc;
         this.coment = coment;
-        if(tipo.toLowerCase(Locale.ROOT) != "pc" && tipo.toLowerCase(Locale.ROOT) != "video" && tipo.toLowerCase(Locale.ROOT) != "red" && tipo.toLowerCase(Locale.ROOT) != "otros" ){
+        if (tipo.toLowerCase(Locale.ROOT) != "pc" && tipo.toLowerCase(Locale.ROOT) != "video" && tipo.toLowerCase(Locale.ROOT) != "red" && tipo.toLowerCase(Locale.ROOT) != "otros") {
             //Hay que gestionar el que de error
-        }
-        else{
+        } else {
             this.tipo = tipo;
         }
         this.fEntrada = fEntrada;
         this.fSalida = fSalida;
 
         this.cliente = cliente;
-        this.trab = nTrab + " " + aTrab; //Junta nombre y apellido en una misma variable
+        this.trab = trab;
         this.cantMod = cantModif;
     }
 
@@ -100,5 +99,13 @@ public class Registro {
 
     public void setTrab(String trab) {
         this.trab = trab;
+    }
+
+    public int getCantMod() {
+        return cantMod;
+    }
+
+    public void setCantMod(int cantMod) {
+        this.cantMod = cantMod;
     }
 }

@@ -33,9 +33,26 @@ public class RecursosKud {
             String nTrab = rs.getString("nTrab");
             String aTrab = rs.getString("aTrab");
             int cantMod = rs.getInt("cantMod");
-            Registro r = new Registro(serial,desc,coment,tipo,fEntrada,fSalida,cliente,nTrab,aTrab,cantMod);
+            String trab = nTrab + " " + aTrab;
+            Registro r = new Registro(serial,desc,coment,tipo,fEntrada,fSalida,cliente,trab,cantMod);
             solucion.add(r);
         }
         return solucion;
+    }
+
+    public void añadirRegistro(Registro r) {
+        String request = "insert into Registrar values('"+r.getSerial()+"','"+r.getTrab()+"','"+r.getfEntrada()+"','"+r.getfSalida()+"','"+r.getCliente()+"','"+r.getCantMod()+"');";
+        dbController.execSQL(request);
+    }
+
+    public List<String> getTrabajadores() throws SQLException {
+        List<String> trabajadores = new ArrayList<>();
+        String request = "SELECT * from Trabajadores;";
+        ResultSet rs = dbController.execSQL(request);
+        while(rs.next()){
+            String s = rs.getString("nombre");
+            trabajadores.add(s);
+        }
+        return trabajadores;
     }
 }
