@@ -20,7 +20,7 @@ public class DBController {
     private void conOpen() {
         try {
             //conn = DriverManager.getConnection("jdbc:sqlite:"+pathToSQLiteDB);
-            conn = DriverManager.getConnection("jdbc:sqlite:SefticAlmacen.sql");
+            conn = DriverManager.getConnection("jdbc:sqlite:data.sqlite");
             System.out.println("Connection to SQLite has been established.");
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
