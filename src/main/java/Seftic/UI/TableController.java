@@ -1,14 +1,18 @@
-package UI;
+package Seftic.UI;
 
-import model.Registro;
+import Seftic.App;
+import Seftic.DB.RecursosKud;
+import Seftic.model.Registro;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-
 import java.net.URL;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class TableController {
@@ -55,9 +59,12 @@ public class TableController {
     @FXML
     private Button inventarioId;
 
+    private App app;
+    private RecursosKud rk = RecursosKud.getInstance();
+
     @FXML
     void añadirClick(ActionEvent event) {
-
+        app.enseñarAñadir();
     }
 
     @FXML
@@ -71,7 +78,11 @@ public class TableController {
     }
 
     @FXML
-    void initialize() {
+    void initialize() throws SQLException, ParseException {
+        List<Registro> listaTotal = rk.getRecursos();
+    }
 
+    public void setMainApp(App app) {
+        this.app = app;
     }
 }

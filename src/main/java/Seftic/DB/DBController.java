@@ -1,4 +1,4 @@
-package DB;
+package Seftic.DB;
 
 
 import java.sql.*;

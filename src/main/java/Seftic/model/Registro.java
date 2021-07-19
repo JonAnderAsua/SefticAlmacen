@@ -1,4 +1,4 @@
-package model;
+package Seftic.model;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -14,12 +14,13 @@ public class Registro {
     private String desc;
     private String coment;
     private String tipo;
-    private Date fEntrada;
-    private Date fSalida;
+    private String fEntrada;
+    private String fSalida;
     private String cliente;
     private String trab;
+    private int cantMod;
 
-    public Registro(String serial, String desc, String coment, String tipo, Date fEntrada, Date fSalida, String cliente, String nTrab, String aTrab) throws ParseException {
+    public Registro(String serial, String desc, String coment, String tipo, String fEntrada, String fSalida, String cliente, String nTrab, String aTrab, int cantModif) throws ParseException {
         this.serial = serial;
         this.desc = desc;
         this.coment = coment;
@@ -29,25 +30,12 @@ public class Registro {
         else{
             this.tipo = tipo;
         }
+        this.fEntrada = fEntrada;
+        this.fSalida = fSalida;
 
-        //DateTimeFormatter dtf5 = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm");
-        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
-        DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
-        Date fechaHoy = format.parse(timeStamp);
-        if(fEntrada.before(fechaHoy)){
-            this.fEntrada = fEntrada;
-        }
-        else{
-            //Gestionar el error
-        }
-        if(fSalida.before(fechaHoy)){
-            this.fSalida = fSalida;
-        }
-        else{
-            //Gestionar el error
-        }
         this.cliente = cliente;
         this.trab = nTrab + " " + aTrab; //Junta nombre y apellido en una misma variable
+        this.cantMod = cantModif;
     }
 
     public String getSerial() {
@@ -82,19 +70,19 @@ public class Registro {
         this.tipo = tipo;
     }
 
-    public Date getfEntrada() {
+    public String getfEntrada() {
         return fEntrada;
     }
 
-    public void setfEntrada(Date fEntrada) {
+    public void setfEntrada(String fEntrada) {
         this.fEntrada = fEntrada;
     }
 
-    public Date getfSalida() {
+    public String getfSalida() {
         return fSalida;
     }
 
-    public void setfSalida(Date fSalida) {
+    public void setfSalida(String fSalida) {
         this.fSalida = fSalida;
     }
 
