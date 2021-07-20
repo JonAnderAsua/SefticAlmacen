@@ -25,6 +25,9 @@ public class App extends Application {
     private Stage stageAñadirStock;
 
     private Scene escena;
+    private Scene escena2;
+    private Scene escena3;
+    private Scene escena4;
 
     private TableController tCont;
     private AñadirController añadirCont;
@@ -53,16 +56,19 @@ public class App extends Application {
 
         FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/Añadir.fxml"));
         root2 = loader2.load();
+        escena2 = new Scene(root2);
         añadirCont = loader2.getController();
         añadirCont.setMainApp(this);
 
         FXMLLoader loader3 = new FXMLLoader(getClass().getResource("/tablaStock.fxml"));
         root3 = loader3.load();
+        escena3 = new Scene(root3);
         stockCont = loader3.getController();
         stockCont.setMainApp(this);
 
         FXMLLoader loader4 = new FXMLLoader(getClass().getResource("/añadirProducto.fxml"));
         root4 = loader4.load();
+        escena4 = new Scene(root4);
         añadirStockCont = loader4.getController();
         añadirStockCont.setMainApp(this);
 
@@ -70,7 +76,7 @@ public class App extends Application {
     }
 
     public void enseñarAñadir(){
-        stageAñadir.setScene(new Scene(root2));
+        stageAñadir.setScene(escena2);
         stageAñadir.show();
     }
 
@@ -83,12 +89,12 @@ public class App extends Application {
     }
 
     public void mostrarInventario() {
-        stageStock.setScene(new Scene(root3));
+        stageStock.setScene(escena3);
         stageStock.show();
     }
 
     public void enseñarAñadirStock() {
-        stageAñadirStock.setScene(new Scene(root4));
+        stageAñadirStock.setScene(escena4);
         stageAñadirStock.show();
     }
 }

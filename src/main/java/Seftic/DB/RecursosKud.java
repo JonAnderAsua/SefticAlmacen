@@ -95,4 +95,42 @@ public class RecursosKud {
         String request = "INSERT INTO Producto VALUES('" + serial + "','" + desc + "','" + coment + "',0,'" + tipo + "');";
         dbController.execSQL(request);
     }
+
+    public List<Producto> getProductoPorStock(String value) throws SQLException {
+        List<Producto> productos = new ArrayList<>();
+        String request = "SELECT * FROM Producto WHERE cant > 0;";
+        if(value.equals("No")){
+            request = "SELECT * FROM Producto WHERE cant <= 0;";
+        }
+        ResultSet rs = dbController.execSQL(request);
+        while(rs.next()){
+            String serial = rs.getString("serial");
+            String desc = rs.getString("desc");
+            String coment = rs.getString("coment");
+            int cant = rs.getInt("cant");
+            String tipo = rs.getString("tipo");
+            Producto p = new Producto(serial,desc,coment,cant,tipo);
+            productos.add(p);
+        }
+        return productos;
+    }
+
+    public List<Producto> getProductoPorSerial(String text, String value) throws SQLException {
+        List<Producto> productos = new ArrayList<>();
+        String request = "SELECT * FROM Producto WHERE cant > 0 AND serial LIKE '" +text+"';";
+        if(value.equals("No")){
+            request = "SELECT * FROM Producto WHERE cant <= 0 AND serial LIKE '" +text+"';";
+        }
+        ResultSet rs = dbController.execSQL(request);
+        while(rs.next()){
+            String serial = rs.getString("serial");
+            String desc = rs.getString("desc");
+            String coment = rs.getString("coment");
+            int cant = rs.getInt("cant");
+            String tipo = rs.getString("tipo");
+            Producto p = new Producto(serial,desc,coment,cant,tipo);
+            productos.add(p);
+        }
+        return productos;
+    }
 }

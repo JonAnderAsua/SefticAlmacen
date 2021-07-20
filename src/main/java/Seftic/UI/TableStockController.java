@@ -56,6 +56,10 @@ public class TableStockController {
 
     @FXML
     private Button volverId;
+
+    @FXML
+    private TextField buscarField;
+
     private App app;
     private RecursosKud rk = RecursosKud.getInstance();
 
@@ -65,8 +69,15 @@ public class TableStockController {
     }
 
     @FXML
-    void buscarClick(ActionEvent event) {
-
+    void buscarClick(ActionEvent event) throws SQLException {
+        if(buscarField.getText().equals("")){
+            List<Producto> lista = rk.getProductoPorStock(comboId.getValue());
+            cargarTabla(lista);
+        }
+        else {
+            List<Producto> listaPorSerial = rk.getProductoPorSerial(buscarField.getText(),comboId.getValue());
+            cargarTabla(listaPorSerial);
+        }
     }
 
     @FXML
@@ -76,7 +87,7 @@ public class TableStockController {
 
     @FXML
     void initialize() throws SQLException {
-        comboId.getItems().addAll("Sí", "No");
+        comboId.getItems().addAll("Sí", "No", "Ambas");
         List<Producto> lista =  rk.getAllProductos();
         serialId.setCellValueFactory(new PropertyValueFactory<>("serial"));
         descId.setCellValueFactory(new PropertyValueFactory<>("desc"));
@@ -85,6 +96,10 @@ public class TableStockController {
         tipoId.setCellValueFactory(new PropertyValueFactory<>("tipo"));
 
         //Callback<TableColumn<Producto,String>, TableCell<Producto,String>> defaultTextFieldCellFactory = TextFieldTableCell.<Producto>forTableColumn();
+        cargarTabla(lista);
+    }
+
+    private void cargarTabla(List<Producto> lista) {
         tableStockId.getItems().clear();
         ObservableList<Producto> listaObs = FXCollections.observableArrayList();
         listaObs.addAll(lista);
