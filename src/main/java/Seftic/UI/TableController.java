@@ -77,14 +77,29 @@ public class TableController {
     private Button actualizarId;
 
     @FXML
-    void ActualizarClick(ActionEvent event) {
+    void ActualizarClick(ActionEvent event) throws SQLException, ParseException {
+        cargarTabla(rk.getRecursos());
+    }
 
+    private void cargarTabla(List<Registro> recursos) {
     }
 
 
     @FXML
     void buscarClick(ActionEvent event) {
-
+        switch (comboBuscarId.getValue()){
+            case "Serial":
+                //Buscar por serial
+                break;
+            case "Trabajador":
+                //Buscar por trabajador
+                break;
+            case "Cliente":
+                //Buscar por cliente
+                break;
+            default:
+                //No hacer nada
+        }
     }
 
     @FXML

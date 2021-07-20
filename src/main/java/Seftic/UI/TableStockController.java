@@ -84,8 +84,15 @@ public class TableStockController {
     @FXML
     void buscarClick(ActionEvent event) throws SQLException {
         if(buscarField.getText().equals("")){
-            List<Producto> lista = rk.getProductoPorStock(comboId.getValue());
-            cargarTabla(lista);
+            if(comboId.getValue().equals("Ambas")){
+                List<Producto> lista = rk.getAllProductos();
+                cargarTabla(lista);
+            }
+            else{
+                List<Producto> lista = rk.getProductoPorStock(comboId.getValue());
+                cargarTabla(lista);
+            }
+
         }
         else {
             List<Producto> listaPorSerial = rk.getProductoPorSerial(buscarField.getText(),comboId.getValue());
