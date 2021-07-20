@@ -48,6 +48,12 @@ public class AñadirController {
     @FXML
     private Label avisoLabel;
 
+    @FXML
+    private Button limpiarId;
+
+    @FXML
+    private Button volverId;
+
     private App app;
     private RecursosKud rk = RecursosKud.getInstance();
 
@@ -98,9 +104,26 @@ public class AñadirController {
         for(int i = 0; i<lista.size() ; i++ ){
             trabajadorId.getItems().add(lista.get(i));
         }
+
+
     }
 
     public void setMainApp(App app) {
         this.app = app;
     }
+
+    @FXML
+    void limpiarClick(ActionEvent event) {
+        serialId.setText("");
+        descripcionId.setText("");
+        comentarioId.setText("");
+        clienteId.setText("");
+        cantidadId.setText("");
+    }
+
+    @FXML
+    void volverClick(ActionEvent event) {
+        app.enseñarTabla();
+    }
+
 }

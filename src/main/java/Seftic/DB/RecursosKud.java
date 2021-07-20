@@ -84,4 +84,15 @@ public class RecursosKud {
         }
         return productos;
     }
+
+    public boolean comprobarSerial(String text) throws SQLException {
+        String request = "SELECT serial FROM Producto where serial LIKE '" + text + "';";
+        ResultSet rs = dbController.execSQL(request);
+        return rs.next();
+    }
+
+    public void añadirProducto(String serial, String desc, String coment, String tipo) {
+        String request = "INSERT INTO Producto VALUES('" + serial + "','" + desc + "','" + coment + "',0,'" + tipo + "');";
+        dbController.execSQL(request);
+    }
 }

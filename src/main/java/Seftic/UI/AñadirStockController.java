@@ -1,0 +1,90 @@
+package Seftic.UI;
+
+import Seftic.App;
+import Seftic.DB.RecursosKud;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+
+import java.sql.SQLException;
+import java.util.List;
+
+public class AñadirStockController {
+
+    @FXML
+    private TextField serialField;
+
+    @FXML
+    private TextField descField;
+
+    @FXML
+    private TextField comentField;
+
+    @FXML
+    private ComboBox<String> comboBoxTipo;
+
+    @FXML
+    private Button añadirLabel;
+
+    @FXML
+    private Button volverLabel;
+
+    @FXML
+    private Button limpiarLabel;
+
+    @FXML
+    private Label labelAviso;
+
+    private App app;
+    private RecursosKud rk = RecursosKud.getInstance();
+
+    @FXML
+    void añadirClick(ActionEvent event) throws SQLException {
+        if(descField.getText() == null){
+            descField.setText("");
+        }
+
+        if(comentField.getText() == null){
+            comentField.setText("");
+        }
+
+        if(serialField.getText() == null || comboBoxTipo.getValue() == null){
+            labelAviso.setText("Por favor rellena los campos obligatorios...");
+        }
+        else{
+            boolean existe = rk.comprobarSerial(serialField.getText());
+            if(existe){
+                labelAviso.setText("El producto que quieres añadir ya está en la DB");
+            }
+            else{
+                rk.añadirProducto(serialField.getText(),descField.getText(),comentField.getText(),comboBoxTipo.getValue());
+                labelAviso.setText("El producto " + serialField.getText() + " se ha añadido");
+            }
+        }
+    }
+
+    @FXML
+    void limpiarClick(ActionEvent event) {
+        serialField.setText("");
+        descField.setText("");
+        comentField.setText("");
+    }
+
+    @FXML
+    void volverClick(ActionEvent event) {
+        app.enseñarTabla();
+    }
+
+    public void setMainApp(App app) {
+        this.app = app;
+    }
+
+    @FXML
+    void initialize() throws SQLException {
+        comboBoxTipo.getItems().addAll("PC", "Video", "Red", "Otro");
+
+    }
+}

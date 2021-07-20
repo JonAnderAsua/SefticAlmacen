@@ -1,6 +1,7 @@
 package Seftic;
 
 import Seftic.UI.AñadirController;
+import Seftic.UI.AñadirStockController;
 import Seftic.UI.TableController;
 import Seftic.UI.TableStockController;
 import javafx.application.Application;
@@ -16,22 +17,26 @@ public class App extends Application {
     private Parent root;
     private Parent root2;
     private Parent root3;
+    private Parent root4;
 
     private Stage stage;
     private Stage stageAñadir;
     private Stage stageStock;
+    private Stage stageAñadirStock;
 
     private Scene escena;
 
     private TableController tCont;
     private AñadirController añadirCont;
     private TableStockController stockCont;
+    private AñadirStockController añadirStockCont;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
         stageAñadir = primaryStage;
         stageStock = primaryStage;
+        stageAñadirStock = primaryStage;
         pantailakKargatu();
 
         stage.setTitle("Almacén Seftic");
@@ -55,6 +60,13 @@ public class App extends Application {
         root3 = loader3.load();
         stockCont = loader3.getController();
         stockCont.setMainApp(this);
+
+        FXMLLoader loader4 = new FXMLLoader(getClass().getResource("/añadirProducto.fxml"));
+        root4 = loader4.load();
+        añadirStockCont = loader4.getController();
+        añadirStockCont.setMainApp(this);
+
+
     }
 
     public void enseñarAñadir(){
@@ -73,5 +85,10 @@ public class App extends Application {
     public void mostrarInventario() {
         stageStock.setScene(new Scene(root3));
         stageStock.show();
+    }
+
+    public void enseñarAñadirStock() {
+        stageAñadirStock.setScene(new Scene(root4));
+        stageAñadirStock.show();
     }
 }
