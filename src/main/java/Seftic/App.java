@@ -1,9 +1,7 @@
 package Seftic;
 
-import Seftic.UI.AñadirController;
-import Seftic.UI.AñadirStockController;
-import Seftic.UI.TableController;
-import Seftic.UI.TableStockController;
+import Seftic.UI.*;
+import Seftic.model.Producto;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,21 +16,25 @@ public class App extends Application {
     private Parent root2;
     private Parent root3;
     private Parent root4;
+    private Parent root5;
 
     private Stage stage;
     private Stage stageAñadir;
     private Stage stageStock;
     private Stage stageAñadirStock;
+    private Stage stageModificarProducto;
 
     private Scene escena;
     private Scene escena2;
     private Scene escena3;
     private Scene escena4;
+    private Scene escena5;
 
     private TableController tCont;
     private AñadirController añadirCont;
     private TableStockController stockCont;
     private AñadirStockController añadirStockCont;
+    private ModificarProducto modificarProductoCont;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -40,6 +42,7 @@ public class App extends Application {
         stageAñadir = primaryStage;
         stageStock = primaryStage;
         stageAñadirStock = primaryStage;
+        stageModificarProducto = primaryStage;
         pantailakKargatu();
 
         stage.setTitle("Almacén Seftic");
@@ -72,6 +75,12 @@ public class App extends Application {
         añadirStockCont = loader4.getController();
         añadirStockCont.setMainApp(this);
 
+        FXMLLoader loader5 = new FXMLLoader(getClass().getResource("/modificarProducto.fxml"));
+        root5 = loader5.load();
+        escena5 = new Scene(root5);
+        modificarProductoCont = loader5.getController();
+        modificarProductoCont.setMainApp(this);
+
 
     }
 
@@ -96,5 +105,11 @@ public class App extends Application {
     public void enseñarAñadirStock() {
         stageAñadirStock.setScene(escena4);
         stageAñadirStock.show();
+    }
+
+    public void modificarProducto(Producto p){
+        stageModificarProducto.setScene(escena5);
+        stageModificarProducto.show();
+        modificarProductoCont.hasieratu(p);
     }
 }

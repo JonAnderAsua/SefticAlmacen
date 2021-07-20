@@ -2,12 +2,10 @@ package Seftic.UI;
 
 import Seftic.App;
 import Seftic.DB.RecursosKud;
+import Seftic.model.Producto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -41,6 +39,7 @@ public class AñadirStockController {
     private App app;
     private RecursosKud rk = RecursosKud.getInstance();
 
+
     @FXML
     void añadirClick(ActionEvent event) throws SQLException {
         if(descField.getText() == null){
@@ -60,7 +59,7 @@ public class AñadirStockController {
                 labelAviso.setText("El producto que quieres añadir ya está en la DB");
             }
             else{
-                rk.añadirProducto(serialField.getText(),descField.getText(),comentField.getText(),comboBoxTipo.getValue());
+                rk.añadirProducto(serialField.getText(),descField.getText(),comentField.getText(),0,comboBoxTipo.getValue());
                 labelAviso.setText("El producto " + serialField.getText() + " se ha añadido");
             }
         }
@@ -75,7 +74,7 @@ public class AñadirStockController {
 
     @FXML
     void volverClick(ActionEvent event) {
-        app.enseñarTabla();
+        app.mostrarInventario();
     }
 
     public void setMainApp(App app) {
@@ -86,5 +85,11 @@ public class AñadirStockController {
     void initialize() throws SQLException {
         comboBoxTipo.getItems().addAll("PC", "Video", "Red", "Otro");
 
+    }
+
+    public void llenarCampos(Producto p) {
+        serialField.setText(p.getSerial());
+        descField.setText(p.getDesc());
+        comentField.setText(p.getComentario());
     }
 }

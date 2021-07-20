@@ -63,6 +63,19 @@ public class TableStockController {
     private App app;
     private RecursosKud rk = RecursosKud.getInstance();
 
+    private ContextMenu cm = new ContextMenu();
+    private MenuItem m1 = new MenuItem("Borrar");
+    private MenuItem m2 = new MenuItem("Modificar");
+
+    @FXML
+    private Button actualizarId;
+
+    @FXML
+    void actualizarClick(ActionEvent event) throws SQLException {
+        cargarTabla(rk.getAllProductos());
+    }
+
+
     @FXML
     void añadirClick(ActionEvent event) {
         app.enseñarAñadirStock();
@@ -96,7 +109,28 @@ public class TableStockController {
         tipoId.setCellValueFactory(new PropertyValueFactory<>("tipo"));
 
         //Callback<TableColumn<Producto,String>, TableCell<Producto,String>> defaultTextFieldCellFactory = TextFieldTableCell.<Producto>forTableColumn();
+
+        m1.setOnAction(col ->{ //Borrar
+            String serial = tableStockId.getSelectionModel().getSelectedItem().getSerial();
+            rk.borrarProducto(serial);
+        });
+
+        m2.setOnAction(col -> {
+            String serial = tableStockId.getSelectionModel().getSelectedItem().getSerial();
+            String desc = tableStockId.getSelectionModel().getSelectedItem().getDesc();
+            String coment = tableStockId.getSelectionModel().getSelectedItem().getComentario();
+            int cant = tableStockId.getSelectionModel().getSelectedItem().getCantidad();
+            String tipo = tableStockId.getSelectionModel().getSelectedItem().getTipo();
+            Producto p = new Producto(serial, desc, coment, cant, tipo);
+            app.modificarProducto(new Producto(serial, desc, coment, cant, tipo));
+
+        });
+        cm.getItems().addAll(m1,m2);
+        tableStockId.setContextMenu(cm);
+
         cargarTabla(lista);
+
+
     }
 
     private void cargarTabla(List<Producto> lista) {

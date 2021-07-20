@@ -91,8 +91,8 @@ public class RecursosKud {
         return rs.next();
     }
 
-    public void añadirProducto(String serial, String desc, String coment, String tipo) {
-        String request = "INSERT INTO Producto VALUES('" + serial + "','" + desc + "','" + coment + "',0,'" + tipo + "');";
+    public void añadirProducto(String serial, String desc, String coment, int cant,String tipo) {
+        String request = "INSERT INTO Producto VALUES('" + serial + "','" + desc + "','" + coment + "',"+cant+",'" + tipo + "');";
         dbController.execSQL(request);
     }
 
@@ -132,5 +132,10 @@ public class RecursosKud {
             productos.add(p);
         }
         return productos;
+    }
+
+    public void borrarProducto(String serial) {
+        String request = "DELETE FROM Producto WHERE serial LIKE '" + serial + "';";
+        dbController.execSQL(request);
     }
 }

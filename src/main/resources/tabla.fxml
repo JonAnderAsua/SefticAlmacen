@@ -29,5 +29,6 @@
       <Button fx:id="inventarioId" layoutX="836.0" layoutY="560.0" mnemonicParsing="false" onAction="#inventarioClick" text="Inventario" />
       <TextField fx:id="buscarTextId" layoutX="212.0" layoutY="560.0" prefHeight="26.0" prefWidth="240.0" />
       <ComboBox fx:id="comboBuscarId" layoutX="460.0" layoutY="560.0" prefWidth="150.0" />
+      <Button fx:id="actualizarId" layoutX="669.0" layoutY="560.0" mnemonicParsing="false" onAction="#ActualizarClick" text="Actualizar tabla" />
    </children>
 </AnchorPane>

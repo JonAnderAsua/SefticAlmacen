@@ -74,6 +74,15 @@ public class TableController {
     }
 
     @FXML
+    private Button actualizarId;
+
+    @FXML
+    void ActualizarClick(ActionEvent event) {
+
+    }
+
+
+    @FXML
     void buscarClick(ActionEvent event) {
 
     }
