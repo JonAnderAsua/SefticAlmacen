@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Seftic.UI.TableController">
    <children>
@@ -25,6 +26,8 @@
       </TableView>
       <Button fx:id="añadirId" layoutX="38.0" layoutY="560.0" mnemonicParsing="false" onAction="#añadirClick" text="Añadir" />
       <Button fx:id="buscarId" layoutX="138.0" layoutY="560.0" mnemonicParsing="false" onAction="#buscarClick" text="Buscar" />
-      <Button fx:id="inventarioId" layoutX="232.0" layoutY="560.0" mnemonicParsing="false" onAction="#inventarioClick" text="Inventario" />
+      <Button fx:id="inventarioId" layoutX="836.0" layoutY="560.0" mnemonicParsing="false" onAction="#inventarioClick" text="Inventario" />
+      <TextField fx:id="buscarTextId" layoutX="212.0" layoutY="560.0" prefHeight="26.0" prefWidth="240.0" />
+      <ComboBox fx:id="comboBuscarId" layoutX="460.0" layoutY="560.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

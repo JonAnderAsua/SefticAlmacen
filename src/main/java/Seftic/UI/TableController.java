@@ -5,9 +5,8 @@ import Seftic.DB.RecursosKud;
 import Seftic.model.Registro;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -59,6 +58,13 @@ public class TableController {
     @FXML
     private Button inventarioId;
 
+    @FXML
+    private TextField buscarTextId;
+
+    @FXML
+    private ComboBox<String> comboBuscarId;
+
+
     private App app;
     private RecursosKud rk = RecursosKud.getInstance();
 
@@ -74,11 +80,12 @@ public class TableController {
 
     @FXML
     void inventarioClick(ActionEvent event) {
-
+        app.mostrarInventario();
     }
 
     @FXML
     void initialize() throws SQLException, ParseException {
+        comboBuscarId.getItems().addAll("Serial", "Trabajador", "Cliente");
         List<Registro> listaTotal = rk.getRecursos();
     }
 

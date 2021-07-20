@@ -11,10 +11,7 @@ import Seftic.DB.RecursosKud;
 import Seftic.model.Registro;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class AñadirController {
 
@@ -48,14 +45,49 @@ public class AñadirController {
     @FXML
     private Button añadirId;
 
+    @FXML
+    private Label avisoLabel;
+
     private App app;
     private RecursosKud rk = RecursosKud.getInstance();
 
     @FXML
-    void añadirClick(ActionEvent event) throws ParseException {
-        Registro r = new Registro(serialId.getText(),descripcionId.getText(),comentarioId.getText(), tipoId.getValue(), fEntradaId.getValue().toString(),fSalidaId.getValue().toString(),clienteId.getText(),trabajadorId.getValue(),Integer.parseInt(cantidadId.getText()));
-        rk.añadirRegistro(r);
-        app.enseñarTabla();
+    void añadirClick(ActionEvent event) throws ParseException, SQLException {
+        String fechaOut = "";
+        String fechaIn = "";
+        Boolean hayStock = true;
+        if(serialId.getText() == null || tipoId.getValue() == null || trabajadorId.getValue() == null || cantidadId.getText() == null ){
+            avisoLabel.setText("Hay que meter los valores obligatorios");
+        }
+        else{
+            if(descripcionId.getText() == null){
+                descripcionId.setText("");
+            }
+            if(comentarioId.getText() == null){
+                comentarioId.setText("");
+            }
+            if(fEntradaId.getValue().toString() != null){
+                fechaIn = fEntradaId.getValue().toString();
+                hayStock = rk.comprobarStock(serialId.getText(),Integer.parseInt(cantidadId.getText()));
+            }
+            if(fSalidaId.getValue().toString() != null){
+                fechaOut = fSalidaId.getValue().toString();
+
+            }
+            if(clienteId.getText() == null){
+                clienteId.setText("");
+            }
+            if(hayStock){
+                Registro r = new Registro(serialId.getText(),descripcionId.getText(),comentarioId.getText(), tipoId.getValue(), fechaIn,fechaOut,clienteId.getText(),trabajadorId.getValue(),Integer.parseInt(cantidadId.getText()));
+                rk.añadirRegistro(r);
+                app.enseñarTabla();
+            }
+
+            else{
+                avisoLabel.setText("No hay tanto Stock de este producto");
+            }
+        }
+
     }
 
     @FXML
