@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TableController {
@@ -50,6 +51,9 @@ public class TableController {
     @FXML
     private ComboBox<String> comboBuscarId;
 
+    @FXML
+    private TextField buscarTextId;
+
     private App app;
     private RecursosKud rk = RecursosKud.getInstance();
 
@@ -79,20 +83,22 @@ public class TableController {
 
 
     @FXML
-    void buscarClick(ActionEvent event) {
+    void buscarClick(ActionEvent event) throws SQLException, ParseException {
+        List<Registro> lista = new ArrayList<>();
         switch (comboBuscarId.getValue()){
             case "Serial":
-                //Buscar por serial
+                lista = rk.buscarPorSerial(buscarTextId.getText());
                 break;
             case "Trabajador":
-                //Buscar por trabajador
+                lista= rk.buscarPorTrabajador(buscarTextId.getText());
                 break;
             case "Cliente":
-                //Buscar por cliente
+                lista = rk.buscarPorCliente(buscarTextId.getText());
                 break;
             default:
-                //No hacer nada
+                lista = rk.getRecursos();
         }
+        cargarTabla(lista);
     }
 
     @FXML

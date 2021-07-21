@@ -178,4 +178,69 @@ public class RecursosKud {
         }
         return p;
     }
+
+    public List<Registro> buscarPorCliente(String text) throws SQLException, ParseException {
+        List<Registro> solucion = new ArrayList<>();
+        String request = "SELECT * FROM Registrar WHERE cliente LIKE '" + text + "';";
+        ResultSet rs = dbController.execSQL(request);
+
+        while(rs.next()){
+            String serial = rs.getString("serial");
+            String desc = rs.getString("desc");
+            String coment = rs.getString("coment");
+            String tipo = rs.getString("tipo");
+            String fEntrada = rs.getString("fEntrada");
+            String fSalida = rs.getString("fSalida");
+            String cliente = rs.getString("cliente");
+            String nTrab = rs.getString("nTrab");
+            int cantMod = rs.getInt("cantMod");
+            Registro r = new Registro(serial,desc,coment,tipo,fEntrada,fSalida,cliente,nTrab,cantMod);
+            solucion.add(r);
+        }
+        return solucion;
+    }
+
+    public List<Registro> buscarPorTrabajador(String s) throws SQLException, ParseException {
+        List<Registro> solucion = new ArrayList<>();
+        String request = "SELECT * FROM Registrar WHERE nTrab LIKE '" + s + "';";
+        ResultSet rs = dbController.execSQL(request);
+
+        while(rs.next()){
+            String serial = rs.getString("serial");
+            String desc = rs.getString("desc");
+            String coment = rs.getString("coment");
+            String tipo = rs.getString("tipo");
+            String fEntrada = rs.getString("fEntrada");
+            String fSalida = rs.getString("fSalida");
+            String cliente = rs.getString("cliente");
+            String nTrab = rs.getString("nTrab");
+            int cantMod = rs.getInt("cantMod");
+            Registro r = new Registro(serial,desc,coment,tipo,fEntrada,fSalida,cliente,nTrab,cantMod);
+            solucion.add(r);
+        }
+        return solucion;
+    }
+
+    public List<Registro> buscarPorSerial(String s) throws SQLException, ParseException {
+        List<Registro> solucion = new ArrayList<>();
+        String request = "SELECT * FROM Registrar JOIN Producto ON Registrar.serial=Producto.serial WHERE serial LIKE '" + s + "';";
+        ResultSet rs = dbController.execSQL(request);
+        if(rs != null){
+            while(rs.next()){
+                String serial = rs.getString("serial");
+                String desc = rs.getString("desc");
+                String coment = rs.getString("coment");
+                String tipo = rs.getString("tipo");
+                String fEntrada = rs.getString("fEntrada");
+                String fSalida = rs.getString("fSalida");
+                String cliente = rs.getString("cliente");
+                String nTrab = rs.getString("nTrab");
+                int cantMod = rs.getInt("cantMod");
+                Registro r = new Registro(serial,desc,coment,tipo,fEntrada,fSalida,cliente,nTrab,cantMod);
+                solucion.add(r);
+            }
+            return solucion;
+        }
+
+    }
 }
