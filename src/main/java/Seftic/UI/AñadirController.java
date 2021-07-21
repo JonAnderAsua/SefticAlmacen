@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import Seftic.App;
 import Seftic.DB.RecursosKud;
+import Seftic.model.Producto;
 import Seftic.model.Registro;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,13 +22,7 @@ public class AñadirController {
     private TextField serialId;
 
     @FXML
-    private TextField descripcionId;
-
-    @FXML
     private TextField clienteId;
-
-    @FXML
-    private ComboBox<String> tipoId;
 
     @FXML
     private TextField fEntradaId;
@@ -65,21 +60,20 @@ public class AñadirController {
         String fechaIn = "";
         Boolean fechasCorrectas;
         Boolean hayStock = true;
-        if(serialId.getText() == null || tipoId.getValue() == null || trabajadorId.getValue() == null || cantidadId.getText() == null ){
+        if(serialId.getText() == null  || trabajadorId.getValue() == null || cantidadId.getText() == null ){
             avisoLabel.setText("Hay que meter los valores obligatorios");
         }
         else{
-            if(descripcionId.getText() == null){
-                descripcionId.setText("");
-            }
+            Producto p = rk.getProductoUnico(serialId.getText()) ;
             if(comentarioId.getText() == null){
                 comentarioId.setText("");
             }
             if(fEntradaId.getText() != null){ //Entra algo al almacén
                 fechaIn = fEntradaId.getText();
             }
-            if(fSalidaId.getText() != null){ //Sale algo del almacén
+            if(!fSalidaId.getText().equals("")){ //Sale algo del almacén
                 fechaOut = fSalidaId.getText();
+                System.out.println("Entra en fecha salida");
                 hayStock = rk.comprobarStock(serialId.getText(),Integer.parseInt(cantidadId.getText()));
             }
             if(clienteId.getText() == null){
@@ -87,7 +81,7 @@ public class AñadirController {
             }
             fechasCorrectas = comprobarFechas(fechaIn,fechaOut);
             if(hayStock && fechasCorrectas){
-                Registro r = new Registro(serialId.getText(),descripcionId.getText(),comentarioId.getText(), tipoId.getValue(), fechaIn,fechaOut,clienteId.getText(),trabajadorId.getValue(),Integer.parseInt(cantidadId.getText()));
+                Registro r = new Registro(serialId.getText(),p.getDesc(),comentarioId.getText(), p.getTipo(), fechaIn,fechaOut,clienteId.getText(),trabajadorId.getValue(),Integer.parseInt(cantidadId.getText()));
                 rk.añadirRegistro(r);
                 app.enseñarTabla();
             }
@@ -143,15 +137,12 @@ public class AñadirController {
  */
 
     public void hasieratu(Registro r) throws SQLException {
-        tipoId.getItems().addAll("PC","Video","Red","Otros");
         List<String> lista = rk.getTrabajadores();
         for(int i = 0; i<lista.size() ; i++ ){
             trabajadorId.getItems().add(lista.get(i));
         }
         serialId.setText(r.getSerial());
-        descripcionId.setText(r.getDesc());
         clienteId.setText(r.getCliente());
-        tipoId.setValue(r.getTipo());
         if(fEntradaId.getText() != null){
             fEntradaId.setText(r.getfEntrada());
         }
@@ -170,7 +161,6 @@ public class AñadirController {
     @FXML
     void limpiarClick(ActionEvent event) {
         serialId.setText("");
-        descripcionId.setText("");
         comentarioId.setText("");
         clienteId.setText("");
         cantidadId.setText("");

@@ -111,7 +111,6 @@ public class TableStockController {
         List<Producto> lista =  rk.getAllProductos();
         serialId.setCellValueFactory(new PropertyValueFactory<>("serial"));
         descId.setCellValueFactory(new PropertyValueFactory<>("desc"));
-        comentarioId.setCellValueFactory(new PropertyValueFactory<>("comentario"));
         cantidadId.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
         tipoId.setCellValueFactory(new PropertyValueFactory<>("tipo"));
 
@@ -125,11 +124,10 @@ public class TableStockController {
         m2.setOnAction(col -> {
             String serial = tableStockId.getSelectionModel().getSelectedItem().getSerial();
             String desc = tableStockId.getSelectionModel().getSelectedItem().getDesc();
-            String coment = tableStockId.getSelectionModel().getSelectedItem().getComentario();
             int cant = tableStockId.getSelectionModel().getSelectedItem().getCantidad();
             String tipo = tableStockId.getSelectionModel().getSelectedItem().getTipo();
-            Producto p = new Producto(serial, desc, coment, cant, tipo);
-            app.modificarProducto(new Producto(serial, desc, coment, cant, tipo));
+            Producto p = new Producto(serial, desc, cant, tipo);
+            app.modificarProducto(new Producto(serial, desc, cant, tipo));
 
         });
         cm.getItems().addAll(m1,m2);

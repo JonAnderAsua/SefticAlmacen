@@ -11,12 +11,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class TableController {
 
@@ -51,20 +48,7 @@ public class TableController {
     private TableColumn<Registro, Integer> cantidadId;
 
     @FXML
-    private Button añadirId;
-
-    @FXML
-    private Button buscarId;
-
-    @FXML
-    private Button inventarioId;
-
-    @FXML
-    private TextField buscarTextId;
-
-    @FXML
     private ComboBox<String> comboBuscarId;
-
 
     private App app;
     private RecursosKud rk = RecursosKud.getInstance();

@@ -58,7 +58,7 @@ public class ModificarProducto {
     @FXML
     void modificarClick(ActionEvent event) {
         rk.borrarProducto(serialLabel.getText());
-        rk.añadirProducto(serialLabel.getText(),descLabel.getText(),comentarioLabel.getText(),Integer.parseInt(cantLabel.getText()) ,comboboxTipo.getValue());
+        rk.añadirProducto(serialLabel.getText(),descLabel.getText(),Integer.parseInt(cantLabel.getText()) ,comboboxTipo.getValue());
     }
 
     @FXML
@@ -82,7 +82,6 @@ public class ModificarProducto {
         comboboxTipo.getItems().addAll("PC","Video","Red","Otros");
         serialLabel.setText(p.getSerial());
         descLabel.setText(p.getDesc());
-        comentarioLabel.setText(p.getComentario());
         cantLabel.setText(String.valueOf(p.getCantidad()));
         comboboxTipo.setValue(p.getTipo());
     }

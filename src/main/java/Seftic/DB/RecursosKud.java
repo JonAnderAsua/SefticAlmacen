@@ -20,11 +20,9 @@ public class RecursosKud {
 
     public List<Registro> getRecursos() throws SQLException, ParseException {
         List<Registro> solucion = new ArrayList<>();
-        String request = "SELECT Registrar.serial, Registrar.nTrab, fEntrada, fSalida, cliente, desc, coment, tipo, cantMod FROM Registrar, Producto";
+        String request = "SELECT Registrar.serial, Registrar.nTrab, fEntrada, fSalida, cliente, desc, coment, tipo, cantMod FROM Registrar JOIN Producto ON Registrar.serial=Producto.serial";
         ResultSet rs = dbController.execSQL(request);
-        if(rs == null){
-            System.exit(0);
-        }
+
         while(rs.next()){
             String serial = rs.getString("serial");
             String desc = rs.getString("desc");
@@ -42,7 +40,7 @@ public class RecursosKud {
     }
 
     public void añadirRegistro(Registro r) {
-        String request = "insert into Registrar values('"+r.getSerial()+"','"+r.getTrab()+"','"+r.getfEntrada()+"','"+r.getfSalida()+"','"+r.getCliente()+"','"+r.getCantMod()+"');";
+        String request = "insert into Registrar values('"+r.getSerial()+"','"+r.getTrab()+"','"+r.getfEntrada()+"','"+r.getfSalida()+"','"+r.getCliente()+"',"+r.getCantMod()+",'"+r.getComent()+"');";
         dbController.execSQL(request);
     }
 
@@ -76,10 +74,9 @@ public class RecursosKud {
         while(rs.next()){
             String serial = rs.getString("serial");
             String desc = rs.getString("desc");
-            String coment = rs.getString("coment");
             int cant = rs.getInt("cant");
             String tipo = rs.getString("tipo");
-            Producto p = new Producto(serial,desc,coment,cant,tipo);
+            Producto p = new Producto(serial,desc,cant,tipo);
             productos.add(p);
         }
         return productos;
@@ -91,8 +88,8 @@ public class RecursosKud {
         return rs.next();
     }
 
-    public void añadirProducto(String serial, String desc, String coment, int cant,String tipo) {
-        String request = "INSERT INTO Producto VALUES('" + serial + "','" + desc + "','" + coment + "',"+cant+",'" + tipo + "');";
+    public void añadirProducto(String serial, String desc, int cant,String tipo) {
+        String request = "INSERT INTO Producto VALUES('" + serial + "','" + desc + "',"+cant+",'" + tipo + "');";
         dbController.execSQL(request);
     }
 
@@ -106,10 +103,9 @@ public class RecursosKud {
         while(rs.next()){
             String serial = rs.getString("serial");
             String desc = rs.getString("desc");
-            String coment = rs.getString("coment");
             int cant = rs.getInt("cant");
             String tipo = rs.getString("tipo");
-            Producto p = new Producto(serial,desc,coment,cant,tipo);
+            Producto p = new Producto(serial,desc,cant,tipo);
             productos.add(p);
         }
         return productos;
@@ -125,10 +121,9 @@ public class RecursosKud {
         while(rs.next()){
             String serial = rs.getString("serial");
             String desc = rs.getString("desc");
-            String coment = rs.getString("coment");
             int cant = rs.getInt("cant");
             String tipo = rs.getString("tipo");
-            Producto p = new Producto(serial,desc,coment,cant,tipo);
+            Producto p = new Producto(serial,desc,cant,tipo);
             productos.add(p);
         }
         return productos;
@@ -169,5 +164,19 @@ public class RecursosKud {
             request = "UPDATE Producto SET cant=" + cant + " WHERE serial LIKE '" + serial + "';";
             dbController.execSQL(request);
         }
+    }
+
+    public Producto getProductoUnico(String s) throws SQLException {
+        Producto p = new Producto("","",0,"");
+        String request = "SELECT * FROM Producto WHERE serial LIKE '" + s + "';";
+        ResultSet rs = dbController.execSQL(request);
+        if(rs.next()){
+            String serial = rs.getString("serial");
+            String desc = rs.getString("desc");
+            int cant = rs.getInt("cant");
+            String tipo = rs.getString("tipo");
+            p = new Producto(serial,desc,cant,tipo);
+        }
+        return p;
     }
 }

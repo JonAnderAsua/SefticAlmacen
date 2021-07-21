@@ -59,7 +59,7 @@ public class AñadirStockController {
                 labelAviso.setText("El producto que quieres añadir ya está en la DB");
             }
             else{
-                rk.añadirProducto(serialField.getText(),descField.getText(),comentField.getText(),0,comboBoxTipo.getValue());
+                rk.añadirProducto(serialField.getText(),descField.getText(),0,comboBoxTipo.getValue());
                 labelAviso.setText("El producto " + serialField.getText() + " se ha añadido");
             }
         }
@@ -90,6 +90,5 @@ public class AñadirStockController {
     public void llenarCampos(Producto p) {
         serialField.setText(p.getSerial());
         descField.setText(p.getDesc());
-        comentField.setText(p.getComentario());
     }
 }
