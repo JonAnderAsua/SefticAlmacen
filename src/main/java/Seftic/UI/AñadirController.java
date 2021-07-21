@@ -3,6 +3,7 @@ package Seftic.UI;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -29,10 +30,10 @@ public class AñadirController {
     private ComboBox<String> tipoId;
 
     @FXML
-    private DatePicker fEntradaId;
+    private TextField fEntradaId;
 
     @FXML
-    private DatePicker fSalidaId;
+    private TextField fSalidaId;
 
     @FXML
     private TextField comentarioId;
@@ -62,6 +63,7 @@ public class AñadirController {
     void añadirClick(ActionEvent event) throws ParseException, SQLException {
         String fechaOut = "";
         String fechaIn = "";
+        Boolean fechasCorrectas;
         Boolean hayStock = true;
         if(serialId.getText() == null || tipoId.getValue() == null || trabajadorId.getValue() == null || cantidadId.getText() == null ){
             avisoLabel.setText("Hay que meter los valores obligatorios");
@@ -73,27 +75,57 @@ public class AñadirController {
             if(comentarioId.getText() == null){
                 comentarioId.setText("");
             }
-            if(fEntradaId.getValue() != null){ //Entra algo al almacén
-                fechaIn = fEntradaId.getValue().toString();
+            if(fEntradaId.getText() != null){ //Entra algo al almacén
+                fechaIn = fEntradaId.getText();
             }
-            if(fSalidaId.getValue() != null){ //Sale algo del almacén
-                fechaOut = fSalidaId.getValue().toString();
+            if(fSalidaId.getText() != null){ //Sale algo del almacén
+                fechaOut = fSalidaId.getText();
                 hayStock = rk.comprobarStock(serialId.getText(),Integer.parseInt(cantidadId.getText()));
             }
             if(clienteId.getText() == null){
                 clienteId.setText("");
             }
-            if(hayStock){
+            fechasCorrectas = comprobarFechas(fechaIn,fechaOut);
+            if(hayStock && fechasCorrectas){
                 Registro r = new Registro(serialId.getText(),descripcionId.getText(),comentarioId.getText(), tipoId.getValue(), fechaIn,fechaOut,clienteId.getText(),trabajadorId.getValue(),Integer.parseInt(cantidadId.getText()));
                 rk.añadirRegistro(r);
                 app.enseñarTabla();
             }
-
-            else{
+            if(!hayStock){
                 avisoLabel.setText("No hay tanto Stock de este producto");
+            }
+            if(!fechasCorrectas){
+                System.out.println("Introduce las fechas correctamente: YYYY-MM-DD");
             }
         }
 
+    }
+
+    private Boolean comprobarFechas(String fechaIn, String fechaOut) {
+        Boolean fechaInOk = true;
+        Boolean fechaOutOk = true;
+
+        if(!fechaIn.equals("")){
+            char[] fechaEntrada = fechaIn.toCharArray();
+            if(fechaEntrada[4] == '/' && fechaEntrada[7] == '/' && fechaEntrada.length == 9){
+                fechaInOk = true;
+            }
+        }
+
+        if(!fechaOut.equals("")){
+            char[] fechaSalida = fechaOut.toCharArray();
+            if(fechaSalida[4] == '/' && fechaSalida[7] == '/' && fechaSalida.length == 9){
+                fechaOutOk = true;
+            }
+        }
+
+
+        if(fechaInOk && fechaOutOk){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 /*
     @FXML
@@ -120,11 +152,11 @@ public class AñadirController {
         descripcionId.setText(r.getDesc());
         clienteId.setText(r.getCliente());
         tipoId.setValue(r.getTipo());
-        if(fEntradaId.getValue() != null){
-            fEntradaId.setValue(LocalDate.parse(r.getfEntrada()));
+        if(fEntradaId.getText() != null){
+            fEntradaId.setText(r.getfEntrada());
         }
-        if(fSalidaId.getValue() != null){
-            fSalidaId.setValue(LocalDate.parse(r.getfEntrada()));
+        if(fSalidaId.getText() != null){
+            fSalidaId.setText(r.getfEntrada());
         }
         comentarioId.setText(r.getComent());
         trabajadorId.setValue(r.getTrab());
