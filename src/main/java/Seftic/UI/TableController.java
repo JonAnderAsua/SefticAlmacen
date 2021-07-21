@@ -36,10 +36,10 @@ public class TableController {
     private TableColumn<Registro, String> tipoId;
 
     @FXML
-    private TableColumn<Registro, Date> fechaEntradaId;
+    private TableColumn<Registro, String> fechaEntradaId;
 
     @FXML
-    private TableColumn<Registro, Date> fechaSalidaId;
+    private TableColumn<Registro, String> fechaSalidaId;
 
     @FXML
     private TableColumn<Registro, String> clienteId;
@@ -158,6 +158,8 @@ public class TableController {
         });
         cm.getItems().addAll(m1,m2);
         tableId.setContextMenu(cm);
+
+        cargarTabla(listaTotal);
 
     }
 

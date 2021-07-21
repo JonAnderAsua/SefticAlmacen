@@ -73,13 +73,12 @@ public class AñadirController {
             if(comentarioId.getText() == null){
                 comentarioId.setText("");
             }
-            if(fEntradaId.getValue() != null){
+            if(fEntradaId.getValue() != null){ //Entra algo al almacén
                 fechaIn = fEntradaId.getValue().toString();
-                hayStock = rk.comprobarStock(serialId.getText(),Integer.parseInt(cantidadId.getText()));
             }
-            if(fSalidaId.getValue() != null){
+            if(fSalidaId.getValue() != null){ //Sale algo del almacén
                 fechaOut = fSalidaId.getValue().toString();
-
+                hayStock = rk.comprobarStock(serialId.getText(),Integer.parseInt(cantidadId.getText()));
             }
             if(clienteId.getText() == null){
                 clienteId.setText("");
