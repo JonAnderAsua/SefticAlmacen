@@ -57,7 +57,6 @@ public class RecursosKud {
 
     public Boolean comprobarStock(String text, int parseInt) throws SQLException {
         int cantidad = 0;
-
         String request = "SELECT cant FROM Producto WHERE Producto.serial LIKE '"+text+"';";
         ResultSet rs = dbController.execSQL(request);
         while(rs.next()){
