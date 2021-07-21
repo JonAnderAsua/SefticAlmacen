@@ -2,6 +2,7 @@ package Seftic;
 
 import Seftic.UI.*;
 import Seftic.model.Producto;
+import Seftic.model.Registro;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.text.ParseException;
 
 public class App extends Application {
 
@@ -84,9 +87,11 @@ public class App extends Application {
 
     }
 
-    public void enseñarAñadir(){
+    public void enseñarAñadir() throws ParseException, SQLException {
         stageAñadir.setScene(escena2);
         stageAñadir.show();
+        Registro r = new Registro("","","","","","","","",0);
+        añadirCont.hasieratu(r);
     }
 
     public static void main(String[] args) {
@@ -111,5 +116,11 @@ public class App extends Application {
         stageModificarProducto.setScene(escena5);
         stageModificarProducto.show();
         modificarProductoCont.hasieratu(p);
+    }
+
+    public void modificarRegistro(Registro r) throws SQLException {
+        stageAñadir.setScene(escena2);
+        stageAñadir.show();
+        añadirCont.hasieratu(r);
     }
 }

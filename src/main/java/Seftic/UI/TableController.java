@@ -2,10 +2,14 @@ package Seftic.UI;
 
 import Seftic.App;
 import Seftic.DB.RecursosKud;
+import Seftic.model.Producto;
 import Seftic.model.Registro;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -15,12 +19,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class TableController {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private TableView<Registro> tableId;
@@ -50,6 +48,9 @@ public class TableController {
     private TableColumn<Registro, String> trabajadorId;
 
     @FXML
+    private TableColumn<Registro, Integer> cantidadId;
+
+    @FXML
     private Button añadirId;
 
     @FXML
@@ -68,8 +69,12 @@ public class TableController {
     private App app;
     private RecursosKud rk = RecursosKud.getInstance();
 
+    private ContextMenu cm = new ContextMenu();
+    private MenuItem m1 = new MenuItem("Borrar");
+    private MenuItem m2 = new MenuItem("Modificar");
+
     @FXML
-    void añadirClick(ActionEvent event) {
+    void añadirClick(ActionEvent event) throws SQLException, ParseException {
         app.enseñarAñadir();
     }
 
@@ -82,6 +87,10 @@ public class TableController {
     }
 
     private void cargarTabla(List<Registro> recursos) {
+        tableId.getItems().clear();
+        ObservableList<Registro> listaObs = FXCollections.observableArrayList();
+        listaObs.addAll(recursos);
+        tableId.setItems(listaObs);
     }
 
 
@@ -111,6 +120,45 @@ public class TableController {
     void initialize() throws SQLException, ParseException {
         comboBuscarId.getItems().addAll("Serial", "Trabajador", "Cliente");
         List<Registro> listaTotal = rk.getRecursos();
+
+        serialId.setCellValueFactory(new PropertyValueFactory<>("serial"));
+        DescipcionId.setCellValueFactory(new PropertyValueFactory<>("desc"));
+        ComentarioId.setCellValueFactory(new PropertyValueFactory<>("coment"));
+        tipoId.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+        fechaEntradaId.setCellValueFactory(new PropertyValueFactory<>("fEntrada"));
+        fechaSalidaId.setCellValueFactory(new PropertyValueFactory<>("fSalida"));
+        clienteId.setCellValueFactory(new PropertyValueFactory<>("cliente"));
+        trabajadorId.setCellValueFactory(new PropertyValueFactory<>("trab"));
+        cantidadId.setCellValueFactory(new PropertyValueFactory<>("cantMod"));
+
+        m1.setOnAction(col ->{ //Borrar
+            String serial = tableId.getSelectionModel().getSelectedItem().getSerial();
+            String trabajador = tableId.getSelectionModel().getSelectedItem().getTrab();
+            String fEntrada = tableId.getSelectionModel().getSelectedItem().getfEntrada();
+            String fSalida = tableId.getSelectionModel().getSelectedItem().getfSalida();
+            int cantidad = tableId.getSelectionModel().getSelectedItem().getCantMod();
+            try {
+                rk.borrarRegistro(serial,trabajador,fEntrada,fSalida,cantidad);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
+
+        m2.setOnAction(col -> {
+            String serial = tableId.getSelectionModel().getSelectedItem().getSerial();
+            String desc = tableId.getSelectionModel().getSelectedItem().getDesc();
+            String coment = tableId.getSelectionModel().getSelectedItem().getComent();
+            String tipo = tableId.getSelectionModel().getSelectedItem().getTipo();
+            String fEntrada = tableId.getSelectionModel().getSelectedItem().getfEntrada();
+            String fSalida = tableId.getSelectionModel().getSelectedItem().getfSalida();
+            String cliente = tableId.getSelectionModel().getSelectedItem().getCliente();
+            String trab = tableId.getSelectionModel().getSelectedItem().getTrab();
+            int cantMod = tableId.getSelectionModel().getSelectedItem().getCantMod();
+
+        });
+        cm.getItems().addAll(m1,m2);
+        tableId.setContextMenu(cm);
+
     }
 
     public void setMainApp(App app) {

@@ -19,6 +19,7 @@
             <TableColumn fx:id="fechaSalidaId" prefWidth="75.0" text="Fecha Salida" />
             <TableColumn fx:id="clienteId" prefWidth="75.0" text="Cliente" />
             <TableColumn fx:id="trabajadorId" prefWidth="75.0" text="Trabajador" />
+            <TableColumn fx:id="cantidadId" prefWidth="75.0" text="Cantidad" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

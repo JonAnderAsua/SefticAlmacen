@@ -3,6 +3,7 @@ package Seftic.UI;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -72,11 +73,11 @@ public class AñadirController {
             if(comentarioId.getText() == null){
                 comentarioId.setText("");
             }
-            if(fEntradaId.getValue().toString() != null){
+            if(fEntradaId.getValue() != null){
                 fechaIn = fEntradaId.getValue().toString();
                 hayStock = rk.comprobarStock(serialId.getText(),Integer.parseInt(cantidadId.getText()));
             }
-            if(fSalidaId.getValue().toString() != null){
+            if(fSalidaId.getValue() != null){
                 fechaOut = fSalidaId.getValue().toString();
 
             }
@@ -95,7 +96,7 @@ public class AñadirController {
         }
 
     }
-
+/*
     @FXML
     void initialize() throws SQLException {
 
@@ -106,6 +107,29 @@ public class AñadirController {
         }
 
 
+    }
+
+ */
+
+    public void hasieratu(Registro r) throws SQLException {
+        tipoId.getItems().addAll("PC","Video","Red","Otros");
+        List<String> lista = rk.getTrabajadores();
+        for(int i = 0; i<lista.size() ; i++ ){
+            trabajadorId.getItems().add(lista.get(i));
+        }
+        serialId.setText(r.getSerial());
+        descripcionId.setText(r.getDesc());
+        clienteId.setText(r.getCliente());
+        tipoId.setValue(r.getTipo());
+        if(fEntradaId.getValue() != null){
+            fEntradaId.setValue(LocalDate.parse(r.getfEntrada()));
+        }
+        if(fSalidaId.getValue() != null){
+            fSalidaId.setValue(LocalDate.parse(r.getfEntrada()));
+        }
+        comentarioId.setText(r.getComent());
+        trabajadorId.setValue(r.getTrab());
+        cantidadId.setText(String.valueOf(r.getCantMod()));
     }
 
     public void setMainApp(App app) {

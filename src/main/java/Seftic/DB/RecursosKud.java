@@ -60,7 +60,7 @@ public class RecursosKud {
     public Boolean comprobarStock(String text, int parseInt) throws SQLException {
         int cantidad = 0;
 
-        String request = "SELECT cant FROM Producto WHERE Producto.serial LIKE '"+text;
+        String request = "SELECT cant FROM Producto WHERE Producto.serial LIKE '"+text+"';";
         ResultSet rs = dbController.execSQL(request);
         while(rs.next()){
             cantidad = rs.getInt("cant");
@@ -137,5 +137,37 @@ public class RecursosKud {
     public void borrarProducto(String serial) {
         String request = "DELETE FROM Producto WHERE serial LIKE '" + serial + "';";
         dbController.execSQL(request);
+    }
+
+    public void borrarRegistro(String serial, String trabajador, String fEntrada, String fSalida, int cantidad) throws SQLException {
+        String request = "";
+        int cant= 0;
+
+        //Coger el stock que tiene en ese momento el producto
+        request = "SELECT cant FROM Producto WHERE serial LIKE '" + serial + "';";
+        ResultSet rs = dbController.execSQL(request);
+        while(rs.next()){
+            cant = rs.getInt("cant");
+        }
+        if(fEntrada == null){ //Se ha sacado del almacén
+            //Borrar el registro
+            request = "DELETE FROM Registrar WHERE serial LIKE '" + serial + "' AND nTrab LIKE '" + trabajador + "' AND fSalida LIKE '" + fSalida + "';";
+            dbController.execSQL(request);
+
+            cant = cant + cantidad;
+            //Actualizar el stock del producto
+            request = "UPDATE Producto SET cant=" + cant + " WHERE serial LIKE '" + serial + "';";
+            dbController.execSQL(request);
+        }
+        else{ //Ha entrado al almacén
+            //Borrar el registro
+            request = "DELETE FROM Registrar WHERE serial LIKE '" + serial + "' AND nTrab LIKE '" + trabajador + "' AND fEntrada LIKE '" + fEntrada + "';";
+            dbController.execSQL(request);
+
+            cant = cant - cantidad;
+            //Actualizar el stock del producto
+            request = "UPDATE Producto SET cant=" + cant + " WHERE serial LIKE '" + serial + "';";
+            dbController.execSQL(request);
+        }
     }
 }
