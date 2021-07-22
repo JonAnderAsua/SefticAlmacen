@@ -125,7 +125,7 @@ public class TableController {
             String serial = tableId.getSelectionModel().getSelectedItem().getSerial();
             String trabajador = tableId.getSelectionModel().getSelectedItem().getTrab();
             String fEntrada = tableId.getSelectionModel().getSelectedItem().getFecha();
-            Boolean entrada = tableId.getSelectionModel().getSelectedItem().getEntrada();
+            String entrada = tableId.getSelectionModel().getSelectedItem().getEntrada();
             int cantidad = tableId.getSelectionModel().getSelectedItem().getCantMod();
             try {
                 rk.borrarRegistro(serial,trabajador,fEntrada,entrada,cantidad);
@@ -140,7 +140,7 @@ public class TableController {
             String coment = tableId.getSelectionModel().getSelectedItem().getComent();
             String tipo = tableId.getSelectionModel().getSelectedItem().getTipo();
             String fEntrada = tableId.getSelectionModel().getSelectedItem().getFecha();
-            boolean entrada = tableId.getSelectionModel().getSelectedItem().getEntrada();
+            String entrada = tableId.getSelectionModel().getSelectedItem().getEntrada();
             String cliente = tableId.getSelectionModel().getSelectedItem().getCliente();
             String trab = tableId.getSelectionModel().getSelectedItem().getTrab();
             int cantMod = tableId.getSelectionModel().getSelectedItem().getCantMod();

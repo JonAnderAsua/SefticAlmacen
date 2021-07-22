@@ -59,12 +59,11 @@ public class AñadirController {
 
     @FXML
     void añadirClick(ActionEvent event) throws ParseException, SQLException {
-        Boolean fechasCorrectas;
         Boolean hayStock = true;
-        if(serialId.getText() == null  || trabajadorId.getValue() == null || cantidadId.getText() == null ){
+        if(serialId.getText() == null  || trabajadorId.getValue() == null || cantidadId.getText() == null || fEntradaId.getText() == null){
             avisoLabel.setText("Hay que meter los valores obligatorios");
         }
-        else{
+        else if(rk.existeProducto(serialId.getText())){
             Producto p = rk.getProductoUnico(serialId.getText()) ;
             if(comentarioId.getText() == null){
                 comentarioId.setText("");
@@ -76,37 +75,35 @@ public class AñadirController {
                 clienteId.setText("");
             }
 
-            Boolean entrada = false;
-            if(entradaSalidaBox.getValue().equals("Entrada")){
-                entrada = true;
-            }
-            fechasCorrectas = comprobarFechas(fEntradaId.getText());
-            if(hayStock && fechasCorrectas){
-                Registro r = new Registro(serialId.getText(),p.getDesc(),comentarioId.getText(), p.getTipo(), fEntradaId.getText(),entrada,clienteId.getText(),trabajadorId.getValue(),Integer.parseInt(cantidadId.getText()));
+
+            System.out.print(fEntradaId.getText());
+            if(hayStock && comprobarFechas(fEntradaId.getText())){
+                Registro r = new Registro(serialId.getText(),p.getDesc(),comentarioId.getText(), p.getTipo(), fEntradaId.getText(),entradaSalidaBox.getValue(),clienteId.getText(),trabajadorId.getValue(),Integer.parseInt(cantidadId.getText()));
                 rk.añadirRegistro(r);
                 app.enseñarTabla();
             }
             if(!hayStock){
                 avisoLabel.setText("No hay tanto Stock de este producto");
             }
-            if(!fechasCorrectas){
-                System.out.println("Introduce las fechas correctamente: YYYY-MM-DD");
+            if(!comprobarFechas(fEntradaId.getText())){
+                avisoLabel.setText("Introduce bien las fechas YYYY/MM/DD");
             }
+        }
+        else{
+            avisoLabel.setText("Mete un producto que exista");
         }
 
     }
 
     private Boolean comprobarFechas(String fechaIn) {
+        Boolean correcto = false;
         if(!fechaIn.equals("")){
             char[] fechaEntrada = fechaIn.toCharArray();
-            if(fechaEntrada[4] == '/' && fechaEntrada[7] == '/' && fechaEntrada.length == 9){
-                return true;
+            if(fechaEntrada[4] == '/' && fechaEntrada[7] == '/' && fechaEntrada.length == 10){
+                correcto =  true;
             }
         }
-        else{
-            return false;
-        }
-        return false;
+        return correcto;
     }
 
 

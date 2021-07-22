@@ -90,7 +90,7 @@ public class App extends Application {
     public void enseñarAñadir() throws ParseException, SQLException {
         stageAñadir.setScene(escena2);
         stageAñadir.show();
-        Registro r = new Registro("","","","","",false,"","",0);
+        Registro r = new Registro("","","","","","","","",0);
         añadirCont.hasieratu(r);
     }
 

@@ -15,12 +15,12 @@ public class Registro {
     private String coment;
     private String tipo;
     private String fecha;
-    private Boolean entrada;
+    private String entrada;
     private String cliente;
     private String trab;
     private int cantMod;
 
-    public Registro(String serial, String desc, String coment, String tipo, String fEntrada, Boolean entrada, String cliente, String trab, int cantModif) throws ParseException {
+    public Registro(String serial, String desc, String coment, String tipo, String fEntrada, String entrada, String cliente, String trab, int cantModif) throws ParseException {
         this.serial = serial;
         this.desc = desc;
         this.coment = coment;
@@ -77,11 +77,11 @@ public class Registro {
         this.fecha = fecha;
     }
 
-    public Boolean getEntrada() {
+    public String getEntrada() {
         return entrada;
     }
 
-    public void setEntrada(Boolean entrada) {
+    public void setEntrada(String entrada) {
         this.entrada = entrada;
     }
 

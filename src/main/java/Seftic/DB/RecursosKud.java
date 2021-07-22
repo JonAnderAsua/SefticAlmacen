@@ -29,7 +29,7 @@ public class RecursosKud {
             String coment = rs.getString("coment");
             String tipo = rs.getString("tipo");
             String fEntrada = rs.getString("fEntrada");
-            Boolean entrada = rs.getBoolean("entrada");
+            String entrada = rs.getString("entrada");
             String cliente = rs.getString("cliente");
             String nTrab = rs.getString("nTrab");
             int cantMod = rs.getInt("cantMod");
@@ -40,7 +40,8 @@ public class RecursosKud {
     }
 
     public void añadirRegistro(Registro r) {
-        String request = "insert into Registrar values('"+r.getSerial()+"','"+r.getTrab()+"','"+r.getFecha()+"','"+r.getCliente()+"',"+r.getCantMod()+",'"+r.getComent()+",'"+r.getEntrada()+"');";
+        String request = "insert into Registrar values('"+r.getSerial()+"','"+r.getTrab()+"','"+r.getFecha()+"','"+r.getCliente()+"',"+r.getCantMod()+",'"+r.getComent()+"','"+r.getEntrada()+"');";
+        System.out.println(request);
         dbController.execSQL(request);
     }
 
@@ -128,7 +129,7 @@ public class RecursosKud {
         dbController.execSQL(request);
     }
 
-    public void borrarRegistro(String serial, String trabajador, String fEntrada, boolean entrada, int cantidad) throws SQLException {
+    public void borrarRegistro(String serial, String trabajador, String fEntrada, String entrada, int cantidad) throws SQLException {
         String request = "";
         int cant= 0;
 
@@ -199,7 +200,7 @@ public class RecursosKud {
                 String coment = rs.getString("coment");
                 String tipo = rs.getString("tipo");
                 String fEntrada = rs.getString("fEntrada");
-                Boolean entrada = rs.getBoolean("entrada");
+                String entrada = rs.getString("entrada");
                 String cliente = rs.getString("cliente");
                 String nTrab = rs.getString("nTrab");
                 int cantMod = rs.getInt("cantMod");
@@ -208,5 +209,16 @@ public class RecursosKud {
             }
         }
         return lista;
+    }
+
+    public boolean existeProducto(String text) throws SQLException {
+        String request = "SELECT * FROM Registrar WHERE serial LIKE '" + text + "'";
+        ResultSet rs = dbController.execSQL(request);
+        if(rs.next()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
