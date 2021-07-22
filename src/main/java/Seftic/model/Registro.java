@@ -14,13 +14,13 @@ public class Registro {
     private String desc;
     private String coment;
     private String tipo;
-    private String fEntrada;
-    private String fSalida;
+    private String fecha;
+    private Boolean entrada;
     private String cliente;
     private String trab;
     private int cantMod;
 
-    public Registro(String serial, String desc, String coment, String tipo, String fEntrada, String fSalida, String cliente, String trab, int cantModif) throws ParseException {
+    public Registro(String serial, String desc, String coment, String tipo, String fEntrada, Boolean entrada, String cliente, String trab, int cantModif) throws ParseException {
         this.serial = serial;
         this.desc = desc;
         this.coment = coment;
@@ -29,8 +29,8 @@ public class Registro {
         } else {
             this.tipo = tipo;
         }
-        this.fEntrada = fEntrada;
-        this.fSalida = fSalida;
+        this.fecha = fEntrada;
+        this.entrada = entrada;
 
         this.cliente = cliente;
         this.trab = trab;
@@ -69,20 +69,20 @@ public class Registro {
         this.tipo = tipo;
     }
 
-    public String getfEntrada() {
-        return fEntrada;
+    public String getFecha() {
+        return fecha;
     }
 
-    public void setfEntrada(String fEntrada) {
-        this.fEntrada = fEntrada;
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
-    public String getfSalida() {
-        return fSalida;
+    public Boolean getEntrada() {
+        return entrada;
     }
 
-    public void setfSalida(String fSalida) {
-        this.fSalida = fSalida;
+    public void setEntrada(Boolean entrada) {
+        this.entrada = entrada;
     }
 
     public String getCliente() {

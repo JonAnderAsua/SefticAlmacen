@@ -34,10 +34,10 @@ public class TableController {
     private TableColumn<Registro, String> tipoId;
 
     @FXML
-    private TableColumn<Registro, String> fechaEntradaId;
+    private TableColumn<Registro, String> fechaId;
 
     @FXML
-    private TableColumn<Registro, String> fechaSalidaId;
+    private TableColumn<Registro, String> inOutId;
 
     @FXML
     private TableColumn<Registro, String> clienteId;
@@ -115,8 +115,8 @@ public class TableController {
         DescipcionId.setCellValueFactory(new PropertyValueFactory<>("desc"));
         ComentarioId.setCellValueFactory(new PropertyValueFactory<>("coment"));
         tipoId.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-        fechaEntradaId.setCellValueFactory(new PropertyValueFactory<>("fEntrada"));
-        fechaSalidaId.setCellValueFactory(new PropertyValueFactory<>("fSalida"));
+        fechaId.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+        inOutId.setCellValueFactory(new PropertyValueFactory<>("entrada"));
         clienteId.setCellValueFactory(new PropertyValueFactory<>("cliente"));
         trabajadorId.setCellValueFactory(new PropertyValueFactory<>("trab"));
         cantidadId.setCellValueFactory(new PropertyValueFactory<>("cantMod"));
@@ -124,11 +124,11 @@ public class TableController {
         m1.setOnAction(col ->{ //Borrar
             String serial = tableId.getSelectionModel().getSelectedItem().getSerial();
             String trabajador = tableId.getSelectionModel().getSelectedItem().getTrab();
-            String fEntrada = tableId.getSelectionModel().getSelectedItem().getfEntrada();
-            String fSalida = tableId.getSelectionModel().getSelectedItem().getfSalida();
+            String fEntrada = tableId.getSelectionModel().getSelectedItem().getFecha();
+            Boolean entrada = tableId.getSelectionModel().getSelectedItem().getEntrada();
             int cantidad = tableId.getSelectionModel().getSelectedItem().getCantMod();
             try {
-                rk.borrarRegistro(serial,trabajador,fEntrada,fSalida,cantidad);
+                rk.borrarRegistro(serial,trabajador,fEntrada,entrada,cantidad);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
@@ -139,8 +139,8 @@ public class TableController {
             String desc = tableId.getSelectionModel().getSelectedItem().getDesc();
             String coment = tableId.getSelectionModel().getSelectedItem().getComent();
             String tipo = tableId.getSelectionModel().getSelectedItem().getTipo();
-            String fEntrada = tableId.getSelectionModel().getSelectedItem().getfEntrada();
-            String fSalida = tableId.getSelectionModel().getSelectedItem().getfSalida();
+            String fEntrada = tableId.getSelectionModel().getSelectedItem().getFecha();
+            boolean entrada = tableId.getSelectionModel().getSelectedItem().getEntrada();
             String cliente = tableId.getSelectionModel().getSelectedItem().getCliente();
             String trab = tableId.getSelectionModel().getSelectedItem().getTrab();
             int cantMod = tableId.getSelectionModel().getSelectedItem().getCantMod();

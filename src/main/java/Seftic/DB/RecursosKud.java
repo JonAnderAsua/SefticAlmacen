@@ -20,7 +20,7 @@ public class RecursosKud {
 
     public List<Registro> getRecursos() throws SQLException, ParseException {
         List<Registro> solucion = new ArrayList<>();
-        String request = "SELECT Registrar.serial, Registrar.nTrab, fEntrada, fSalida, cliente, desc, coment, tipo, cantMod FROM Registrar JOIN Producto ON Registrar.serial=Producto.serial";
+        String request = "SELECT Registrar.serial, Registrar.nTrab, fEntrada, entrada, cliente, desc, coment, tipo, cantMod FROM Registrar JOIN Producto ON Registrar.serial=Producto.serial";
         ResultSet rs = dbController.execSQL(request);
 
         while(rs.next()){
@@ -29,18 +29,18 @@ public class RecursosKud {
             String coment = rs.getString("coment");
             String tipo = rs.getString("tipo");
             String fEntrada = rs.getString("fEntrada");
-            String fSalida = rs.getString("fSalida");
+            Boolean entrada = rs.getBoolean("entrada");
             String cliente = rs.getString("cliente");
             String nTrab = rs.getString("nTrab");
             int cantMod = rs.getInt("cantMod");
-            Registro r = new Registro(serial,desc,coment,tipo,fEntrada,fSalida,cliente,nTrab,cantMod);
+            Registro r = new Registro(serial,desc,coment,tipo,fEntrada,entrada,cliente,nTrab,cantMod);
             solucion.add(r);
         }
         return solucion;
     }
 
     public void añadirRegistro(Registro r) {
-        String request = "insert into Registrar values('"+r.getSerial()+"','"+r.getTrab()+"','"+r.getfEntrada()+"','"+r.getfSalida()+"','"+r.getCliente()+"',"+r.getCantMod()+",'"+r.getComent()+"');";
+        String request = "insert into Registrar values('"+r.getSerial()+"','"+r.getTrab()+"','"+r.getFecha()+"','"+r.getCliente()+"',"+r.getCantMod()+",'"+r.getComent()+",'"+r.getEntrada()+"');";
         dbController.execSQL(request);
     }
 
@@ -128,7 +128,7 @@ public class RecursosKud {
         dbController.execSQL(request);
     }
 
-    public void borrarRegistro(String serial, String trabajador, String fEntrada, String fSalida, int cantidad) throws SQLException {
+    public void borrarRegistro(String serial, String trabajador, String fEntrada, boolean entrada, int cantidad) throws SQLException {
         String request = "";
         int cant= 0;
 
@@ -140,7 +140,7 @@ public class RecursosKud {
         }
         if(fEntrada == null){ //Se ha sacado del almacén
             //Borrar el registro
-            request = "DELETE FROM Registrar WHERE serial LIKE '" + serial + "' AND nTrab LIKE '" + trabajador + "' AND fSalida LIKE '" + fSalida + "';";
+            request = "DELETE FROM Registrar WHERE serial LIKE '" + serial + "' AND nTrab LIKE '" + trabajador + "' AND fecha LIKE '" + fEntrada + "' AND entrada=" + entrada + ";";
             dbController.execSQL(request);
 
             cant = cant + cantidad;
@@ -199,11 +199,11 @@ public class RecursosKud {
                 String coment = rs.getString("coment");
                 String tipo = rs.getString("tipo");
                 String fEntrada = rs.getString("fEntrada");
-                String fSalida = rs.getString("fSalida");
+                Boolean entrada = rs.getBoolean("entrada");
                 String cliente = rs.getString("cliente");
                 String nTrab = rs.getString("nTrab");
                 int cantMod = rs.getInt("cantMod");
-                Registro r = new Registro(serial,desc,coment,tipo,fEntrada,fSalida,cliente,nTrab,cantMod);
+                Registro r = new Registro(serial,desc,coment,tipo,fEntrada,entrada,cliente,nTrab,cantMod);
                 lista.add(r);
             }
         }

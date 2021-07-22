@@ -15,8 +15,8 @@
           <TableColumn fx:id="DescipcionId" prefWidth="75.0" text="Descripcion" />
             <TableColumn fx:id="ComentarioId" prefWidth="75.0" text="Comentario" />
             <TableColumn fx:id="tipoId" prefWidth="75.0" text="Tipo" />
-            <TableColumn fx:id="fechaEntradaId" prefWidth="75.0" text="Fecha Entrada" />
-            <TableColumn fx:id="fechaSalidaId" prefWidth="75.0" text="Fecha Salida" />
+            <TableColumn fx:id="fechaId" prefWidth="75.0" text="Fecha" />
+            <TableColumn fx:id="inOutId" prefWidth="75.0" text="In/Out" />
             <TableColumn fx:id="clienteId" prefWidth="75.0" text="Cliente" />
             <TableColumn fx:id="trabajadorId" prefWidth="75.0" text="Trabajador" />
             <TableColumn fx:id="cantidadId" prefWidth="75.0" text="Cantidad" />

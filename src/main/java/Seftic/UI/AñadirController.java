@@ -1,5 +1,6 @@
 package Seftic.UI;
 
+import java.awt.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -15,6 +16,9 @@ import Seftic.model.Registro;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 public class AñadirController {
 
@@ -26,9 +30,8 @@ public class AñadirController {
 
     @FXML
     private TextField fEntradaId;
-
     @FXML
-    private TextField fSalidaId;
+    private ComboBox<String> entradaSalidaBox;
 
     @FXML
     private TextField comentarioId;
@@ -56,8 +59,6 @@ public class AñadirController {
 
     @FXML
     void añadirClick(ActionEvent event) throws ParseException, SQLException {
-        String fechaOut = "";
-        String fechaIn = "";
         Boolean fechasCorrectas;
         Boolean hayStock = true;
         if(serialId.getText() == null  || trabajadorId.getValue() == null || cantidadId.getText() == null ){
@@ -68,20 +69,20 @@ public class AñadirController {
             if(comentarioId.getText() == null){
                 comentarioId.setText("");
             }
-            if(fEntradaId.getText() != null){ //Entra algo al almacén
-                fechaIn = fEntradaId.getText();
-            }
-            if(!fSalidaId.getText().equals("")){ //Sale algo del almacén
-                fechaOut = fSalidaId.getText();
-                System.out.println("Entra en fecha salida");
+            if(entradaSalidaBox.getValue().equals("Salida")){ //Sale algo del almacén
                 hayStock = rk.comprobarStock(serialId.getText(),Integer.parseInt(cantidadId.getText()));
             }
             if(clienteId.getText() == null){
                 clienteId.setText("");
             }
-            fechasCorrectas = comprobarFechas(fechaIn,fechaOut);
+
+            Boolean entrada = false;
+            if(entradaSalidaBox.getValue().equals("Entrada")){
+                entrada = true;
+            }
+            fechasCorrectas = comprobarFechas(fEntradaId.getText());
             if(hayStock && fechasCorrectas){
-                Registro r = new Registro(serialId.getText(),p.getDesc(),comentarioId.getText(), p.getTipo(), fechaIn,fechaOut,clienteId.getText(),trabajadorId.getValue(),Integer.parseInt(cantidadId.getText()));
+                Registro r = new Registro(serialId.getText(),p.getDesc(),comentarioId.getText(), p.getTipo(), fEntradaId.getText(),entrada,clienteId.getText(),trabajadorId.getValue(),Integer.parseInt(cantidadId.getText()));
                 rk.añadirRegistro(r);
                 app.enseñarTabla();
             }
@@ -95,48 +96,23 @@ public class AñadirController {
 
     }
 
-    private Boolean comprobarFechas(String fechaIn, String fechaOut) {
-        Boolean fechaInOk = true;
-        Boolean fechaOutOk = true;
-
+    private Boolean comprobarFechas(String fechaIn) {
         if(!fechaIn.equals("")){
             char[] fechaEntrada = fechaIn.toCharArray();
             if(fechaEntrada[4] == '/' && fechaEntrada[7] == '/' && fechaEntrada.length == 9){
-                fechaInOk = true;
+                return true;
             }
-        }
-
-        if(!fechaOut.equals("")){
-            char[] fechaSalida = fechaOut.toCharArray();
-            if(fechaSalida[4] == '/' && fechaSalida[7] == '/' && fechaSalida.length == 9){
-                fechaOutOk = true;
-            }
-        }
-
-
-        if(fechaInOk && fechaOutOk){
-            return true;
         }
         else{
             return false;
         }
-    }
-/*
-    @FXML
-    void initialize() throws SQLException {
-
-        tipoId.getItems().addAll("PC","Video","Red","Otros");
-        List<String> lista = rk.getTrabajadores();
-        for(int i = 0; i<lista.size() ; i++ ){
-            trabajadorId.getItems().add(lista.get(i));
-        }
-
-
+        return false;
     }
 
- */
 
     public void hasieratu(Registro r) throws SQLException {
+        entradaSalidaBox.getItems().addAll("Entrada","Salida");
+        entradaSalidaBox.setValue("Entrada");
         List<String> lista = rk.getTrabajadores();
         for(int i = 0; i<lista.size() ; i++ ){
             trabajadorId.getItems().add(lista.get(i));
@@ -144,10 +120,7 @@ public class AñadirController {
         serialId.setText(r.getSerial());
         clienteId.setText(r.getCliente());
         if(fEntradaId.getText() != null){
-            fEntradaId.setText(r.getfEntrada());
-        }
-        if(fSalidaId.getText() != null){
-            fSalidaId.setText(r.getfEntrada());
+            fEntradaId.setText(r.getFecha());
         }
         comentarioId.setText(r.getComent());
         trabajadorId.setValue(r.getTrab());
