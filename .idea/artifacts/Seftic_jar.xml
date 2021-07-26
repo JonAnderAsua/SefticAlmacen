@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Seftic:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Seftic_jar</output-path>
+    <root id="archive" name="Seftic.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="Seftic.main" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.xerial/sqlite-jdbc/3.36.0.1/7bd89ad11392210f8e86282004519b36d53cb9ee/sqlite-jdbc-3.36.0.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

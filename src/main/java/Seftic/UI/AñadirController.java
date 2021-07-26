@@ -1,13 +1,9 @@
 package Seftic.UI;
 
-import java.awt.*;
-import java.net.URL;
+
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import Seftic.App;
 import Seftic.DB.RecursosKud;
