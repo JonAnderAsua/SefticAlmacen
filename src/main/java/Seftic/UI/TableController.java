@@ -144,6 +144,13 @@ public class TableController {
             String cliente = tableId.getSelectionModel().getSelectedItem().getCliente();
             String trab = tableId.getSelectionModel().getSelectedItem().getTrab();
             int cantMod = tableId.getSelectionModel().getSelectedItem().getCantMod();
+            try {
+                app.modificarRegistro(new Registro(serial,desc,coment,tipo,fEntrada,entrada,cliente,trab,cantMod));
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
         });
         cm.getItems().addAll(m1,m2);

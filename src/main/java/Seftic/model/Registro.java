@@ -1,12 +1,6 @@
 package Seftic.model;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public class Registro {
@@ -24,11 +18,7 @@ public class Registro {
         this.serial = serial;
         this.desc = desc;
         this.coment = coment;
-        if (tipo.toLowerCase(Locale.ROOT) != "pc" && tipo.toLowerCase(Locale.ROOT) != "video" && tipo.toLowerCase(Locale.ROOT) != "red" && tipo.toLowerCase(Locale.ROOT) != "otros") {
-            //Hay que gestionar el que de error
-        } else {
-            this.tipo = tipo;
-        }
+        this.tipo=tipo;
         this.fecha = fEntrada;
         this.entrada = entrada;
 
