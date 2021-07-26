@@ -1,7 +1,6 @@
 package Seftic.model;
 
 import java.text.ParseException;
-import java.util.Locale;
 
 public class Registro {
     private String serial;
@@ -21,7 +20,6 @@ public class Registro {
         this.tipo=tipo;
         this.fecha = fEntrada;
         this.entrada = entrada;
-
         this.cliente = cliente;
         this.trab = trab;
         this.cantMod = cantModif;
@@ -39,63 +37,28 @@ public class Registro {
         return desc;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
     public String getComent() {
         return coment;
-    }
-
-    public void setComent(String coment) {
-        this.coment = coment;
     }
 
     public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getEntrada() {
-        return entrada;
-    }
-
-    public void setEntrada(String entrada) {
-        this.entrada = entrada;
-    }
-
     public String getCliente() {
         return cliente;
-    }
-
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
     }
 
     public String getTrab() {
         return trab;
     }
 
-    public void setTrab(String trab) {
-        this.trab = trab;
-    }
-
     public int getCantMod() {
         return cantMod;
     }
 
-    public void setCantMod(int cantMod) {
-        this.cantMod = cantMod;
-    }
+    public String getFecha() {return this.fecha;}
+
+    public String getEntrada() {return this.entrada;}
+
 }

@@ -145,6 +145,7 @@ public class TableController {
             String trab = tableId.getSelectionModel().getSelectedItem().getTrab();
             int cantMod = tableId.getSelectionModel().getSelectedItem().getCantMod();
             try {
+                rk.borrarProducto(serial); //la trampita
                 app.modificarRegistro(new Registro(serial,desc,coment,tipo,fEntrada,entrada,cliente,trab,cantMod));
             } catch (SQLException throwables) {
                 throwables.printStackTrace();

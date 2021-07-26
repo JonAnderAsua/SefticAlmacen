@@ -99,11 +99,56 @@ public class AñadirController {
         Boolean correcto = false;
         if(!fechaIn.equals("")){
             char[] fechaEntrada = fechaIn.toCharArray();
+            System.out.println(fechaEntrada.length);
             if(fechaEntrada[4] == '/' && fechaEntrada[7] == '/' && fechaEntrada.length == 10){
-                correcto =  true;
+                System.out.println("Las barras están");
+                correcto = sonNumeros(fechaEntrada);
             }
         }
         return correcto;
+    }
+
+    private Boolean sonNumeros(char[] fechaEntrada) {
+        int i = 0;
+        boolean esNumero = true;
+
+        while(i < fechaEntrada.length && esNumero){
+            if(fechaEntrada[i] != '/'){
+                try{
+                    Integer.parseInt(String.valueOf(fechaEntrada[i]));
+                }
+                catch (NumberFormatException exception){
+                    esNumero = false;
+                }
+            }
+            i++;
+        }
+
+        if(esNumero){
+           String mesString = "";
+           int mes = Integer.parseInt(String.valueOf(fechaEntrada[5]) + String.valueOf(fechaEntrada[6]));
+           int dia = Integer.parseInt(String.valueOf(fechaEntrada[8]) + String.valueOf(fechaEntrada[9]));            System.out.println("Mes: " + mes + " Dia: " + dia);
+           if(mes == 01 || mes == 03 || mes == 05 || mes == 07 || mes == 10 || mes == 12 || mes == 8){
+               if(dia > 31){
+                   esNumero = false;
+               }
+           }
+           else if(mes == 04 || mes == 06 || mes == 9 || mes == 11){
+               if(dia > 30){
+                   esNumero = false;
+               }
+           }
+           else if(mes == 02){
+               if(dia > 28){
+                   esNumero = false;
+               }
+           }
+           else{
+               esNumero = false;
+           }
+        }
+
+        return esNumero;
     }
 
 
