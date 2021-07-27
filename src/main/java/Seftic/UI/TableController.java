@@ -111,6 +111,8 @@ public class TableController {
         comboBuscarId.getItems().addAll("Serial", "Trabajador", "Cliente");
         List<Registro> listaTotal = rk.getRecursos();
 
+        
+        //Rellenar las columnas con sus respectivos valores
         serialId.setCellValueFactory(new PropertyValueFactory<>("serial"));
         DescipcionId.setCellValueFactory(new PropertyValueFactory<>("desc"));
         ComentarioId.setCellValueFactory(new PropertyValueFactory<>("coment"));
@@ -134,7 +136,7 @@ public class TableController {
             }
         });
 
-        m2.setOnAction(col -> {
+        m2.setOnAction(col -> { //Modificar
             String serial = tableId.getSelectionModel().getSelectedItem().getSerial();
             String desc = tableId.getSelectionModel().getSelectedItem().getDesc();
             String coment = tableId.getSelectionModel().getSelectedItem().getComent();

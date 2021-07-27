@@ -48,7 +48,7 @@ public class App extends Application {
         stageModificarProducto = primaryStage;
         pantailakKargatu();
 
-        stage.setTitle("Almacén Seftic");
+        stage.setTitle("Almac�n Seftic");
         escena = new Scene(root,950,600);
         stage.setScene(escena);
         stage.show();
@@ -60,7 +60,7 @@ public class App extends Application {
         tCont = loader.getController();
         tCont.setMainApp(this);
 
-        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/Añadir.fxml"));
+        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/A�adir.fxml"));
         root2 = loader2.load();
         escena2 = new Scene(root2);
         añadirCont = loader2.getController();
@@ -72,7 +72,7 @@ public class App extends Application {
         stockCont = loader3.getController();
         stockCont.setMainApp(this);
 
-        FXMLLoader loader4 = new FXMLLoader(getClass().getResource("/añadirProducto.fxml"));
+        FXMLLoader loader4 = new FXMLLoader(getClass().getResource("/a�adirProducto.fxml"));
         root4 = loader4.load();
         escena4 = new Scene(root4);
         añadirStockCont = loader4.getController();
@@ -90,7 +90,7 @@ public class App extends Application {
     public void enseñarAñadir() throws ParseException, SQLException {
         stageAñadir.setScene(escena2);
         stageAñadir.show();
-        Registro r = new Registro("","","","","","","","",0);
+        Registro r = new Registro("","","","","","","","",0); //Hacer esto es un poco feo pero es que no se me ocurre otra cosa
         añadirCont.hasieratu(r);
     }
 
