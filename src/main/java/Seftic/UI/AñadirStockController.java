@@ -78,10 +78,8 @@ public class AñadirStockController {
     }
 
     @FXML
-    void initialize() throws SQLException {
-
+    void initialize(){
         comboBoxTipo.getItems().addAll("PC", "Video", "Red", "Otro");
-
     }
 
     public void llenarCampos(Producto p) {

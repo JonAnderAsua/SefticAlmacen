@@ -44,11 +44,9 @@ public class AñadirController {
     @FXML
     private Label avisoLabel;
 
-    @FXML
-    private Button limpiarId;
 
     @FXML
-    private Button volverId;
+    private ComboBox<String> comboNombre;
 
     private App app;
     private RecursosKud rk = RecursosKud.getInstance();
@@ -151,10 +149,17 @@ public class AñadirController {
     public void hasieratu(Registro r) throws SQLException {
         entradaSalidaBox.getItems().addAll("Entrada","Salida");
         entradaSalidaBox.setValue("Entrada");
+
         List<String> lista = rk.getTrabajadores();
         for(int i = 0; i<lista.size() ; i++ ){
             trabajadorId.getItems().add(lista.get(i));
         }
+
+        lista = rk.getAllProductosString();
+        for(int i = 0; i<lista.size() ; i++ ){
+            comboNombre.getItems().add(lista.get(i));
+        }
+
         serialId.setText(r.getSerial());
         clienteId.setText(r.getCliente());
         if(fEntradaId.getText() != null){
@@ -173,6 +178,7 @@ public class AñadirController {
     void limpiarClick(ActionEvent event) {
         serialId.setText("");
         comentarioId.setText("");
+        fEntradaId.setText("");
         clienteId.setText("");
         cantidadId.setText("");
     }
