@@ -9,15 +9,11 @@ import Seftic.App;
 import Seftic.DB.RecursosKud;
 import Seftic.model.Producto;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-
-import javax.security.auth.callback.Callback;
 
 public class TableStockController {
 
@@ -26,6 +22,9 @@ public class TableStockController {
 
     @FXML
     private URL location;
+
+    @FXML
+    private TableColumn<Producto, String> nombreId;
 
     @FXML
     private TableView<Producto> tableStockId;
@@ -37,7 +36,7 @@ public class TableStockController {
     private TableColumn<Producto, String> descId;
 
     @FXML
-    private TableColumn<?, ?> comentarioId;
+    private TableColumn<Producto, String> comentarioId;
 
     @FXML
     private TableColumn<Producto, Integer> cantidadId;
@@ -109,6 +108,7 @@ public class TableStockController {
     void initialize() throws SQLException {
         comboId.getItems().addAll("Sí", "No", "Ambas");
         List<Producto> lista =  rk.getAllProductos();
+        nombreId.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         serialId.setCellValueFactory(new PropertyValueFactory<>("serial"));
         descId.setCellValueFactory(new PropertyValueFactory<>("desc"));
         cantidadId.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
@@ -122,12 +122,13 @@ public class TableStockController {
         });
 
         m2.setOnAction(col -> {
+            String nombre = tableStockId.getSelectionModel().getSelectedItem().getNombre();
             String serial = tableStockId.getSelectionModel().getSelectedItem().getSerial();
             String desc = tableStockId.getSelectionModel().getSelectedItem().getDesc();
             int cant = tableStockId.getSelectionModel().getSelectedItem().getCantidad();
             String tipo = tableStockId.getSelectionModel().getSelectedItem().getTipo();
-            Producto p = new Producto(serial, desc, cant, tipo);
-            app.modificarProducto(new Producto(serial, desc, cant, tipo));
+            Producto p = new Producto(nombre,serial, desc, cant, tipo);
+            app.modificarProducto(new Producto(nombre,serial, desc, cant, tipo));
 
         });
         cm.getItems().addAll(m1,m2);

@@ -1,12 +1,15 @@
 package Seftic.model;
 
 public class Producto {
+
+    private String nombre;
     private String serial;
     private String desc;
     private int cantidad;
     private String tipo;
 
-    public Producto(String serial, String desc,  int cantidad, String tipo) {
+    public Producto(String nombre, String serial, String desc,  int cantidad, String tipo) {
+        this.nombre = nombre;
         this.serial = serial;
         this.desc = desc;
         this.cantidad = cantidad;
@@ -44,5 +47,13 @@ public class Producto {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

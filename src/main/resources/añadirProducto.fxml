@@ -6,17 +6,19 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="246.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Seftic.UI.AñadirStockController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="257.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Seftic.UI.AñadirStockController">
    <children>
-      <Label layoutX="54.0" layoutY="44.0" text="Serial*" />
-      <Label layoutX="54.0" layoutY="81.0" text="Descripcion" />
-      <Label layoutX="54.0" layoutY="120.0" text="Tipo*" />
-      <TextField fx:id="serialField" layoutX="107.0" layoutY="39.0" />
-      <TextField fx:id="descField" layoutX="139.0" layoutY="76.0" />
-      <ComboBox fx:id="comboBoxTipo" layoutX="98.0" layoutY="115.0" prefWidth="150.0" />
-      <Button fx:id="añadirLabel" layoutX="32.0" layoutY="198.0" mnemonicParsing="false" onAction="#añadirClick" text="Añadir" />
-      <Button fx:id="volverLabel" layoutX="134.0" layoutY="198.0" mnemonicParsing="false" onAction="#volverClick" text="Volver" />
-      <Button fx:id="limpiarLabel" layoutX="219.0" layoutY="198.0" mnemonicParsing="false" onAction="#limpiarClick" text="Limpiar" />
-      <Label fx:id="labelAviso" layoutX="42.0" layoutY="151.0" prefHeight="40.0" prefWidth="255.0" />
+      <Label layoutX="53.0" layoutY="66.0" text="Serial" />
+      <Label layoutX="53.0" layoutY="103.0" text="Descripcion" />
+      <Label layoutX="53.0" layoutY="142.0" text="Tipo*" />
+      <TextField fx:id="serialField" layoutX="97.0" layoutY="61.0" />
+      <TextField fx:id="descField" layoutX="138.0" layoutY="98.0" />
+      <ComboBox fx:id="comboBoxTipo" layoutX="97.0" layoutY="137.0" prefWidth="150.0" />
+      <Button fx:id="añadirLabel" layoutX="31.0" layoutY="220.0" mnemonicParsing="false" onAction="#añadirClick" text="Añadir" />
+      <Button fx:id="volverLabel" layoutX="133.0" layoutY="220.0" mnemonicParsing="false" onAction="#volverClick" text="Volver" />
+      <Button fx:id="limpiarLabel" layoutX="218.0" layoutY="220.0" mnemonicParsing="false" onAction="#limpiarClick" text="Limpiar" />
+      <Label fx:id="labelAviso" layoutX="41.0" layoutY="173.0" prefHeight="40.0" prefWidth="255.0" />
+      <Label layoutX="51.0" layoutY="33.0" text="Nombre*" />
+      <TextField fx:id="nombreField" layoutX="110.0" layoutY="28.0" />
    </children>
 </AnchorPane>

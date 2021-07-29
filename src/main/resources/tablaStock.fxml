@@ -9,8 +9,15 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Seftic.UI.TableStockController">
    <children>
+      <Button fx:id="añadirId" layoutX="46.0" layoutY="560.0" mnemonicParsing="false" onAction="#añadirClick" text="Añadir producto" />
+      <Button fx:id="buscarId" layoutX="238.0" layoutY="560.0" mnemonicParsing="false" onAction="#buscarClick" text="Buscar" />
+      <TextField fx:id="buscarField" layoutX="313.0" layoutY="560.0" prefHeight="26.0" prefWidth="181.0" />
+      <ComboBox fx:id="comboId" layoutX="510.0" layoutY="560.0" prefHeight="26.0" prefWidth="99.0" promptText="Stock?" />
+      <Button fx:id="volverId" layoutX="851.0" layoutY="560.0" mnemonicParsing="false" onAction="#volverClick" text="Volver" />
+      <Button fx:id="actualizarId" layoutX="689.0" layoutY="560.0" mnemonicParsing="false" onAction="#actualizarClick" text="Actualizar tabla" />
       <TableView fx:id="tableStockId" layoutX="26.0" layoutY="19.0" prefHeight="535.0" prefWidth="885.0">
         <columns>
+            <TableColumn fx:id="nombreId" prefWidth="75.0" text="Nombre" />
           <TableColumn fx:id="serialId" prefWidth="75.0" text="Serial" />
           <TableColumn fx:id="descId" prefWidth="75.0" text="Descripcion" />
             <TableColumn fx:id="cantidadId" prefWidth="75.0" text="Cantidad" />
@@ -20,11 +27,5 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="añadirId" layoutX="46.0" layoutY="560.0" mnemonicParsing="false" onAction="#añadirClick" text="Añadir producto" />
-      <Button fx:id="buscarId" layoutX="238.0" layoutY="560.0" mnemonicParsing="false" onAction="#buscarClick" text="Buscar" />
-      <TextField fx:id="buscarField" layoutX="313.0" layoutY="560.0" prefHeight="26.0" prefWidth="181.0" />
-      <ComboBox fx:id="comboId" layoutX="510.0" layoutY="560.0" prefHeight="26.0" prefWidth="99.0" promptText="Stock?" />
-      <Button fx:id="volverId" layoutX="851.0" layoutY="560.0" mnemonicParsing="false" onAction="#volverClick" text="Volver" />
-      <Button fx:id="actualizarId" layoutX="689.0" layoutY="560.0" mnemonicParsing="false" onAction="#actualizarClick" text="Actualizar tabla" />
    </children>
 </AnchorPane>

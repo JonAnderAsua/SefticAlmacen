@@ -72,18 +72,19 @@ public class RecursosKud {
 
         ResultSet rs = dbController.execSQL(request);
         while(rs.next()){
+            String nombre = rs.getString("nombre");
             String serial = rs.getString("serial");
             String desc = rs.getString("desc");
             int cant = rs.getInt("cant");
             String tipo = rs.getString("tipo");
-            Producto p = new Producto(serial,desc,cant,tipo);
+            Producto p = new Producto(nombre,serial,desc,cant,tipo);
             productos.add(p);
         }
         return productos;
     }
 
     public boolean comprobarSerial(String text) throws SQLException {
-        String request = "SELECT serial FROM Producto where serial LIKE '" + text + "';";
+        String request = "SELECT serial FROM Producto where nombre LIKE '" + text + "';";
         ResultSet rs = dbController.execSQL(request);
         return rs.next();
     }
@@ -106,10 +107,11 @@ public class RecursosKud {
         ResultSet rs = dbController.execSQL(request);
         while(rs.next()){
             String serial = rs.getString("serial");
+            String nombre = rs.getString("nombre");
             String desc = rs.getString("desc");
             int cant = rs.getInt("cant");
             String tipo = rs.getString("tipo");
-            Producto p = new Producto(serial,desc,cant,tipo);
+            Producto p = new Producto(nombre,serial,desc,cant,tipo);
             productos.add(p);
         }
         return productos;
@@ -162,15 +164,16 @@ public class RecursosKud {
     }
 
     public Producto getProductoUnico(String s) throws SQLException {
-        Producto p = new Producto("","",0,"");
+        Producto p = new Producto("","","",0,"");
         String request = "SELECT * FROM Producto WHERE serial LIKE '%" + s + "%';";
         ResultSet rs = dbController.execSQL(request);
         if(rs.next()){
+            String nombre = rs.getString("nombre");
             String serial = rs.getString("serial");
             String desc = rs.getString("desc");
             int cant = rs.getInt("cant");
             String tipo = rs.getString("tipo");
-            p = new Producto(serial,desc,cant,tipo);
+            p = new Producto(nombre,serial,desc,cant,tipo);
         }
         return p;
     }
@@ -229,7 +232,6 @@ public class RecursosKud {
         ResultSet rs = dbController.execSQL(request);
         while(rs.next()){ //Pasa por todos y coge el último
             sol = rs.getString("fEntrada");
-            System.out.println("Sol: " + sol);
         }
         return sol;
     }
@@ -242,5 +244,15 @@ public class RecursosKud {
     public void añadirTrabajador(String text) {
         String request = "INSERT INTO Trabajador VALUES ('" + text + "');";
         dbController.execSQL(request);
+    }
+
+    public List<String> getAllProductosString() throws SQLException {
+        List<Producto> listaProducto = getAllProductos();
+        List<String> lista = new ArrayList<>();
+        for(int i = 0 ; i < listaProducto.size() ; i++){
+            lista.add(listaProducto.get(i).getNombre());
+            System.out.println(listaProducto.get(i).getNombre());
+        }
+        return lista;
     }
 }

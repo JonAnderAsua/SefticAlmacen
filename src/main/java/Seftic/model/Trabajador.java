@@ -33,6 +33,5 @@ public class Trabajador {
         } catch (SQLException throwables) {
             this.ultimoRegistro = "No hay registro";
         }
-        System.out.println(ultimoRegistro);
     }
 }

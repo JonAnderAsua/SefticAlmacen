@@ -3,6 +3,8 @@ package Seftic.UI;
 import Seftic.App;
 import Seftic.DB.RecursosKud;
 import Seftic.model.Producto;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -25,13 +27,7 @@ public class AñadirStockController {
     private ComboBox<String> comboBoxTipo;
 
     @FXML
-    private Button añadirLabel;
-
-    @FXML
-    private Button volverLabel;
-
-    @FXML
-    private Button limpiarLabel;
+    private TextField nombreField;
 
     @FXML
     private Label labelAviso;
@@ -50,11 +46,11 @@ public class AñadirStockController {
             comentField.setText("");
         }
 
-        if(serialField.getText() == null || comboBoxTipo.getValue() == null){
+        if(nombreField.getText() == null || comboBoxTipo.getValue() == null){
             labelAviso.setText("Por favor rellena los campos obligatorios...");
         }
         else{
-            boolean existe = rk.comprobarSerial(serialField.getText());
+            boolean existe = rk.comprobarSerial(nombreField.getText());
             if(existe){
                 labelAviso.setText("El producto que quieres añadir ya está en la DB");
             }
@@ -83,6 +79,7 @@ public class AñadirStockController {
 
     @FXML
     void initialize() throws SQLException {
+
         comboBoxTipo.getItems().addAll("PC", "Video", "Red", "Otro");
 
     }
