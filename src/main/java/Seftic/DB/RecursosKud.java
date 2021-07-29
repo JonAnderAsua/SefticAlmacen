@@ -89,8 +89,8 @@ public class RecursosKud {
         return rs.next();
     }
 
-    public void añadirProducto(String serial, String desc, int cant,String tipo) {
-        String request = "INSERT INTO Producto VALUES('" + serial + "','" + desc + "',"+cant+",'" + tipo + "');";
+    public void añadirProducto(String nombre,String serial, String desc, int cant,String tipo) {
+        String request = "INSERT INTO Producto VALUES('" + serial + "','" + desc + "',"+cant+",'" + tipo + "','" + nombre + "');";
         dbController.execSQL(request);
     }
 

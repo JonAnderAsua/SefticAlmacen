@@ -14,6 +14,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.Callback;
 
 public class TableStockController {
 
@@ -48,13 +50,7 @@ public class TableStockController {
     private Button añadirId;
 
     @FXML
-    private Button buscarId;
-
-    @FXML
     private ComboBox<String> comboId;
-
-    @FXML
-    private Button volverId;
 
     @FXML
     private TextField buscarField;
@@ -62,18 +58,15 @@ public class TableStockController {
     private App app;
     private RecursosKud rk = RecursosKud.getInstance();
 
+    //Context Menu
     private ContextMenu cm = new ContextMenu();
     private MenuItem m1 = new MenuItem("Borrar");
     private MenuItem m2 = new MenuItem("Modificar");
 
     @FXML
-    private Button actualizarId;
-
-    @FXML
     void actualizarClick(ActionEvent event) throws SQLException {
         cargarTabla(rk.getAllProductos());
     }
-
 
     @FXML
     void añadirClick(ActionEvent event) {
@@ -114,7 +107,7 @@ public class TableStockController {
         cantidadId.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
         tipoId.setCellValueFactory(new PropertyValueFactory<>("tipo"));
 
-        //Callback<TableColumn<Producto,String>, TableCell<Producto,String>> defaultTextFieldCellFactory = TextFieldTableCell.<Producto>forTableColumn();
+        Callback<TableColumn<Producto,String>, TableCell<Producto,String>> defaultTextFieldCellFactory = TextFieldTableCell.<Producto>forTableColumn();
 
         m1.setOnAction(col ->{ //Borrar
             String serial = tableStockId.getSelectionModel().getSelectedItem().getSerial();

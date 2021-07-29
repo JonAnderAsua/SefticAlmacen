@@ -21,9 +21,6 @@ public class AñadirStockController {
     private TextField descField;
 
     @FXML
-    private TextField comentField;
-
-    @FXML
     private ComboBox<String> comboBoxTipo;
 
     @FXML
@@ -42,9 +39,6 @@ public class AñadirStockController {
             descField.setText("");
         }
 
-        if(comentField.getText() == null){
-            comentField.setText("");
-        }
 
         if(nombreField.getText() == null || comboBoxTipo.getValue() == null){
             labelAviso.setText("Por favor rellena los campos obligatorios...");
@@ -55,7 +49,7 @@ public class AñadirStockController {
                 labelAviso.setText("El producto que quieres añadir ya está en la DB");
             }
             else{
-                rk.añadirProducto(serialField.getText(),descField.getText(),0,comboBoxTipo.getValue());
+                rk.añadirProducto(nombreField.getText(),serialField.getText(),descField.getText(),0,comboBoxTipo.getValue());
                 labelAviso.setText("El producto " + serialField.getText() + " se ha añadido");
             }
         }
@@ -65,7 +59,6 @@ public class AñadirStockController {
     void limpiarClick(ActionEvent event) {
         serialField.setText("");
         descField.setText("");
-        comentField.setText("");
     }
 
     @FXML

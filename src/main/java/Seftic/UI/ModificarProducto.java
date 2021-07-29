@@ -14,11 +14,6 @@ import javafx.scene.control.TextField;
 
 public class ModificarProducto {
 
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private TextField serialLabel;
@@ -27,19 +22,10 @@ public class ModificarProducto {
     private TextField descLabel;
 
     @FXML
-    private TextField comentarioLabel;
+    private TextField nombreLabel;
 
     @FXML
     private TextField cantLabel;
-
-    @FXML
-    private Button modificarId;
-
-    @FXML
-    private Button limpiarId;
-
-    @FXML
-    private Button volverId;
 
     @FXML
     private ComboBox<String> comboboxTipo;
@@ -49,34 +35,23 @@ public class ModificarProducto {
 
     @FXML
     void limpiarClick(ActionEvent event) {
+        nombreLabel.setText("");
         serialLabel.setText("");
         descLabel.setText("");
-        comentarioLabel.setText("");
         cantLabel.setText("");
     }
 
     @FXML
     void modificarClick(ActionEvent event) {
         rk.borrarProducto(serialLabel.getText());
-        rk.añadirProducto(serialLabel.getText(),descLabel.getText(),Integer.parseInt(cantLabel.getText()) ,comboboxTipo.getValue());
+        rk.añadirProducto(nombreLabel.getText(),serialLabel.getText(),descLabel.getText(),Integer.parseInt(cantLabel.getText()) ,comboboxTipo.getValue());
     }
 
     @FXML
     void volverClick(ActionEvent event) {
         app.mostrarInventario();
     }
-/*
-    @FXML
-    void initialize() {
-       comboboxTipo.getItems().addAll("PC","Video","Red","Otros");
-       serialLabel.setText(p.getSerial());
-       descLabel.setText(p.getDesc());
-       comentarioLabel.setText(p.getComentario());
-       cantLabel.setText(String.valueOf(p.getCantidad()));
-       comboboxTipo.setValue(p.getTipo());
-    }
 
- */
 
     public void hasieratu(Producto p){
         comboboxTipo.getItems().addAll("PC","Video","Red","Otros");
@@ -84,6 +59,7 @@ public class ModificarProducto {
         descLabel.setText(p.getDesc());
         cantLabel.setText(String.valueOf(p.getCantidad()));
         comboboxTipo.setValue(p.getTipo());
+        nombreLabel.setText(p.getNombre());
     }
 
     public void setMainApp(App app) {
