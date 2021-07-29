@@ -238,4 +238,9 @@ public class RecursosKud {
         String request = "DELETE FROM Trabajador WHERE nombre LIKE '" + nombre + "';";
         dbController.execSQL(request);
     }
+
+    public void añadirTrabajador(String text) {
+        String request = "INSERT INTO Trabajador VALUES ('" + text + "');";
+        dbController.execSQL(request);
+    }
 }

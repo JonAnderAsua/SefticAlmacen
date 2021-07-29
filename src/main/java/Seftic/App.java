@@ -21,6 +21,7 @@ public class App extends Application {
     private Parent root4;
     private Parent root5;
     private Parent root6;
+    private Parent root7;
 
     private Stage stage;
     private Stage stageAñadir;
@@ -28,6 +29,7 @@ public class App extends Application {
     private Stage stageAñadirStock;
     private Stage stageModificarProducto;
     private Stage stageTrabajadores;
+    private Stage stageAñadirTrabajador;
 
     private Scene escena;
     private Scene escena2;
@@ -35,6 +37,7 @@ public class App extends Application {
     private Scene escena4;
     private Scene escena5;
     private Scene escena6;
+    private Scene escena7;
 
     private TableController tCont;
     private AñadirController añadirCont;
@@ -42,6 +45,7 @@ public class App extends Application {
     private AñadirStockController añadirStockCont;
     private ModificarProducto modificarProductoCont;
     private TrabajadoresContr trabContr;
+    private AñadirTrabajadorController añadirTrabContr;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -51,6 +55,7 @@ public class App extends Application {
         stageAñadirStock = primaryStage;
         stageModificarProducto = primaryStage;
         stageTrabajadores = primaryStage;
+        stageAñadirTrabajador = primaryStage;
         pantailakKargatu();
 
         stage.setTitle("Almacen Seftic");
@@ -94,6 +99,12 @@ public class App extends Application {
         escena6 = new Scene(root6);
         trabContr = loader6.getController();
         trabContr.setMainApp(this);
+
+        FXMLLoader loader7 = new FXMLLoader(getClass().getResource("/añadirTrabajador.fxml"));
+        root7 = loader7.load();
+        escena7 = new Scene(root7);
+        añadirTrabContr = loader7.getController();
+        añadirTrabContr.setMainApp(this);
 
 
     }
@@ -139,5 +150,11 @@ public class App extends Application {
         stageTrabajadores.setScene(escena6);
         stageTrabajadores.show();
         trabContr.iniciar();
+    }
+
+    public void cargarNuevoTrab(String s){
+        stageAñadirTrabajador.setScene(escena7);
+        stageAñadirTrabajador.show();
+        añadirTrabContr.iniciar(s);
     }
 }

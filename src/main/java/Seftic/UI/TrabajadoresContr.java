@@ -42,7 +42,7 @@ public class TrabajadoresContr {
 
     @FXML
     void añadirClick(ActionEvent event) {
-
+        app.cargarNuevoTrab("");
     }
 
     @FXML
@@ -63,7 +63,8 @@ public class TrabajadoresContr {
 
         m2.setOnAction(col -> { //Modificar
             String nombre = tableId.getSelectionModel().getSelectedItem().getNombre();
-
+            rk.borrarTrabajador(nombre);
+            app.cargarNuevoTrab(nombre);
         });
         cm.getItems().addAll(m1,m2);
         tableId.setContextMenu(cm);
