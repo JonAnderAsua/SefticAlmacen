@@ -221,4 +221,21 @@ public class RecursosKud {
             return false;
         }
     }
+
+    public String getRegistro(String nombre) throws SQLException {
+        String sol = "No hay registro";
+        System.out.println(nombre);
+        String request = "SELECT fEntrada FROM Registrar WHERE nTrab LIKE '" + nombre + "';";
+        ResultSet rs = dbController.execSQL(request);
+        while(rs.next()){ //Pasa por todos y coge el último
+            sol = rs.getString("fEntrada");
+            System.out.println("Sol: " + sol);
+        }
+        return sol;
+    }
+
+    public void borrarTrabajador(String nombre) {
+        String request = "DELETE FROM Trabajador WHERE nombre LIKE '" + nombre + "';";
+        dbController.execSQL(request);
+    }
 }

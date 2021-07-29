@@ -20,24 +20,28 @@ public class App extends Application {
     private Parent root3;
     private Parent root4;
     private Parent root5;
+    private Parent root6;
 
     private Stage stage;
     private Stage stageAñadir;
     private Stage stageStock;
     private Stage stageAñadirStock;
     private Stage stageModificarProducto;
+    private Stage stageTrabajadores;
 
     private Scene escena;
     private Scene escena2;
     private Scene escena3;
     private Scene escena4;
     private Scene escena5;
+    private Scene escena6;
 
     private TableController tCont;
     private AñadirController añadirCont;
     private TableStockController stockCont;
     private AñadirStockController añadirStockCont;
     private ModificarProducto modificarProductoCont;
+    private TrabajadoresContr trabContr;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -46,9 +50,10 @@ public class App extends Application {
         stageStock = primaryStage;
         stageAñadirStock = primaryStage;
         stageModificarProducto = primaryStage;
+        stageTrabajadores = primaryStage;
         pantailakKargatu();
 
-        stage.setTitle("Almac�n Seftic");
+        stage.setTitle("Almacen Seftic");
         escena = new Scene(root,950,600);
         stage.setScene(escena);
         stage.show();
@@ -60,7 +65,7 @@ public class App extends Application {
         tCont = loader.getController();
         tCont.setMainApp(this);
 
-        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/A�adir.fxml"));
+        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/Añadir.fxml"));
         root2 = loader2.load();
         escena2 = new Scene(root2);
         añadirCont = loader2.getController();
@@ -72,7 +77,7 @@ public class App extends Application {
         stockCont = loader3.getController();
         stockCont.setMainApp(this);
 
-        FXMLLoader loader4 = new FXMLLoader(getClass().getResource("/a�adirProducto.fxml"));
+        FXMLLoader loader4 = new FXMLLoader(getClass().getResource("/añadirProducto.fxml"));
         root4 = loader4.load();
         escena4 = new Scene(root4);
         añadirStockCont = loader4.getController();
@@ -83,6 +88,12 @@ public class App extends Application {
         escena5 = new Scene(root5);
         modificarProductoCont = loader5.getController();
         modificarProductoCont.setMainApp(this);
+
+        FXMLLoader loader6 = new FXMLLoader(getClass().getResource("/tablaTrabajadores.fxml"));
+        root6 = loader6.load();
+        escena6 = new Scene(root6);
+        trabContr = loader6.getController();
+        trabContr.setMainApp(this);
 
 
     }
@@ -122,5 +133,11 @@ public class App extends Application {
         stageAñadir.setScene(escena2);
         stageAñadir.show();
         añadirCont.hasieratu(r);
+    }
+
+    public void cargarTablaTrab() throws SQLException {
+        stageTrabajadores.setScene(escena6);
+        stageTrabajadores.show();
+        trabContr.iniciar();
     }
 }

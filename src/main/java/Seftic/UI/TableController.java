@@ -163,6 +163,11 @@ public class TableController {
 
     }
 
+    @FXML
+    void trabajadorClick(ActionEvent event) throws SQLException {
+        app.cargarTablaTrab();
+    }
+
     public void setMainApp(App app) {
         this.app = app;
     }
