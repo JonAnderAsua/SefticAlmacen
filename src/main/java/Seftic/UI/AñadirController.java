@@ -150,6 +150,10 @@ public class AñadirController {
         entradaSalidaBox.getItems().addAll("Entrada","Salida");
         entradaSalidaBox.setValue("Entrada");
 
+        //Reiniciar los comboBox, si no da error
+        trabajadorId.getItems().clear();
+        comboNombre.getItems().clear();
+
         List<String> lista = rk.getTrabajadores();
         for(int i = 0; i<lista.size() ; i++ ){
             trabajadorId.getItems().add(lista.get(i));
