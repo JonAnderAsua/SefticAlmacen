@@ -254,4 +254,10 @@ public class RecursosKud {
         }
         return lista;
     }
+
+    public boolean existeElTrabajador(String text) throws SQLException {
+        String request = "SELECT nombre FROM Trabajador WHERE nombre LIKE '" + text + "';";
+        ResultSet rs = dbController.execSQL(request);
+        return rs.next();
+    }
 }

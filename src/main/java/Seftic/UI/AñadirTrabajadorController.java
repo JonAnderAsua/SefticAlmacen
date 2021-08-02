@@ -18,8 +18,11 @@ public class AñadirTrabajadorController {
 
     @FXML
     void añadirClick(ActionEvent event) throws SQLException {
-        rk.añadirTrabajador(nombreId.getText());
-        app.cargarTablaTrab();
+        if(!rk.existeElTrabajador(nombreId.getText())){
+            rk.añadirTrabajador(nombreId.getText());
+            app.actulizarListaTrabajadores();
+            app.cargarTablaTrab();
+        }
     }
 
     public void setMainApp(App app){this.app = app;}

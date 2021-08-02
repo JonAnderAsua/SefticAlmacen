@@ -1,19 +1,14 @@
 package Seftic.UI;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import Seftic.App;
 import Seftic.DB.RecursosKud;
 import Seftic.model.Producto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 public class ModificarProducto {
-
 
     @FXML
     private TextField serialLabel;

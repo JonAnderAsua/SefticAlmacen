@@ -139,6 +139,13 @@ public class TableController {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
+            try {
+                cargarTabla(rk.getRecursos());
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         });
 
         m2.setOnAction(col -> { //Modificar
@@ -160,6 +167,13 @@ public class TableController {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            try {
+                cargarTabla(rk.getRecursos());
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
         });
         cm.getItems().addAll(m1,m2);
@@ -176,5 +190,9 @@ public class TableController {
 
     public void setMainApp(App app) {
         this.app = app;
+    }
+
+    public void actualizarTabla() throws SQLException, ParseException {
+        cargarTabla(rk.getRecursos());
     }
 }

@@ -47,6 +47,7 @@ public class AñadirStockController {
             }
             else{
                 rk.añadirProducto(nombreField.getText(),serialField.getText(),descField.getText(),0,comboBoxTipo.getValue());
+                app.actualizarListaStock();
                 labelAviso.setText("El producto " + serialField.getText() + " se ha añadido");
             }
         }

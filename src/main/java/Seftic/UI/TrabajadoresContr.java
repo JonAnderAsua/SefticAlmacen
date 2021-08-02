@@ -59,6 +59,11 @@ public class TrabajadoresContr {
         m1.setOnAction(col ->{ //Borrar
             String nombre = tableId.getSelectionModel().getSelectedItem().getNombre();
             rk.borrarTrabajador(nombre);
+            try {
+                cargarTabla(deStringATrabajador(rk.getTrabajadores()));
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         });
 
         m2.setOnAction(col -> { //Modificar
@@ -94,4 +99,7 @@ public class TrabajadoresContr {
         this.app = app;
     }
 
+    public void actualizarTabla() throws SQLException {
+        cargarTabla(deStringATrabajador(rk.getTrabajadores()));
+    }
 }

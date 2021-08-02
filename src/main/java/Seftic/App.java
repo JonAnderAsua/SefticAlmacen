@@ -157,4 +157,20 @@ public class App extends Application {
         stageAñadirTrabajador.show();
         añadirTrabContr.iniciar(s);
     }
+
+
+    //Actualizar la lista de registros para cada vez que se añade uno nuevo
+    public void actualizarListaDeRegistros() throws SQLException, ParseException {
+        tCont.actualizarTabla();
+    }
+
+    //Actualizar la lista de trabajadores cada vez que se añade uno nuevo
+    public void actulizarListaTrabajadores() throws SQLException {
+        trabContr.actualizarTabla();
+    }
+
+    //Actualizar la lista de productos cada vez que se añade uno nuevo
+    public void actualizarListaStock() throws SQLException {
+        stockCont.actualizarTabla();
+    }
 }

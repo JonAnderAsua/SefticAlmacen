@@ -154,4 +154,8 @@ public class TableStockController {
     public void setMainApp(App app) {
         this.app = app;
     }
+
+    public void actualizarTabla() throws SQLException {
+        cargarTabla(rk.getAllProductos());
+    }
 }
