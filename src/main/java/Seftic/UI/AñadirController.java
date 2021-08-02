@@ -26,6 +26,8 @@ public class AñadirController {
 
     @FXML
     private TextField fEntradaId;
+    @FXML
+    private ComboBox<String> entradaSalidaBox;
 
     @FXML
     private TextField comentarioId;
@@ -35,6 +37,9 @@ public class AñadirController {
 
     @FXML
     private TextField cantidadId;
+
+    @FXML
+    private Button añadirId;
 
     @FXML
     private Label avisoLabel;

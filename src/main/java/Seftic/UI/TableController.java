@@ -19,6 +19,9 @@ import java.util.List;
 public class TableController {
 
     @FXML
+    private TableColumn<Registro,String> nombreId;
+
+    @FXML
     private TableView<Registro> tableId;
 
     @FXML
@@ -113,6 +116,7 @@ public class TableController {
 
         
         //Rellenar las columnas con sus respectivos valores
+        nombreId.setCellValueFactory(new PropertyValueFactory<>("nombreProducto"));
         serialId.setCellValueFactory(new PropertyValueFactory<>("serial"));
         DescipcionId.setCellValueFactory(new PropertyValueFactory<>("desc"));
         ComentarioId.setCellValueFactory(new PropertyValueFactory<>("coment"));
