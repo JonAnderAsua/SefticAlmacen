@@ -3,14 +3,11 @@ package Seftic.UI;
 import Seftic.App;
 import Seftic.DB.RecursosKud;
 import Seftic.model.Producto;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public class AñadirStockController {
 
@@ -44,7 +41,7 @@ public class AñadirStockController {
             labelAviso.setText("Por favor rellena los campos obligatorios...");
         }
         else{
-            boolean existe = rk.comprobarSerial(nombreField.getText());
+            boolean existe = rk.comprobarNombre(nombreField.getText());
             if(existe){
                 labelAviso.setText("El producto que quieres añadir ya está en la DB");
             }

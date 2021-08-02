@@ -26,8 +26,6 @@ public class AñadirController {
 
     @FXML
     private TextField fEntradaId;
-    @FXML
-    private ComboBox<String> entradaSalidaBox;
 
     @FXML
     private TextField comentarioId;
@@ -37,9 +35,6 @@ public class AñadirController {
 
     @FXML
     private TextField cantidadId;
-
-    @FXML
-    private Button añadirId;
 
     @FXML
     private Label avisoLabel;
@@ -54,11 +49,14 @@ public class AñadirController {
     @FXML
     void añadirClick(ActionEvent event) throws ParseException, SQLException {
         Boolean hayStock = true;
-        if(serialId.getText() == null  || trabajadorId.getValue() == null || cantidadId.getText() == null || fEntradaId.getText() == null){
+
+        //Comprobar si mete todos los valores obligatorios
+        if(comboNombre.getValue() == null  || trabajadorId.getValue() == null || cantidadId.getText() == null || fEntradaId.getText() == null){
             avisoLabel.setText("Hay que meter los valores obligatorios");
         }
-        else if(rk.existeProducto(serialId.getText())){
-            Producto p = rk.getProductoUnico(serialId.getText()) ;
+
+        else {
+            Producto p = rk.getProductoUnico(comboNombre.getValue()) ;
             if(comentarioId.getText() == null){
                 comentarioId.setText("");
             }
@@ -72,7 +70,7 @@ public class AñadirController {
 
             System.out.print(fEntradaId.getText());
             if(hayStock && comprobarFechas(fEntradaId.getText())){
-                Registro r = new Registro(serialId.getText(),p.getDesc(),comentarioId.getText(), p.getTipo(), fEntradaId.getText(),entradaSalidaBox.getValue(),clienteId.getText(),trabajadorId.getValue(),Integer.parseInt(cantidadId.getText()));
+                Registro r = new Registro(comboNombre.getValue(),serialId.getText(),p.getDesc(),comentarioId.getText(), p.getTipo(), fEntradaId.getText(),entradaSalidaBox.getValue(),clienteId.getText(),trabajadorId.getValue(),Integer.parseInt(cantidadId.getText()));
                 rk.añadirRegistro(r);
                 app.enseñarTabla();
             }
@@ -82,9 +80,6 @@ public class AñadirController {
             if(!comprobarFechas(fEntradaId.getText())){
                 avisoLabel.setText("Introduce bien las fechas YYYY/MM/DD");
             }
-        }
-        else{
-            avisoLabel.setText("Mete un producto que exista");
         }
 
     }

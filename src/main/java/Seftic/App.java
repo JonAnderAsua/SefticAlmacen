@@ -112,7 +112,7 @@ public class App extends Application {
     public void enseñarAñadir() throws ParseException, SQLException {
         stageAñadir.setScene(escena2);
         stageAñadir.show();
-        Registro r = new Registro("","","","","","","","",0); //Hacer esto es un poco feo pero es que no se me ocurre otra cosa
+        Registro r = new Registro("","","","","","","","","",0); //Hacer esto es un poco feo pero es que no se me ocurre otra cosa
         añadirCont.hasieratu(r);
     }
 

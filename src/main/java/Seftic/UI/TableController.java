@@ -87,7 +87,7 @@ public class TableController {
         List<Registro> lista = new ArrayList<>();
         switch (comboBuscarId.getValue()){
             case "Serial":
-                lista = rk.buscarPorSerial(buscarTextId.getText());
+                lista = rk.buscarPorNombre(buscarTextId.getText());
                 break;
             case "Trabajador":
                 lista= rk.buscarPorTrabajador(buscarTextId.getText());
@@ -124,19 +124,21 @@ public class TableController {
         cantidadId.setCellValueFactory(new PropertyValueFactory<>("cantMod"));
 
         m1.setOnAction(col ->{ //Borrar
+            String nombre = tableId.getSelectionModel().getSelectedItem().getNombreProducto();
             String serial = tableId.getSelectionModel().getSelectedItem().getSerial();
             String trabajador = tableId.getSelectionModel().getSelectedItem().getTrab();
             String fEntrada = tableId.getSelectionModel().getSelectedItem().getFecha();
             String entrada = tableId.getSelectionModel().getSelectedItem().getEntrada();
             int cantidad = tableId.getSelectionModel().getSelectedItem().getCantMod();
             try {
-                rk.borrarRegistro(serial,trabajador,fEntrada,entrada,cantidad);
+                rk.borrarRegistro(nombre,serial,trabajador,fEntrada,entrada,cantidad);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
         });
 
         m2.setOnAction(col -> { //Modificar
+            String nombreProducto = tableId.getSelectionModel().getSelectedItem().getNombreProducto();
             String serial = tableId.getSelectionModel().getSelectedItem().getSerial();
             String desc = tableId.getSelectionModel().getSelectedItem().getDesc();
             String coment = tableId.getSelectionModel().getSelectedItem().getComent();
@@ -148,7 +150,7 @@ public class TableController {
             int cantMod = tableId.getSelectionModel().getSelectedItem().getCantMod();
             try {
                 rk.borrarProducto(serial); //la trampita
-                app.modificarRegistro(new Registro(serial,desc,coment,tipo,fEntrada,entrada,cliente,trab,cantMod));
+                app.modificarRegistro(new Registro(nombreProducto,serial,desc,coment,tipo,fEntrada,entrada,cliente,trab,cantMod));
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             } catch (ParseException e) {

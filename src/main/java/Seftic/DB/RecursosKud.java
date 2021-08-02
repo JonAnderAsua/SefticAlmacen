@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class RecursosKud {
@@ -20,10 +19,11 @@ public class RecursosKud {
 
     public List<Registro> getRecursos() throws SQLException, ParseException {
         List<Registro> solucion = new ArrayList<>();
-        String request = "SELECT Registrar.serial, Registrar.nTrab, fEntrada, entrada, cliente, desc, coment, tipo, cantMod FROM Registrar JOIN Producto ON Registrar.serial=Producto.serial";
+        String request = "SELECT nombreProducto,Registrar.serial, Registrar.nTrab, fEntrada, entrada, cliente, desc, coment, tipo, cantMod,nombreProducto FROM Registrar JOIN Producto ON nombreProducto = nombre";
         ResultSet rs = dbController.execSQL(request);
 
         while(rs.next()){
+            String nombreProducto = rs.getString("nombreProducto");
             String serial = rs.getString("serial");
             String desc = rs.getString("desc");
             String coment = rs.getString("coment");
@@ -33,14 +33,14 @@ public class RecursosKud {
             String cliente = rs.getString("cliente");
             String nTrab = rs.getString("nTrab");
             int cantMod = rs.getInt("cantMod");
-            Registro r = new Registro(serial,desc,coment,tipo,fEntrada,entrada,cliente,nTrab,cantMod);
+            Registro r = new Registro(nombreProducto,serial,desc,coment,tipo,fEntrada,entrada,cliente,nTrab,cantMod);
             solucion.add(r);
         }
         return solucion;
     }
 
     public void añadirRegistro(Registro r) {
-        String request = "insert into Registrar values('"+r.getSerial()+"','"+r.getTrab()+"','"+r.getFecha()+"','"+r.getCliente()+"',"+r.getCantMod()+",'"+r.getComent()+"','"+r.getEntrada()+"');";
+        String request = "insert into Registrar values('"+r.getSerial()+"','"+r.getTrab()+"','"+r.getFecha()+"','"+r.getCliente()+"',"+r.getCantMod()+",'"+r.getComent()+"','"+r.getEntrada()+"','" + r.getNombreProducto() + "');";
         System.out.println(request);
         dbController.execSQL(request);
     }
@@ -58,7 +58,7 @@ public class RecursosKud {
 
     public Boolean comprobarStock(String text, int parseInt) throws SQLException {
         int cantidad = 0;
-        String request = "SELECT cant FROM Producto WHERE Producto.serial LIKE '"+text+"';";
+        String request = "SELECT cant FROM Producto WHERE Producto.nombre LIKE '"+text+"';";
         ResultSet rs = dbController.execSQL(request);
         while(rs.next()){
             cantidad = rs.getInt("cant");
@@ -83,7 +83,7 @@ public class RecursosKud {
         return productos;
     }
 
-    public boolean comprobarSerial(String text) throws SQLException {
+    public boolean comprobarNombre(String text) throws SQLException {
         String request = "SELECT serial FROM Producto where nombre LIKE '" + text + "';";
         ResultSet rs = dbController.execSQL(request);
         return rs.next();
@@ -118,7 +118,6 @@ public class RecursosKud {
     }
 
     public List<Producto> getProductoPorSerial(String text, String value) throws SQLException {
-        List<Producto> productos = new ArrayList<>();
         String request = "SELECT * FROM Producto WHERE cant > 0 AND serial LIKE '" +text+"';";
         if(value.equals("No")){
             request = "SELECT * FROM Producto WHERE cant <= 0 AND serial LIKE '" +text+"';";
@@ -131,41 +130,35 @@ public class RecursosKud {
         dbController.execSQL(request);
     }
 
-    public void borrarRegistro(String serial, String trabajador, String fEntrada, String entrada, int cantidad) throws SQLException {
-        String request = "";
+    public void borrarRegistro(String nombre, String serial, String trabajador, String check, String fEntrada, int cantidad) throws SQLException {
         int cant= 0;
 
         //Coger el stock que tiene en ese momento el producto
-        request = "SELECT cant FROM Producto WHERE serial LIKE '" + serial + "';";
+        String request = "SELECT cant FROM Producto WHERE serial LIKE '" + serial + "';";
         ResultSet rs = dbController.execSQL(request);
         while(rs.next()){
             cant = rs.getInt("cant");
         }
-        if(fEntrada == null){ //Se ha sacado del almacén
-            //Borrar el registro
-            request = "DELETE FROM Registrar WHERE serial LIKE '" + serial + "' AND nTrab LIKE '" + trabajador + "' AND fecha LIKE '" + fEntrada + "' AND entrada=" + entrada + ";";
-            dbController.execSQL(request);
 
+        //Borrar el registro
+        request = "DELETE FROM Registrar WHERE nombreProducto LIKE '" + nombre + "' AND nTrab LIKE '" + trabajador + "' AND fecha LIKE '" + fEntrada + "';";
+        dbController.execSQL(request);
+
+        if(check.equals("Salida")){ //Se ha devuelto al almacén
             cant = cant + cantidad;
-            //Actualizar el stock del producto
-            request = "UPDATE Producto SET cant=" + cant + " WHERE serial LIKE '" + serial + "';";
-            dbController.execSQL(request);
         }
-        else{ //Ha entrado al almacén
-            //Borrar el registro
-            request = "DELETE FROM Registrar WHERE serial LIKE '" + serial + "' AND nTrab LIKE '" + trabajador + "' AND fEntrada LIKE '" + fEntrada + "';";
-            dbController.execSQL(request);
-
+        else{ //Se ha vuelto a sacar del almacén
             cant = cant - cantidad;
-            //Actualizar el stock del producto
-            request = "UPDATE Producto SET cant=" + cant + " WHERE serial LIKE '" + serial + "';";
-            dbController.execSQL(request);
         }
+
+        //Actualizar el stock del producto
+        request = "UPDATE Producto SET cant=" + cant + " WHERE serial LIKE '" + serial + "';";
+        dbController.execSQL(request);
     }
 
     public Producto getProductoUnico(String s) throws SQLException {
         Producto p = new Producto("","","",0,"");
-        String request = "SELECT * FROM Producto WHERE serial LIKE '%" + s + "%';";
+        String request = "SELECT * FROM Producto WHERE nombre LIKE '%" + s + "%';";
         ResultSet rs = dbController.execSQL(request);
         if(rs.next()){
             String nombre = rs.getString("nombre");
@@ -179,17 +172,17 @@ public class RecursosKud {
     }
 
     public List<Registro> buscarPorCliente(String text) throws SQLException, ParseException {
-        String request = "SELECT * FROM Registrar JOIN Producto ON Registrar.serial=Producto.serial WHERE cliente LIKE '%" + text + "%';";
+        String request = "SELECT * FROM Registrar JOIN Producto ON Registrar.nombreProducto=Producto.nombre WHERE cliente LIKE '%" + text + "%';";
         return getListaRegistros(request);
     }
 
     public List<Registro> buscarPorTrabajador(String s) throws SQLException, ParseException {
-        String request = "SELECT * FROM Registrar JOIN Producto ON Registrar.serial=Producto.serial WHERE nTrab LIKE '%" + s + "%';";
+        String request = "SELECT * FROM Registrar JOIN Producto ON Registrar.nombreProducto=Producto.nombre WHERE nTrab LIKE '%" + s + "%';";
         return getListaRegistros(request);
     }
 
-    public List<Registro> buscarPorSerial(String s) throws SQLException, ParseException {
-        String request = "SELECT * FROM Registrar JOIN Producto ON Registrar.serial=Producto.serial WHERE Registrar.serial LIKE '%" + s + "%';";
+    public List<Registro> buscarPorNombre(String s) throws SQLException, ParseException {
+        String request = "SELECT * FROM Registrar JOIN Producto ON Registrar.nombreProducto = Producto.nombre WHERE Registrar.nombre LIKE '%" + s + "%';";
         return getListaRegistros(request);
     }
 
@@ -198,6 +191,7 @@ public class RecursosKud {
         ResultSet rs = dbController.execSQL(request);
         if(rs != null){
             while(rs.next()){
+                String nombreProducto = rs.getString("nombreProducto");
                 String serial = rs.getString("serial");
                 String desc = rs.getString("desc");
                 String coment = rs.getString("coment");
@@ -207,7 +201,7 @@ public class RecursosKud {
                 String cliente = rs.getString("cliente");
                 String nTrab = rs.getString("nTrab");
                 int cantMod = rs.getInt("cantMod");
-                Registro r = new Registro(serial,desc,coment,tipo,fEntrada,entrada,cliente,nTrab,cantMod);
+                Registro r = new Registro(nombreProducto,serial,desc,coment,tipo,fEntrada,entrada,cliente,nTrab,cantMod);
                 lista.add(r);
             }
         }
@@ -215,7 +209,7 @@ public class RecursosKud {
     }
 
     public boolean existeProducto(String text) throws SQLException {
-        String request = "SELECT * FROM Registrar WHERE serial LIKE '" + text + "'";
+        String request = "SELECT * FROM Registrar WHERE nombreProducto LIKE '" + text + "'";
         ResultSet rs = dbController.execSQL(request);
         if(rs.next()){
             return true;
@@ -251,7 +245,6 @@ public class RecursosKud {
         List<String> lista = new ArrayList<>();
         for(int i = 0 ; i < listaProducto.size() ; i++){
             lista.add(listaProducto.get(i).getNombre());
-            System.out.println(listaProducto.get(i).getNombre());
         }
         return lista;
     }

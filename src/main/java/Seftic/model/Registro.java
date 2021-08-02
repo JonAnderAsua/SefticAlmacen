@@ -11,9 +11,11 @@ public class Registro {
     private String entrada;
     private String cliente;
     private String trab;
+    private String nombreProducto;
     private int cantMod;
 
-    public Registro(String serial, String desc, String coment, String tipo, String fEntrada, String entrada, String cliente, String trab, int cantModif) throws ParseException {
+    public Registro(String nombre,String serial, String desc, String coment, String tipo, String fEntrada, String entrada, String cliente, String trab, int cantModif) throws ParseException {
+        this.nombreProducto = nombre;
         this.serial = serial;
         this.desc = desc;
         this.coment = coment;
@@ -61,4 +63,11 @@ public class Registro {
 
     public String getEntrada() {return this.entrada;}
 
+    public String getNombreProducto() {
+        return nombreProducto;
+    }
+
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
 }
