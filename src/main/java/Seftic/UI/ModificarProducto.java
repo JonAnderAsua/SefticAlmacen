@@ -50,8 +50,6 @@ public class ModificarProducto {
 
     public void hasieratu(Producto p){
         comboboxTipo.getItems().addAll("PC","Video","Red","Otros");
-        serialLabel.setText(p.getSerial());
-        descLabel.setText(p.getDesc());
         cantLabel.setText(String.valueOf(p.getCantidad()));
         comboboxTipo.setValue(p.getTipo());
         nombreLabel.setText(p.getNombre());

@@ -3,33 +3,13 @@ package Seftic.model;
 public class Producto {
 
     private String nombre;
-    private String serial;
-    private String desc;
     private int cantidad;
     private String tipo;
 
-    public Producto(String nombre, String serial, String desc,  int cantidad, String tipo) {
+    public Producto(String nombre,   int cantidad, String tipo) {
         this.nombre = nombre;
-        this.serial = serial;
-        this.desc = desc;
         this.cantidad = cantidad;
         this.tipo = tipo;
-    }
-
-    public String getSerial() {
-        return serial;
-    }
-
-    public void setSerial(String serial) {
-        this.serial = serial;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
     }
 
 

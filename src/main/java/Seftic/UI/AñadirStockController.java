@@ -73,8 +73,4 @@ public class AñadirStockController {
         comboBoxTipo.getItems().addAll("PC", "Video", "Red", "Otro");
     }
 
-    public void llenarCampos(Producto p) {
-        serialField.setText(p.getSerial());
-        descField.setText(p.getDesc());
-    }
 }

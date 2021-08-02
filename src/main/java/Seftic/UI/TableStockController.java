@@ -122,12 +122,10 @@ public class TableStockController {
 
         m2.setOnAction(col -> {
             String nombre = tableStockId.getSelectionModel().getSelectedItem().getNombre();
-            String serial = tableStockId.getSelectionModel().getSelectedItem().getSerial();
-            String desc = tableStockId.getSelectionModel().getSelectedItem().getDesc();
             int cant = tableStockId.getSelectionModel().getSelectedItem().getCantidad();
             String tipo = tableStockId.getSelectionModel().getSelectedItem().getTipo();
-            Producto p = new Producto(nombre,serial, desc, cant, tipo);
-            app.modificarProducto(new Producto(nombre,serial, desc, cant, tipo));
+            Producto p = new Producto(nombre, cant, tipo);
+            app.modificarProducto(new Producto(nombre, cant, tipo));
 
             try {
                 cargarTabla(rk.getAllProductos());

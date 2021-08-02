@@ -73,11 +73,9 @@ public class RecursosKud {
         ResultSet rs = dbController.execSQL(request);
         while(rs.next()){
             String nombre = rs.getString("nombre");
-            String serial = rs.getString("serial");
-            String desc = rs.getString("desc");
             int cant = rs.getInt("cant");
             String tipo = rs.getString("tipo");
-            Producto p = new Producto(nombre,serial,desc,cant,tipo);
+            Producto p = new Producto(nombre,cant,tipo);
             productos.add(p);
         }
         return productos;
@@ -90,7 +88,7 @@ public class RecursosKud {
     }
 
     public void añadirProducto(String nombre,String serial, String desc, int cant,String tipo) {
-        String request = "INSERT INTO Producto VALUES('" + serial + "','" + desc + "',"+cant+",'" + tipo + "','" + nombre + "');";
+        String request = "INSERT INTO Producto VALUES("+cant+",'" + tipo + "','" + nombre + "');";
         dbController.execSQL(request);
     }
 
@@ -106,12 +104,10 @@ public class RecursosKud {
         List<Producto> productos = new ArrayList<>();
         ResultSet rs = dbController.execSQL(request);
         while(rs.next()){
-            String serial = rs.getString("serial");
             String nombre = rs.getString("nombre");
-            String desc = rs.getString("desc");
             int cant = rs.getInt("cant");
             String tipo = rs.getString("tipo");
-            Producto p = new Producto(nombre,serial,desc,cant,tipo);
+            Producto p = new Producto(nombre,cant,tipo);
             productos.add(p);
         }
         return productos;
@@ -163,16 +159,14 @@ public class RecursosKud {
     }
 
     public Producto getProductoUnico(String s) throws SQLException {
-        Producto p = new Producto("","","",0,"");
+        Producto p = new Producto("",0,"");
         String request = "SELECT * FROM Producto WHERE nombre LIKE '%" + s + "%';";
         ResultSet rs = dbController.execSQL(request);
         if(rs.next()){
             String nombre = rs.getString("nombre");
-            String serial = rs.getString("serial");
-            String desc = rs.getString("desc");
             int cant = rs.getInt("cant");
             String tipo = rs.getString("tipo");
-            p = new Producto(nombre,serial,desc,cant,tipo);
+            p = new Producto(nombre,cant,tipo);
         }
         return p;
     }
