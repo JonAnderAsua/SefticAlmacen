@@ -126,7 +126,7 @@ public class RecursosKud {
     }
 
     public void borrarProducto(String serial) {
-        String request = "DELETE FROM Producto WHERE serial LIKE '" + serial + "';";
+        String request = "DELETE FROM Producto WHERE nombre LIKE '" + serial + "';";
         dbController.execSQL(request);
     }
 
@@ -138,17 +138,23 @@ public class RecursosKud {
         ResultSet rs = dbController.execSQL(request);
         while(rs.next()){
             cant = rs.getInt("cant");
+            System.out.println("Cantidad = " + cant);
+
         }
 
         //Borrar el registro
-        request = "DELETE FROM Registrar WHERE nombreProducto LIKE '" + nombre + "' AND nTrab LIKE '" + trabajador + "' AND fecha LIKE '" + fEntrada + "';";
+        request = "DELETE FROM Registrar WHERE nombreProducto LIKE '" + nombre + "' AND nTrab LIKE '" + trabajador + "' AND fEntrada LIKE '" + fEntrada + "';";
+        System.out.println(request);
         dbController.execSQL(request);
 
         if(check.equals("Salida")){ //Se ha devuelto al almacén
             cant = cant + cantidad;
+            System.out.println("Salida: " + cant );
         }
         else{ //Se ha vuelto a sacar del almacén
             cant = cant - cantidad;
+            System.out.println("Entrada: " + cant );
+
         }
 
         //Actualizar el stock del producto

@@ -43,7 +43,7 @@ public class ModificarProducto {
 
     @FXML
     void modificarClick(ActionEvent event) {
-        rk.borrarProducto(serialLabel.getText());
+        rk.borrarProducto(nombreLabel.getText());
         rk.añadirProducto(nombreLabel.getText(),serialLabel.getText(),descLabel.getText(),Integer.parseInt(cantLabel.getText()) ,comboboxTipo.getValue());
     }
 

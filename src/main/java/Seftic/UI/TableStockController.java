@@ -100,6 +100,7 @@ public class TableStockController {
     @FXML
     void initialize() throws SQLException {
         comboId.getItems().addAll("Sí", "No", "Ambas");
+        comboId.setValue("");
         List<Producto> lista =  rk.getAllProductos();
         nombreId.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         serialId.setCellValueFactory(new PropertyValueFactory<>("serial"));
@@ -110,8 +111,13 @@ public class TableStockController {
         Callback<TableColumn<Producto,String>, TableCell<Producto,String>> defaultTextFieldCellFactory = TextFieldTableCell.<Producto>forTableColumn();
 
         m1.setOnAction(col ->{ //Borrar
-            String serial = tableStockId.getSelectionModel().getSelectedItem().getSerial();
-            rk.borrarProducto(serial);
+            String nombre = tableStockId.getSelectionModel().getSelectedItem().getNombre();
+            rk.borrarProducto(nombre);
+            try {
+                cargarTabla(rk.getAllProductos());
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         });
 
         m2.setOnAction(col -> {
@@ -122,6 +128,12 @@ public class TableStockController {
             String tipo = tableStockId.getSelectionModel().getSelectedItem().getTipo();
             Producto p = new Producto(nombre,serial, desc, cant, tipo);
             app.modificarProducto(new Producto(nombre,serial, desc, cant, tipo));
+
+            try {
+                cargarTabla(rk.getAllProductos());
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
 
         });
         cm.getItems().addAll(m1,m2);

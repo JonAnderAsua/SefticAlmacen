@@ -135,7 +135,7 @@ public class TableController {
             String entrada = tableId.getSelectionModel().getSelectedItem().getEntrada();
             int cantidad = tableId.getSelectionModel().getSelectedItem().getCantMod();
             try {
-                rk.borrarRegistro(nombre,serial,trabajador,fEntrada,entrada,cantidad);
+                rk.borrarRegistro(nombre,serial,trabajador,entrada,fEntrada,cantidad);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
