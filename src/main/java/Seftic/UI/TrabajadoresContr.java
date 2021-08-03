@@ -36,11 +36,6 @@ public class TrabajadoresContr {
     private App app;
 
     @FXML
-    void actualizarClick(ActionEvent event) throws SQLException {
-        cargarTabla(deStringATrabajador(rk.getTrabajadores()));
-    }
-
-    @FXML
     void añadirClick(ActionEvent event) {
         app.cargarNuevoTrab("");
     }

@@ -65,8 +65,6 @@ public class TableController {
     @FXML
     void añadirClick(ActionEvent event) throws SQLException, ParseException { app.enseñarAñadir(); }
 
-    @FXML
-    void ActualizarClick(ActionEvent event) throws SQLException, ParseException {cargarTabla(rk.getRecursos());}
 
     private void cargarTabla(List<Registro> recursos) {
         tableId.getItems().clear();

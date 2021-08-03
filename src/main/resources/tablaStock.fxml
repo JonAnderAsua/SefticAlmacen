@@ -14,7 +14,6 @@
       <TextField fx:id="buscarField" layoutX="313.0" layoutY="560.0" prefHeight="26.0" prefWidth="181.0" />
       <ComboBox fx:id="comboId" layoutX="510.0" layoutY="560.0" prefHeight="26.0" prefWidth="99.0" promptText="Stock?" />
       <Button fx:id="volverId" layoutX="851.0" layoutY="560.0" mnemonicParsing="false" onAction="#volverClick" text="Volver" />
-      <Button fx:id="actualizarId" layoutX="689.0" layoutY="560.0" mnemonicParsing="false" onAction="#actualizarClick" text="Actualizar tabla" />
       <TableView fx:id="tableStockId" layoutX="26.0" layoutY="19.0" prefHeight="535.0" prefWidth="885.0">
         <columns>
             <TableColumn fx:id="nombreId" prefWidth="75.0" text="Nombre" />

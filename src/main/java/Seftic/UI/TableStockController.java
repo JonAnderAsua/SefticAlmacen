@@ -62,11 +62,6 @@ public class TableStockController {
     private MenuItem m2 = new MenuItem("Modificar");
 
     @FXML
-    void actualizarClick(ActionEvent event) throws SQLException {
-        cargarTabla(rk.getAllProductos());
-    }
-
-    @FXML
     void añadirClick(ActionEvent event) {
         app.enseñarAñadirStock();
     }

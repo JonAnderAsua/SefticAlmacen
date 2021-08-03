@@ -5,8 +5,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="609.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Seftic.UI.TrabajadoresContr">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="442.0" prefWidth="451.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Seftic.UI.TrabajadoresContr">
    <children>
       <TableView fx:id="tableId" layoutX="14.0" layoutY="17.0" prefHeight="377.0" prefWidth="415.0">
         <columns>
@@ -17,8 +16,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="añadirId" layoutX="453.0" layoutY="61.0" mnemonicParsing="false" onAction="#añadirClick" text="Añadir trabajador" />
-      <Button fx:id="actualizarId" layoutX="453.0" layoutY="107.0" mnemonicParsing="false" onAction="#actualizarClick" text="Actualizar tabla" />
-      <Button fx:id="volverId" layoutX="453.0" layoutY="151.0" mnemonicParsing="false" onAction="#volverClick" text="Volver" />
+      <Button fx:id="añadirId" layoutX="21.0" layoutY="402.0" mnemonicParsing="false" onAction="#añadirClick" text="Añadir trabajador" />
+      <Button fx:id="volverId" layoutX="305.0" layoutY="402.0" mnemonicParsing="false" onAction="#volverClick" text="Volver" />
    </children>
 </AnchorPane>
