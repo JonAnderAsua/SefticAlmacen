@@ -88,7 +88,7 @@ public class RecursosKud {
     }
 
     public boolean comprobarNombre(String text) throws SQLException {
-        String request = "SELECT serial FROM Producto where nombre LIKE '" + text + "';";
+        String request = "SELECT nombre FROM Producto where nombre LIKE '" + text + "';";
         ResultSet rs = dbController.execSQL(request);
         return rs.next();
     }
@@ -130,7 +130,7 @@ public class RecursosKud {
         int cant= 0;
 
         //Coger el stock que tiene en ese momento el producto
-        String request = "SELECT cant FROM Producto WHERE serial LIKE '" + serial + "';";
+        String request = "SELECT cant FROM Producto WHERE nombre LIKE '" + nombre + "';";
         ResultSet rs = dbController.execSQL(request);
         while(rs.next()){
             cant = rs.getInt("cant");

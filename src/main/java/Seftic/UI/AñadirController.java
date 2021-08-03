@@ -163,6 +163,7 @@ public class AñadirController {
             comboNombre.getItems().add(lista.get(i));
         }
 
+        comboNombre.setValue(r.getNombreProducto());
         serialId.setText(r.getSerial());
         clienteId.setText(r.getCliente());
         if(fEntradaId.getText() != null){

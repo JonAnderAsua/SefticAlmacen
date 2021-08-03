@@ -7,7 +7,6 @@ public class DBController {
 
     Connection conn=null;
     private static final DBController controller = new DBController();
-    //private final String pathToSQLiteDB = Utils.getProperties().getProperty("dbname");
 
     private DBController() {
         this.conOpen();
@@ -19,7 +18,6 @@ public class DBController {
 
     private void conOpen() {
         try {
-            //conn = DriverManager.getConnection("jdbc:sqlite:"+pathToSQLiteDB);
             conn = DriverManager.getConnection("jdbc:sqlite:data.sqlite");
             System.out.println("Connection to SQLite has been established.");
         } catch (SQLException ex) {
