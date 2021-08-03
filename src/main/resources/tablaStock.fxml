@@ -18,7 +18,6 @@
       <TableView fx:id="tableStockId" layoutX="26.0" layoutY="19.0" prefHeight="535.0" prefWidth="885.0">
         <columns>
             <TableColumn fx:id="nombreId" prefWidth="75.0" text="Nombre" />
-          <TableColumn fx:id="serialId" prefWidth="75.0" text="Serial" />
           <TableColumn fx:id="descId" prefWidth="75.0" text="Descripcion" />
             <TableColumn fx:id="cantidadId" prefWidth="75.0" text="Cantidad" />
             <TableColumn fx:id="tipoId" prefWidth="75.0" text="Tipo" />

@@ -1,7 +1,6 @@
 package Seftic.DB;
 
 import Seftic.model.*;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -23,25 +22,34 @@ public class RecursosKud {
         ResultSet rs = dbController.execSQL(request);
 
         while(rs.next()){
-            String nombreProducto = rs.getString("nombreProducto");
-            String serial = rs.getString("serial");
-            String desc = rs.getString("desc");
-            String coment = rs.getString("coment");
-            String tipo = rs.getString("tipo");
-            String fEntrada = rs.getString("fEntrada");
-            String entrada = rs.getString("entrada");
-            String cliente = rs.getString("cliente");
-            String nTrab = rs.getString("nTrab");
-            int cantMod = rs.getInt("cantMod");
-            Registro r = new Registro(nombreProducto,serial,desc,coment,tipo,fEntrada,entrada,cliente,nTrab,cantMod);
+            Registro r = getRegistro(rs);
             solucion.add(r);
         }
         return solucion;
     }
 
-    public void añadirRegistro(Registro r) {
+    public void añadirRegistro(Registro r) throws SQLException {
         String request = "insert into Registrar values('"+r.getSerial()+"','"+r.getTrab()+"','"+r.getFecha()+"','"+r.getCliente()+"',"+r.getCantMod()+",'"+r.getComent()+"','"+r.getEntrada()+"','" + r.getNombreProducto() + "');";
-        System.out.println(request);
+        dbController.execSQL(request);
+        actualizarRegistro(r.getNombreProducto(),r.getEntrada(),r.getCantMod());
+    }
+
+    private void actualizarRegistro(String nombreProducto, String entrada, int cantMod) throws SQLException {
+        int cant = 0;
+        String request = "SELECT cant FROM Producto WHERE nombre LIKE '" + nombreProducto + "';";
+        ResultSet rs = dbController.execSQL(request);
+        if(rs.next()){
+            cant = rs.getInt("cant");
+        }
+
+        if(entrada.equals("Entrada")){
+            cant = cant + cantMod;
+        }
+        else{
+            cant = cant - cantMod;
+        }
+
+        request = "UPDATE Producto SET cant = " + cant + " WHERE nombre LIKE '" + nombreProducto + "';";
         dbController.execSQL(request);
     }
 
@@ -62,6 +70,7 @@ public class RecursosKud {
         ResultSet rs = dbController.execSQL(request);
         while(rs.next()){
             cantidad = rs.getInt("cant");
+            System.out.println("Cantidad: " + cantidad);
         }
         return cantidad >= parseInt;
     }
@@ -75,7 +84,8 @@ public class RecursosKud {
             String nombre = rs.getString("nombre");
             int cant = rs.getInt("cant");
             String tipo = rs.getString("tipo");
-            Producto p = new Producto(nombre,cant,tipo);
+            String desc = rs.getString("desc");
+            Producto p = new Producto(nombre,cant,tipo,desc);
             productos.add(p);
         }
         return productos;
@@ -87,8 +97,8 @@ public class RecursosKud {
         return rs.next();
     }
 
-    public void añadirProducto(String nombre,String serial, String desc, int cant,String tipo) {
-        String request = "INSERT INTO Producto VALUES("+cant+",'" + tipo + "','" + nombre + "');";
+    public void añadirProducto(String nombre,String desc, int cant,String tipo) {
+        String request = "INSERT INTO Producto VALUES("+cant+",'" + tipo + "','" + nombre + "','" + desc + "');";
         dbController.execSQL(request);
     }
 
@@ -107,16 +117,17 @@ public class RecursosKud {
             String nombre = rs.getString("nombre");
             int cant = rs.getInt("cant");
             String tipo = rs.getString("tipo");
-            Producto p = new Producto(nombre,cant,tipo);
+            String desc = rs.getString("desc");
+            Producto p = new Producto(nombre,cant,tipo,desc);
             productos.add(p);
         }
         return productos;
     }
 
-    public List<Producto> getProductoPorSerial(String text, String value) throws SQLException {
-        String request = "SELECT * FROM Producto WHERE cant > 0 AND serial LIKE '" +text+"';";
+    public List<Producto> getProductoPorNombre(String text, String value) throws SQLException {
+        String request = "SELECT * FROM Producto WHERE cant > 0 AND nombre LIKE '" +text+"';";
         if(value.equals("No")){
-            request = "SELECT * FROM Producto WHERE cant <= 0 AND serial LIKE '" +text+"';";
+            request = "SELECT * FROM Producto WHERE cant <= 0 AND nombre LIKE '" +text+"';";
         }
         return getListaProductos(request);
     }
@@ -159,14 +170,15 @@ public class RecursosKud {
     }
 
     public Producto getProductoUnico(String s) throws SQLException {
-        Producto p = new Producto("",0,"");
+        Producto p = new Producto("",0,"","");
         String request = "SELECT * FROM Producto WHERE nombre LIKE '%" + s + "%';";
         ResultSet rs = dbController.execSQL(request);
         if(rs.next()){
             String nombre = rs.getString("nombre");
             int cant = rs.getInt("cant");
             String tipo = rs.getString("tipo");
-            p = new Producto(nombre,cant,tipo);
+            String desc = rs.getString("desc");
+            p = new Producto(nombre,cant,tipo,desc);
         }
         return p;
     }
@@ -253,5 +265,19 @@ public class RecursosKud {
         String request = "SELECT nombre FROM Trabajador WHERE nombre LIKE '" + text + "';";
         ResultSet rs = dbController.execSQL(request);
         return rs.next();
+    }
+
+    private Registro getRegistro(ResultSet rs) throws SQLException, ParseException {
+        String nombreProducto = rs.getString("nombreProducto");
+        String serial = rs.getString("serial");
+        String desc = rs.getString("desc");
+        String coment = rs.getString("coment");
+        String tipo = rs.getString("tipo");
+        String fEntrada = rs.getString("fEntrada");
+        String entrada = rs.getString("entrada");
+        String cliente = rs.getString("cliente");
+        String nTrab = rs.getString("nTrab");
+        int cantMod = rs.getInt("cantMod");
+        return new Registro(nombreProducto,serial,desc,coment,tipo,fEntrada,entrada,cliente,nTrab,cantMod);
     }
 }

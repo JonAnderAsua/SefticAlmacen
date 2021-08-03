@@ -11,8 +11,6 @@ import java.sql.SQLException;
 
 public class AñadirStockController {
 
-    @FXML
-    private TextField serialField;
 
     @FXML
     private TextField descField;
@@ -46,17 +44,18 @@ public class AñadirStockController {
                 labelAviso.setText("El producto que quieres añadir ya está en la DB");
             }
             else{
-                rk.añadirProducto(nombreField.getText(),serialField.getText(),descField.getText(),0,comboBoxTipo.getValue());
+                rk.añadirProducto(nombreField.getText(),descField.getText(),0,comboBoxTipo.getValue());
                 app.actualizarListaStock();
-                labelAviso.setText("El producto " + serialField.getText() + " se ha añadido");
+                labelAviso.setText("El producto " + nombreField.getText() + " se ha añadido");
             }
         }
     }
 
     @FXML
     void limpiarClick(ActionEvent event) {
-        serialField.setText("");
         descField.setText("");
+        labelAviso.setText("");
+        nombreField.setText("");
     }
 
     @FXML

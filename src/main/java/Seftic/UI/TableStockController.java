@@ -31,8 +31,6 @@ public class TableStockController {
     @FXML
     private TableView<Producto> tableStockId;
 
-    @FXML
-    private TableColumn<Producto, String> serialId;
 
     @FXML
     private TableColumn<Producto, String> descId;
@@ -87,7 +85,7 @@ public class TableStockController {
 
         }
         else {
-            List<Producto> listaPorSerial = rk.getProductoPorSerial(buscarField.getText(),comboId.getValue());
+            List<Producto> listaPorSerial = rk.getProductoPorNombre(buscarField.getText(),comboId.getValue());
             cargarTabla(listaPorSerial);
         }
     }
@@ -103,12 +101,9 @@ public class TableStockController {
         comboId.setValue("");
         List<Producto> lista =  rk.getAllProductos();
         nombreId.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        serialId.setCellValueFactory(new PropertyValueFactory<>("serial"));
         descId.setCellValueFactory(new PropertyValueFactory<>("desc"));
         cantidadId.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
         tipoId.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-
-        Callback<TableColumn<Producto,String>, TableCell<Producto,String>> defaultTextFieldCellFactory = TextFieldTableCell.<Producto>forTableColumn();
 
         m1.setOnAction(col ->{ //Borrar
             String nombre = tableStockId.getSelectionModel().getSelectedItem().getNombre();
@@ -124,8 +119,8 @@ public class TableStockController {
             String nombre = tableStockId.getSelectionModel().getSelectedItem().getNombre();
             int cant = tableStockId.getSelectionModel().getSelectedItem().getCantidad();
             String tipo = tableStockId.getSelectionModel().getSelectedItem().getTipo();
-            Producto p = new Producto(nombre, cant, tipo);
-            app.modificarProducto(new Producto(nombre, cant, tipo));
+            String desc = tableStockId.getSelectionModel().getSelectedItem().getDesc();
+            app.modificarProducto(new Producto(nombre, cant, tipo,desc));
 
             try {
                 cargarTabla(rk.getAllProductos());

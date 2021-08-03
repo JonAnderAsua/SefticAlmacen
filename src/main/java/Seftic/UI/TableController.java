@@ -2,7 +2,6 @@ package Seftic.UI;
 
 import Seftic.App;
 import Seftic.DB.RecursosKud;
-import Seftic.model.Producto;
 import Seftic.model.Registro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -65,17 +63,10 @@ public class TableController {
     private MenuItem m2 = new MenuItem("Modificar");
 
     @FXML
-    void añadirClick(ActionEvent event) throws SQLException, ParseException {
-        app.enseñarAñadir();
-    }
+    void añadirClick(ActionEvent event) throws SQLException, ParseException { app.enseñarAñadir(); }
 
     @FXML
-    private Button actualizarId;
-
-    @FXML
-    void ActualizarClick(ActionEvent event) throws SQLException, ParseException {
-        cargarTabla(rk.getRecursos());
-    }
+    void ActualizarClick(ActionEvent event) throws SQLException, ParseException {cargarTabla(rk.getRecursos());}
 
     private void cargarTabla(List<Registro> recursos) {
         tableId.getItems().clear();
@@ -87,7 +78,7 @@ public class TableController {
 
     @FXML
     void buscarClick(ActionEvent event) throws SQLException, ParseException {
-        List<Registro> lista = new ArrayList<>();
+        List<Registro> lista ;
         switch (comboBuscarId.getValue()){
             case "Serial":
                 lista = rk.buscarPorNombre(buscarTextId.getText());
@@ -112,8 +103,9 @@ public class TableController {
     @FXML
     void initialize() throws SQLException, ParseException {
         comboBuscarId.getItems().addAll("Serial", "Trabajador", "Cliente");
-        List<Registro> listaTotal = rk.getRecursos();
 
+        //Coger todos los recursos que ya hay en la base de datos
+        List<Registro> listaTotal = rk.getRecursos();
         
         //Rellenar las columnas con sus respectivos valores
         nombreId.setCellValueFactory(new PropertyValueFactory<>("nombreProducto"));
@@ -127,6 +119,7 @@ public class TableController {
         trabajadorId.setCellValueFactory(new PropertyValueFactory<>("trab"));
         cantidadId.setCellValueFactory(new PropertyValueFactory<>("cantMod"));
 
+        //Set MenuItems
         m1.setOnAction(col ->{ //Borrar
             String nombre = tableId.getSelectionModel().getSelectedItem().getNombreProducto();
             String serial = tableId.getSelectionModel().getSelectedItem().getSerial();
@@ -184,15 +177,11 @@ public class TableController {
     }
 
     @FXML
-    void trabajadorClick(ActionEvent event) throws SQLException {
-        app.cargarTablaTrab();
-    }
+    void trabajadorClick(ActionEvent event) throws SQLException { app.cargarTablaTrab(); }
 
     public void setMainApp(App app) {
         this.app = app;
     }
 
-    public void actualizarTabla() throws SQLException, ParseException {
-        cargarTabla(rk.getRecursos());
-    }
+    public void actualizarTabla() throws SQLException, ParseException { cargarTabla(rk.getRecursos()); }
 }

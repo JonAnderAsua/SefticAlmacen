@@ -11,9 +11,6 @@ import javafx.scene.control.TextField;
 public class ModificarProducto {
 
     @FXML
-    private TextField serialLabel;
-
-    @FXML
     private TextField descLabel;
 
     @FXML
@@ -31,7 +28,6 @@ public class ModificarProducto {
     @FXML
     void limpiarClick(ActionEvent event) {
         nombreLabel.setText("");
-        serialLabel.setText("");
         descLabel.setText("");
         cantLabel.setText("");
     }
@@ -39,7 +35,7 @@ public class ModificarProducto {
     @FXML
     void modificarClick(ActionEvent event) {
         rk.borrarProducto(nombreLabel.getText());
-        rk.añadirProducto(nombreLabel.getText(),serialLabel.getText(),descLabel.getText(),Integer.parseInt(cantLabel.getText()) ,comboboxTipo.getValue());
+        rk.añadirProducto(nombreLabel.getText(),descLabel.getText(),Integer.parseInt(cantLabel.getText()) ,comboboxTipo.getValue());
     }
 
     @FXML

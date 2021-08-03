@@ -66,14 +66,12 @@ public class AñadirController {
                 comentarioId.setText("");
             }
             if(entradaSalidaBox.getValue().equals("Salida")){ //Sale algo del almacén
-                hayStock = rk.comprobarStock(serialId.getText(),Integer.parseInt(cantidadId.getText()));
+                hayStock = rk.comprobarStock(comboNombre.getValue(),Integer.parseInt(cantidadId.getText()));
             }
             if(clienteId.getText() == null){
                 clienteId.setText("");
             }
 
-
-            System.out.print(fEntradaId.getText());
             if(hayStock && comprobarFechas(fEntradaId.getText())){
                 Registro r = new Registro(comboNombre.getValue(),serialId.getText(),p.getDesc(),comentarioId.getText(), p.getTipo(), fEntradaId.getText(),entradaSalidaBox.getValue(),clienteId.getText(),trabajadorId.getValue(),Integer.parseInt(cantidadId.getText()));
                 rk.añadirRegistro(r);
@@ -148,6 +146,7 @@ public class AñadirController {
 
 
     public void hasieratu(Registro r) throws SQLException {
+        entradaSalidaBox.getItems().clear();
         entradaSalidaBox.getItems().addAll("Entrada","Salida");
         entradaSalidaBox.setValue("Entrada");
 
