@@ -116,11 +116,8 @@ public class RecursosKud {
         return productos;
     }
 
-    public List<Producto> getProductoPorNombre(String text, String value) throws SQLException {
-        String request = "SELECT * FROM Producto WHERE cant > 0 AND nombre LIKE '" +text+"';";
-        if(value.equals("No")){
-            request = "SELECT * FROM Producto WHERE cant <= 0 AND nombre LIKE '" +text+"';";
-        }
+    public List<Producto> getProductoPorNombre(String text) throws SQLException {
+        String request = "SELECT * FROM Producto WHERE nombre LIKE '%" +text+"%';";
         return getListaProductos(request);
     }
 

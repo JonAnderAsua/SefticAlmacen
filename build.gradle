@@ -5,6 +5,7 @@ plugins {
 
 application{
     mainClass = 'Seftic.App'
+    mainModule = 'Seftic.main'
 }
 
 group 'org.example'

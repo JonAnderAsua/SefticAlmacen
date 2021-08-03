@@ -80,7 +80,7 @@ public class TableStockController {
 
         }
         else {
-            List<Producto> listaPorSerial = rk.getProductoPorNombre(buscarField.getText(),comboId.getValue());
+            List<Producto> listaPorSerial = rk.getProductoPorNombre(buscarField.getText());
             cargarTabla(listaPorSerial);
         }
     }
