@@ -40,10 +40,12 @@ public class RecursosKud {
         ResultSet rs = dbController.execSQL(request);
         if(rs.next()){
             cant = rs.getInt("cant");
+            System.out.println(cant);
         }
 
         if(entrada.equals("Entrada")){
             cant = cant + cantMod;
+            System.out.println(cant);
         }
         else{
             cant = cant - cantMod;

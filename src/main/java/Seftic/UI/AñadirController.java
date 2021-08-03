@@ -76,6 +76,7 @@ public class AñadirController {
                 Registro r = new Registro(comboNombre.getValue(),serialId.getText(),p.getDesc(),comentarioId.getText(), p.getTipo(), fEntradaId.getText(),entradaSalidaBox.getValue(),clienteId.getText(),trabajadorId.getValue(),Integer.parseInt(cantidadId.getText()));
                 rk.añadirRegistro(r);
                 app.actualizarListaDeRegistros();
+                app.actualizarListaStock();
                 app.enseñarTabla();
             }
             if(!hayStock){
