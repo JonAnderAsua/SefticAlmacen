@@ -81,11 +81,7 @@ public class RecursosKud {
 
         ResultSet rs = dbController.execSQL(request);
         while(rs.next()){
-            String nombre = rs.getString("nombre");
-            int cant = rs.getInt("cant");
-            String tipo = rs.getString("tipo");
-            String desc = rs.getString("desc");
-            Producto p = new Producto(nombre,cant,tipo,desc);
+            Producto p = getProducto(rs);
             productos.add(p);
         }
         return productos;
@@ -114,11 +110,7 @@ public class RecursosKud {
         List<Producto> productos = new ArrayList<>();
         ResultSet rs = dbController.execSQL(request);
         while(rs.next()){
-            String nombre = rs.getString("nombre");
-            int cant = rs.getInt("cant");
-            String tipo = rs.getString("tipo");
-            String desc = rs.getString("desc");
-            Producto p = new Producto(nombre,cant,tipo,desc);
+            Producto p = getProducto(rs);
             productos.add(p);
         }
         return productos;
@@ -174,11 +166,7 @@ public class RecursosKud {
         String request = "SELECT * FROM Producto WHERE nombre LIKE '%" + s + "%';";
         ResultSet rs = dbController.execSQL(request);
         if(rs.next()){
-            String nombre = rs.getString("nombre");
-            int cant = rs.getInt("cant");
-            String tipo = rs.getString("tipo");
-            String desc = rs.getString("desc");
-            p = new Producto(nombre,cant,tipo,desc);
+            p = getProducto(rs);
         }
         return p;
     }
@@ -203,17 +191,7 @@ public class RecursosKud {
         ResultSet rs = dbController.execSQL(request);
         if(rs != null){
             while(rs.next()){
-                String nombreProducto = rs.getString("nombreProducto");
-                String serial = rs.getString("serial");
-                String desc = rs.getString("desc");
-                String coment = rs.getString("coment");
-                String tipo = rs.getString("tipo");
-                String fEntrada = rs.getString("fEntrada");
-                String entrada = rs.getString("entrada");
-                String cliente = rs.getString("cliente");
-                String nTrab = rs.getString("nTrab");
-                int cantMod = rs.getInt("cantMod");
-                Registro r = new Registro(nombreProducto,serial,desc,coment,tipo,fEntrada,entrada,cliente,nTrab,cantMod);
+                Registro r = getRegistro(rs);
                 lista.add(r);
             }
         }
@@ -279,5 +257,13 @@ public class RecursosKud {
         String nTrab = rs.getString("nTrab");
         int cantMod = rs.getInt("cantMod");
         return new Registro(nombreProducto,serial,desc,coment,tipo,fEntrada,entrada,cliente,nTrab,cantMod);
+    }
+
+    private Producto getProducto(ResultSet rs) throws SQLException {
+        String nombre = rs.getString("nombre");
+        int cant = rs.getInt("cant");
+        String tipo = rs.getString("tipo");
+        String desc = rs.getString("desc");
+        return new Producto(nombre,cant,tipo,desc);
     }
 }
