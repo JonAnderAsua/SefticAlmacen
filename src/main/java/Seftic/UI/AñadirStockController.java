@@ -34,7 +34,6 @@ public class AñadirStockController {
             descField.setText("");
         }
 
-
         if(nombreField.getText() == null || comboBoxTipo.getValue() == null){
             labelAviso.setText("Por favor rellena los campos obligatorios...");
         }
@@ -69,6 +68,7 @@ public class AñadirStockController {
 
     @FXML
     void initialize(){
+        comboBoxTipo.getItems().clear();
         comboBoxTipo.getItems().addAll("PC", "Video", "Red", "Otro");
     }
 

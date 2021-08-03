@@ -118,7 +118,6 @@ public class AñadirController {
         }
 
         if(esNumero){
-           String mesString = "";
            int mes = Integer.parseInt(String.valueOf(fechaEntrada[5]) + String.valueOf(fechaEntrada[6]));
            int dia = Integer.parseInt(String.valueOf(fechaEntrada[8]) + String.valueOf(fechaEntrada[9]));            System.out.println("Mes: " + mes + " Dia: " + dia);
            if(mes == 01 || mes == 03 || mes == 05 || mes == 07 || mes == 10 || mes == 12 || mes == 8){

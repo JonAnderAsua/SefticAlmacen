@@ -1,7 +1,6 @@
 package Seftic.model;
 
 import Seftic.DB.RecursosKud;
-
 import java.sql.SQLException;
 
 public class Trabajador {

@@ -45,7 +45,9 @@ public class ModificarProducto {
 
 
     public void hasieratu(Producto p){
+        comboboxTipo.getItems().clear();
         comboboxTipo.getItems().addAll("PC","Video","Red","Otros");
+        nombreLabel.setText(p.getNombre());
         cantLabel.setText(String.valueOf(p.getCantidad()));
         comboboxTipo.setValue(p.getTipo());
         nombreLabel.setText(p.getNombre());
