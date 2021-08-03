@@ -101,28 +101,31 @@ public class TableStockController {
         tipoId.setCellValueFactory(new PropertyValueFactory<>("tipo"));
 
         m1.setOnAction(col ->{ //Borrar
-            String nombre = tableStockId.getSelectionModel().getSelectedItem().getNombre();
-            rk.borrarProducto(nombre);
-            try {
-                cargarTabla(rk.getAllProductos());
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            if(tableStockId.getSelectionModel().getSelectedItem() != null){
+                String nombre = tableStockId.getSelectionModel().getSelectedItem().getNombre();
+                rk.borrarProducto(nombre);
+                try {
+                    cargarTabla(rk.getAllProductos());
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
         });
 
         m2.setOnAction(col -> {
-            String nombre = tableStockId.getSelectionModel().getSelectedItem().getNombre();
-            int cant = tableStockId.getSelectionModel().getSelectedItem().getCantidad();
-            String tipo = tableStockId.getSelectionModel().getSelectedItem().getTipo();
-            String desc = tableStockId.getSelectionModel().getSelectedItem().getDesc();
-            app.modificarProducto(new Producto(nombre, cant, tipo,desc));
+            if(tableStockId.getSelectionModel().getSelectedItem() != null){
+                String nombre = tableStockId.getSelectionModel().getSelectedItem().getNombre();
+                int cant = tableStockId.getSelectionModel().getSelectedItem().getCantidad();
+                String tipo = tableStockId.getSelectionModel().getSelectedItem().getTipo();
+                String desc = tableStockId.getSelectionModel().getSelectedItem().getDesc();
+                app.modificarProducto(new Producto(nombre, cant, tipo,desc));
 
-            try {
-                cargarTabla(rk.getAllProductos());
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+                try {
+                    cargarTabla(rk.getAllProductos());
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
-
         });
         cm.getItems().addAll(m1,m2);
         tableStockId.setContextMenu(cm);

@@ -50,21 +50,27 @@ public class TrabajadoresContr {
         List<Trabajador> lista = deStringATrabajador(listaString);
         trabajadorId.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         registroId.setCellValueFactory(new PropertyValueFactory<>("ultimoRegistro"));
+        cm.getItems().clear();
 
         m1.setOnAction(col ->{ //Borrar
-            String nombre = tableId.getSelectionModel().getSelectedItem().getNombre();
-            rk.borrarTrabajador(nombre);
-            try {
-                cargarTabla(deStringATrabajador(rk.getTrabajadores()));
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            if(tableId.getSelectionModel().getSelectedItem() != null){
+                String nombre = tableId.getSelectionModel().getSelectedItem().getNombre();
+                rk.borrarTrabajador(nombre);
+                try {
+                    cargarTabla(deStringATrabajador(rk.getTrabajadores()));
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
+
         });
 
         m2.setOnAction(col -> { //Modificar
-            String nombre = tableId.getSelectionModel().getSelectedItem().getNombre();
-            rk.borrarTrabajador(nombre);
-            app.cargarNuevoTrab(nombre);
+            if(tableId.getSelectionModel().getSelectedItem() != null){
+                String nombre = tableId.getSelectionModel().getSelectedItem().getNombre();
+                rk.borrarTrabajador(nombre);
+                app.cargarNuevoTrab(nombre);
+            }
         });
         cm.getItems().addAll(m1,m2);
         tableId.setContextMenu(cm);
