@@ -156,7 +156,7 @@ public class RecursosKud {
         }
 
         //Actualizar el stock del producto
-        request = "UPDATE Producto SET cant=" + cant + " WHERE serial LIKE '" + serial + "';";
+        request = "UPDATE Producto SET cant=" + cant + " WHERE nombre LIKE '" + nombre + "';";
         dbController.execSQL(request);
     }
 

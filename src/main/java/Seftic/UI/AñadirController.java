@@ -148,7 +148,7 @@ public class AñadirController {
     public void hasieratu(Registro r) throws SQLException {
         entradaSalidaBox.getItems().clear();
         entradaSalidaBox.getItems().addAll("Entrada","Salida");
-        entradaSalidaBox.setValue("Entrada");
+        entradaSalidaBox.setValue(r.getEntrada());
 
         //Reiniciar los comboBox, si no da error
         trabajadorId.getItems().clear();

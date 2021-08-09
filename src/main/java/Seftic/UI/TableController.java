@@ -126,6 +126,7 @@ public class TableController {
             int cantidad = tableId.getSelectionModel().getSelectedItem().getCantMod();
             try {
                 rk.borrarRegistro(nombre,serial,trabajador,entrada,fEntrada,cantidad);
+                app.actualizarListaStock();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }

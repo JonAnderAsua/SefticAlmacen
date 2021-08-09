@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -49,16 +50,31 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Image img = new Image(getClass().getResourceAsStream("/logoSeftic.png"));
         stage = primaryStage;
+        stage.setTitle("Lista de recursos");
+        stage.getIcons().add(img);
         stageAñadir = primaryStage;
+        stageAñadir.setTitle("Añadir un nuevo registro");
+        stageAñadir.getIcons().add(img);
         stageStock = primaryStage;
+        stageStock.setTitle("Lista de los productos");
+        stageStock.getIcons().add(img);
         stageAñadirStock = primaryStage;
+        stageAñadirStock.setTitle("Añadir un nuevo producto");
+
         stageModificarProducto = primaryStage;
+        stageModificarProducto.setTitle("Modificar un producto");
+
         stageTrabajadores = primaryStage;
+        stageTrabajadores.setTitle("Lista de trabajadores");
+
         stageAñadirTrabajador = primaryStage;
+        stageAñadirTrabajador.setTitle("Añadir un nuevo trabajador");
+
         pantailakKargatu();
 
-        stage.setTitle("Almacen Seftic");
+
         escena = new Scene(root,950,600);
         stage.setScene(escena);
         stage.show();
