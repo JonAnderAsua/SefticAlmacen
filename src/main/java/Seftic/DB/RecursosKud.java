@@ -181,7 +181,7 @@ public class RecursosKud {
     }
 
     public List<Registro> buscarPorNombre(String s) throws SQLException, ParseException {
-        String request = "SELECT * FROM Registrar JOIN Producto ON Registrar.nombreProducto = Producto.nombre WHERE Registrar.nombre LIKE '%" + s + "%';";
+        String request = "SELECT * FROM Registrar JOIN Producto ON Registrar.nombreProducto = Producto.nombre WHERE Registrar.nombreProducto LIKE '%" + s + "%';";
         return getListaRegistros(request);
     }
 
