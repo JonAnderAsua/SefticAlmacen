@@ -77,7 +77,7 @@ public class TableController {
     void buscarClick(ActionEvent event) throws SQLException, ParseException {
         List<Registro> lista ;
         switch (comboBuscarId.getValue()){
-            case "Serial":
+            case "Nombre":
                 lista = rk.buscarPorNombre(buscarTextId.getText());
                 break;
             case "Trabajador":
@@ -99,7 +99,7 @@ public class TableController {
 
     @FXML
     void initialize() throws SQLException, ParseException {
-        comboBuscarId.getItems().addAll("Serial", "Trabajador", "Cliente");
+        comboBuscarId.getItems().addAll("Nombre", "Trabajador", "Cliente");
 
         //Coger todos los recursos que ya hay en la base de datos
         List<Registro> listaTotal = rk.getRecursos();

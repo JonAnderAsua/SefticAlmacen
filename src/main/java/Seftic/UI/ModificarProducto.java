@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
+import java.sql.SQLException;
+
 public class ModificarProducto {
 
     @FXML
@@ -33,9 +35,10 @@ public class ModificarProducto {
     }
 
     @FXML
-    void modificarClick(ActionEvent event) {
+    void modificarClick(ActionEvent event) throws SQLException {
         rk.borrarProducto(nombreLabel.getText());
         rk.añadirProducto(nombreLabel.getText(),descLabel.getText(),Integer.parseInt(cantLabel.getText()) ,comboboxTipo.getValue());
+        app.actualizarListaStock();
     }
 
     @FXML
