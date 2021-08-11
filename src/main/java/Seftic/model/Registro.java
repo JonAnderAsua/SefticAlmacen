@@ -31,10 +31,6 @@ public class Registro {
         return serial;
     }
 
-    public void setSerial(String serial) {
-        this.serial = serial;
-    }
-
     public String getDesc() {
         return desc;
     }
@@ -67,7 +63,4 @@ public class Registro {
         return nombreProducto;
     }
 
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
-    }
 }

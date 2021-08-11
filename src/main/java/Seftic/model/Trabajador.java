@@ -21,10 +21,6 @@ public class Trabajador {
         return ultimoRegistro;
     }
 
-    public void setUltimoRegistro(String ultimoRegistro) {
-        this.ultimoRegistro = ultimoRegistro;
-    }
-
     public Trabajador(String nombre)  {
         this.nombre = nombre;
         try {

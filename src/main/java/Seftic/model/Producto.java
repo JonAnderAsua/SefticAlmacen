@@ -19,27 +19,13 @@ public class Producto {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
     public String getTipo() {
         return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public String getDesc(){return desc;}
-
-    public void setDesc(String s){this.desc = s;}
 }
