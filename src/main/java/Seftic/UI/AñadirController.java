@@ -4,7 +4,6 @@ package Seftic.UI;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
-
 import Seftic.App;
 import Seftic.DB.RecursosKud;
 import Seftic.model.Producto;
@@ -39,9 +38,6 @@ public class AñadirController {
     private TextField cantidadId;
 
     @FXML
-    private Button añadirId;
-
-    @FXML
     private Label avisoLabel;
 
 
@@ -50,6 +46,7 @@ public class AñadirController {
 
     private App app;
     private RecursosKud rk = RecursosKud.getInstance();
+    private Boolean admin = false;
 
     @FXML
     void añadirClick(ActionEvent event) throws ParseException, SQLException {
@@ -73,14 +70,13 @@ public class AñadirController {
             }
 
             if(hayStock && comprobarFechas(fEntradaId.getText())){
-                Registro r = new Registro(comboNombre.getValue(),serialId.getText(),p.getDesc(),comentarioId.getText(), p.getTipo(), fEntradaId.getText(),entradaSalidaBox.getValue(),clienteId.getText(),trabajadorId.getValue(),Integer.parseInt(cantidadId.getText()));
-                rk.añadirRegistro(r);
+                rk.añadirRegistro(new Registro(comboNombre.getValue(),serialId.getText(),p.getDesc(),comentarioId.getText(), p.getTipo(), fEntradaId.getText(),entradaSalidaBox.getValue(),clienteId.getText(),trabajadorId.getValue(),Integer.parseInt(cantidadId.getText())));
                 app.actualizarListaDeRegistros();
                 app.actualizarListaStock();
                 app.enseñarTabla();
             }
             if(!hayStock){
-                avisoLabel.setText("No hay tanto Stock de este producto");
+                avisoLabel.setText("La cantidad máxima que se puede sacar es: " + rk.getProductoUnico(comboNombre.getValue()).getCantidad());
             }
             if(!comprobarFechas(fEntradaId.getText())){
                 avisoLabel.setText("Introduce bien las fechas YYYY/MM/DD");
@@ -192,5 +188,7 @@ public class AñadirController {
     void volverClick(ActionEvent event) {
         app.enseñarTabla();
     }
+
+    public void setAdmin(){this.admin=true;}
 
 }

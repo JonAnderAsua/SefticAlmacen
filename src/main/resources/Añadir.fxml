@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="364.0" prefWidth="374.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Seftic.UI.AñadirController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="374.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Seftic.UI.AñadirController">
    <children>
       <Label layoutX="44.0" layoutY="64.0" text="Serial" />
       <Label layoutX="43.0" layoutY="90.0" text="Comentario" />
@@ -19,10 +19,10 @@
       <TextField fx:id="comentarioId" layoutX="132.0" layoutY="85.0" />
       <ComboBox fx:id="trabajadorId" layoutX="119.0" layoutY="216.0" prefWidth="150.0" />
       <TextField fx:id="cantidadId" layoutX="109.0" layoutY="246.0" prefHeight="26.0" prefWidth="46.0" />
-      <Button fx:id="añadirId" layoutX="50.0" layoutY="312.0" mnemonicParsing="false" onAction="#añadirClick" text="Añadir" />
-      <Label fx:id="avisoLabel" layoutX="52.0" layoutY="284.0" prefHeight="16.0" prefWidth="260.0" />
-      <Button fx:id="limpiarId" layoutX="164.0" layoutY="312.0" mnemonicParsing="false" onAction="#limpiarClick" text="Limpiar" />
-      <Button fx:id="volverId" layoutX="272.0" layoutY="312.0" mnemonicParsing="false" onAction="#volverClick" text="Volver" />
+      <Button fx:id="añadirId" layoutX="53.0" layoutY="318.0" mnemonicParsing="false" onAction="#añadirClick" text="Añadir" />
+      <Label fx:id="avisoLabel" layoutX="8.0" layoutY="284.0" prefHeight="26.0" prefWidth="360.0" />
+      <Button fx:id="limpiarId" layoutX="167.0" layoutY="318.0" mnemonicParsing="false" onAction="#limpiarClick" text="Limpiar" />
+      <Button fx:id="volverId" layoutX="275.0" layoutY="318.0" mnemonicParsing="false" onAction="#volverClick" text="Volver" />
       <TextField fx:id="fEntradaId" layoutX="89.0" layoutY="114.0" />
       <Label layoutX="43.0" layoutY="152.0" text="Entrada/Salida" />
       <ComboBox fx:id="entradaSalidaBox" layoutX="143.0" layoutY="147.0" prefWidth="150.0" />

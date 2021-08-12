@@ -23,6 +23,7 @@ public class App extends Application {
     private Parent root5;
     private Parent root6;
     private Parent root7;
+    private Parent root8; //Parent para hacer el login
 
     private Stage stage;
     private Stage stageAñadir;
@@ -31,6 +32,7 @@ public class App extends Application {
     private Stage stageModificarProducto;
     private Stage stageTrabajadores;
     private Stage stageAñadirTrabajador;
+    private Stage stageLogin;
 
     private Scene escena;
     private Scene escena2;
@@ -39,6 +41,7 @@ public class App extends Application {
     private Scene escena5;
     private Scene escena6;
     private Scene escena7;
+    private Scene escena8; //Escena del login
 
     private TableController tCont;
     private AñadirController añadirCont;
@@ -47,6 +50,7 @@ public class App extends Application {
     private ModificarProducto modificarProductoCont;
     private TrabajadoresContr trabContr;
     private AñadirTrabajadorController añadirTrabContr;
+    private Login loginContr;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -62,6 +66,8 @@ public class App extends Application {
         stageStock.getIcons().add(img);
         stageAñadirStock = primaryStage;
         stageAñadirStock.setTitle("Añadir un nuevo producto");
+        stageLogin = primaryStage;
+        stageLogin.setTitle("Login");
 
         stageModificarProducto = primaryStage;
         stageModificarProducto.setTitle("Modificar un producto");
@@ -74,10 +80,13 @@ public class App extends Application {
 
         pantailakKargatu();
 
+        cargarLogin();
+        /*
+        escena8 = new Scene(root8,950,600);
+        stageLogin.setScene(escena8);
+        stageLogin.show();
 
-        escena = new Scene(root,950,600);
-        stage.setScene(escena);
-        stage.show();
+         */
     }
 
     private void pantailakKargatu() throws IOException {
@@ -121,6 +130,12 @@ public class App extends Application {
         escena7 = new Scene(root7);
         añadirTrabContr = loader7.getController();
         añadirTrabContr.setMainApp(this);
+
+        FXMLLoader loader8 = new FXMLLoader(getClass().getResource("/admin.fxml"));
+        root8 = loader8.load();
+        escena8 = new Scene(root8);
+        loginContr = loader8.getController();
+        loginContr.setMainApp(this);
 
 
     }
@@ -188,5 +203,15 @@ public class App extends Application {
     //Actualizar la lista de productos cada vez que se añade uno nuevo
     public void actualizarListaStock() throws SQLException {
         stockCont.actualizarTabla();
+    }
+
+
+    public void setAdmin(){
+        añadirCont.setAdmin();
+    }
+
+    public void cargarLogin(){
+        stageLogin.setScene(escena8);
+        stageLogin.show();
     }
 }
