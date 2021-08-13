@@ -63,6 +63,10 @@ public class TableController {
 
     @FXML
     void añadirClick(ActionEvent event) throws SQLException, ParseException { app.enseñarAñadir(); }
+    @FXML
+    void acabarClick(ActionEvent event) {
+        app.cargarLogin();
+    }
 
 
     private void cargarTabla(List<Registro> recursos) {

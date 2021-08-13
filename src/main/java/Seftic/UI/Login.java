@@ -43,6 +43,9 @@ public class Login {
         this.app = app;
     }
 
+    public void borrarPass(){
+        passwordField.setText("");
+    }
     @FXML
     void initialize() {
         Image img = new Image(getClass().getResourceAsStream("/logoSeftic.png"));

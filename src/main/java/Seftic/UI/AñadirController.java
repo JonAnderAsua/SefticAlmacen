@@ -195,6 +195,8 @@ public class AñadirController {
         app.enseñarTabla();
     }
 
-    public void setAdmin(){this.admin=!this.admin;}
+    public void setAdmin(){this.admin=true;}
+
+    public void adminFalse(){this.admin = false;}
 
 }

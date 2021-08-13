@@ -213,6 +213,8 @@ public class App extends Application {
     }
 
     public void cargarLogin(){
+        loginContr.borrarPass();
+        añadirCont.adminFalse();
         stageLogin.setScene(escena8);
         stageLogin.show();
     }
