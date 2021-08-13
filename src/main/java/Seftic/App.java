@@ -92,6 +92,7 @@ public class App extends Application {
     private void pantailakKargatu() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/tabla.fxml"));
         root = loader.load();
+        escena = new Scene(root);
         tCont = loader.getController();
         tCont.setMainApp(this);
 
@@ -143,7 +144,7 @@ public class App extends Application {
     public void enseñarAñadir() throws ParseException, SQLException {
         stageAñadir.setScene(escena2);
         stageAñadir.show();
-        Registro r = new Registro("","","","","","","","","",0); //Hacer esto es un poco feo pero es que no se me ocurre otra cosa
+        Registro r = new Registro("","","","","","","Salida","","",0); //Hacer esto es un poco feo pero es que no se me ocurre otra cosa
         añadirCont.hasieratu(r);
     }
 
@@ -153,6 +154,7 @@ public class App extends Application {
 
     public void enseñarTabla() {
         stage.setScene(escena);
+        stage.show();
     }
 
     public void mostrarInventario() {

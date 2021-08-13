@@ -24,8 +24,13 @@ public class Login {
     @FXML
     void accederClick(ActionEvent event) {
         String s = "pasahitza";
-        if(passwordField.hashCode() == s.hashCode()){
 
+        if(passwordField.getText().hashCode() == s.hashCode()){
+            app.setAdmin();
+            app.enseñarTabla();
+        }
+        else{
+            labelId.setText("Contraseña incorrecta...");
         }
     }
 

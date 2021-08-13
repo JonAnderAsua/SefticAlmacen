@@ -143,7 +143,13 @@ public class AñadirController {
 
     public void hasieratu(Registro r) throws SQLException {
         entradaSalidaBox.getItems().clear();
-        entradaSalidaBox.getItems().addAll("Entrada","Salida");
+        if(admin){
+            entradaSalidaBox.getItems().add("Entrada");
+        }
+        entradaSalidaBox.getItems().add("Salida");
+        System.out.println("Holi: " + r.getEntrada());
+        entradaSalidaBox.setValue(r.getEntrada());
+
         entradaSalidaBox.setValue(r.getEntrada());
 
         //Reiniciar los comboBox, si no da error
@@ -189,6 +195,6 @@ public class AñadirController {
         app.enseñarTabla();
     }
 
-    public void setAdmin(){this.admin=true;}
+    public void setAdmin(){this.admin=!this.admin;}
 
 }
