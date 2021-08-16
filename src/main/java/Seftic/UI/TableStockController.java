@@ -1,10 +1,5 @@
 package Seftic.UI;
 
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.ResourceBundle;
-
 import Seftic.App;
 import Seftic.DB.RecursosKud;
 import Seftic.model.Producto;
@@ -14,8 +9,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.util.Callback;
+
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class TableStockController {
 
@@ -45,9 +43,6 @@ public class TableStockController {
     private TableColumn<Producto, String> tipoId;
 
     @FXML
-    private Button añadirId;
-
-    @FXML
     private ComboBox<String> comboId;
 
     @FXML
@@ -62,8 +57,8 @@ public class TableStockController {
     private MenuItem m2 = new MenuItem("Modificar");
 
     @FXML
-    void añadirClick(ActionEvent event) {
-        app.enseñarAñadirStock();
+    void anadirClick(ActionEvent event) {
+        app.ensenarAnadirStock();
     }
 
     @FXML
@@ -87,7 +82,7 @@ public class TableStockController {
 
     @FXML
     void volverClick(ActionEvent event) {
-        app.enseñarTabla();
+        app.ensenarTabla();
     }
 
     @FXML

@@ -29,7 +29,7 @@ public class RecursosKud {
         return solucion;
     }
 
-    public void añadirRegistro(Registro r) throws SQLException {
+    public void anadirRegistro(Registro r) throws SQLException {
         String request = "insert into Registrar values('"+r.getSerial()+"','"+r.getTrab()+"','"+r.getFecha()+"','"+r.getCliente()+"',"+r.getCantMod()+",'"+r.getComent()+"','"+r.getEntrada()+"','" + r.getNombreProducto() + "');";
         dbController.execSQL(request);
         actualizarRegistro(r.getNombreProducto(),r.getEntrada(),r.getCantMod());
@@ -93,7 +93,7 @@ public class RecursosKud {
         return rs.next();
     }
 
-    public void añadirProducto(String nombre,String desc, int cant,String tipo) {
+    public void anadirProducto(String nombre, String desc, int cant, String tipo) {
         dbController.execSQL("INSERT INTO Producto VALUES("+cant+",'" + tipo + "','" + nombre + "','" + desc + "');");
     }
 
@@ -200,7 +200,7 @@ public class RecursosKud {
         dbController.execSQL("DELETE FROM Trabajador WHERE nombre LIKE '" + nombre + "';");
     }
 
-    public void añadirTrabajador(String text) {
+    public void anadirTrabajador(String text) {
         dbController.execSQL("INSERT INTO Trabajador VALUES ('" + text + "');");
     }
 

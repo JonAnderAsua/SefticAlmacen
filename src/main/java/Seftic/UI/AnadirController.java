@@ -1,21 +1,21 @@
 package Seftic.UI;
 
 
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.util.List;
 import Seftic.App;
 import Seftic.DB.RecursosKud;
 import Seftic.model.Producto;
 import Seftic.model.Registro;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class AñadirController {
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.List;
+
+public class AnadirController {
 
     @FXML
     private TextField serialId;
@@ -49,7 +49,7 @@ public class AñadirController {
     private Boolean admin = false;
 
     @FXML
-    void añadirClick(ActionEvent event) throws ParseException, SQLException {
+    void anadirClick(ActionEvent event) throws ParseException, SQLException {
         Boolean hayStock = true;
 
         //Comprobar si mete todos los valores obligatorios
@@ -70,10 +70,10 @@ public class AñadirController {
             }
 
             if(hayStock && comprobarFechas(fEntradaId.getText())){
-                rk.añadirRegistro(new Registro(comboNombre.getValue(),serialId.getText(),p.getDesc(),comentarioId.getText(), p.getTipo(), fEntradaId.getText(),entradaSalidaBox.getValue(),clienteId.getText(),trabajadorId.getValue(),Integer.parseInt(cantidadId.getText())));
+                rk.anadirRegistro(new Registro(comboNombre.getValue(),serialId.getText(),p.getDesc(),comentarioId.getText(), p.getTipo(), fEntradaId.getText(),entradaSalidaBox.getValue(),clienteId.getText(),trabajadorId.getValue(),Integer.parseInt(cantidadId.getText())));
                 app.actualizarListaDeRegistros();
                 app.actualizarListaStock();
-                app.enseñarTabla();
+                app.ensenarTabla();
             }
             if(!hayStock){
                 avisoLabel.setText("La cantidad máxima que se puede sacar es: " + rk.getProductoUnico(comboNombre.getValue()).getCantidad());
@@ -192,7 +192,7 @@ public class AñadirController {
 
     @FXML
     void volverClick(ActionEvent event) {
-        app.enseñarTabla();
+        app.ensenarTabla();
     }
 
     public void setAdmin(){this.admin=true;}

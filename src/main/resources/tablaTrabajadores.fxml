@@ -16,7 +16,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="añadirId" layoutX="21.0" layoutY="402.0" mnemonicParsing="false" onAction="#añadirClick" text="Añadir trabajador" />
+      <Button fx:id="añadirId" layoutX="21.0" layoutY="402.0" mnemonicParsing="false" onAction="#anadirClick" text="Añadir trabajador" />
       <Button fx:id="volverId" layoutX="305.0" layoutY="402.0" mnemonicParsing="false" onAction="#volverClick" text="Volver" />
    </children>
 </AnchorPane>

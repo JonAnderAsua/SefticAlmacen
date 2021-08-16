@@ -62,11 +62,7 @@ public class TableController {
     private MenuItem m2 = new MenuItem("Modificar");
 
     @FXML
-    void añadirClick(ActionEvent event) throws SQLException, ParseException { app.enseñarAñadir(); }
-    @FXML
-    void acabarClick(ActionEvent event) {
-        app.cargarLogin();
-    }
+    void anadirClick(ActionEvent event) throws SQLException, ParseException { app.ensenarAnadir(); }
 
 
     private void cargarTabla(List<Registro> recursos) {

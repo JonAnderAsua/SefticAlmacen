@@ -36,7 +36,7 @@ public class Login {
 
     @FXML
     void noAdminClick(ActionEvent event) {
-        app.enseñarTabla();
+        app.ensenarTabla();
     }
 
     public void setMainApp(App app) {

@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
 
-public class AñadirTrabajadorController {
+public class AnadirTrabajadorController {
 
     @FXML
     private TextField nombreId;
@@ -17,9 +17,9 @@ public class AñadirTrabajadorController {
     private RecursosKud rk = RecursosKud.getInstance();
 
     @FXML
-    void añadirClick(ActionEvent event) throws SQLException {
+    void anadirClick(ActionEvent event) throws SQLException {
         if(!rk.existeElTrabajador(nombreId.getText())){
-            rk.añadirTrabajador(nombreId.getText());
+            rk.anadirTrabajador(nombreId.getText());
             app.actulizarListaTrabajadores();
             app.cargarTablaTrab();
         }

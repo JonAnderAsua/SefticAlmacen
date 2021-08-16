@@ -6,13 +6,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="226.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Seftic.UI.AñadirStockController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="226.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Seftic.UI.AnadirStock">
    <children>
       <Label layoutX="53.0" layoutY="70.0" text="Descripcion" />
       <Label layoutX="53.0" layoutY="109.0" text="Tipo*" />
       <TextField fx:id="descField" layoutX="138.0" layoutY="65.0" />
       <ComboBox fx:id="comboBoxTipo" layoutX="97.0" layoutY="104.0" prefWidth="150.0" />
-      <Button fx:id="añadirLabel" layoutX="31.0" layoutY="187.0" mnemonicParsing="false" onAction="#añadirClick" text="Añadir" />
+      <Button fx:id="añadirLabel" layoutX="31.0" layoutY="187.0" mnemonicParsing="false" onAction="#anadirClick" text="Añadir" />
       <Button fx:id="volverLabel" layoutX="133.0" layoutY="187.0" mnemonicParsing="false" onAction="#volverClick" text="Volver" />
       <Button fx:id="limpiarLabel" layoutX="218.0" layoutY="187.0" mnemonicParsing="false" onAction="#limpiarClick" text="Limpiar" />
       <Label fx:id="labelAviso" layoutX="41.0" layoutY="140.0" prefHeight="40.0" prefWidth="255.0" />

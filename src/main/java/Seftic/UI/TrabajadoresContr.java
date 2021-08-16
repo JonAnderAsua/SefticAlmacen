@@ -2,7 +2,6 @@ package Seftic.UI;
 
 import Seftic.App;
 import Seftic.DB.RecursosKud;
-import Seftic.model.Registro;
 import Seftic.model.Trabajador;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,11 +11,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.TransferQueue;
 
 public class TrabajadoresContr {
 
@@ -36,13 +33,13 @@ public class TrabajadoresContr {
     private App app;
 
     @FXML
-    void añadirClick(ActionEvent event) {
+    void anadirClick(ActionEvent event) {
         app.cargarNuevoTrab("");
     }
 
     @FXML
     void volverClick(ActionEvent event) {
-        app.enseñarTabla();
+        app.ensenarTabla();
     }
 
     public void iniciar() throws SQLException {

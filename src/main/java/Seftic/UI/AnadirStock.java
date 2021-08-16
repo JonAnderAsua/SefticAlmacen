@@ -2,14 +2,13 @@ package Seftic.UI;
 
 import Seftic.App;
 import Seftic.DB.RecursosKud;
-import Seftic.model.Producto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.sql.SQLException;
 
-public class AñadirStockController {
+public class AnadirStock {
 
 
     @FXML
@@ -29,7 +28,7 @@ public class AñadirStockController {
 
 
     @FXML
-    void añadirClick(ActionEvent event) throws SQLException {
+    void anadirClick(ActionEvent event) throws SQLException {
         if(descField.getText() == null){
             descField.setText("");
         }
@@ -43,7 +42,7 @@ public class AñadirStockController {
                 labelAviso.setText("El producto que quieres añadir ya está en la DB");
             }
             else{
-                rk.añadirProducto(nombreField.getText(),descField.getText(),0,comboBoxTipo.getValue());
+                rk.anadirProducto(nombreField.getText(),descField.getText(),0,comboBoxTipo.getValue());
                 app.actualizarListaStock();
                 labelAviso.setText("El producto " + nombreField.getText() + " se ha añadido");
             }

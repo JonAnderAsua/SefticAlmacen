@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="269.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Seftic.UI.AñadirTrabajadorController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="269.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Seftic.UI.AnadirTrabajadorController">
    <children>
       <Label layoutX="34.0" layoutY="23.0" prefHeight="31.0" prefWidth="204.0" text="Nombre del trabajador:">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Button layoutX="104.0" layoutY="101.0" mnemonicParsing="false" onAction="#añadirClick" text="Añadir" />
+      <Button layoutX="104.0" layoutY="101.0" mnemonicParsing="false" onAction="#anadirClick" text="Añadir" />
       <TextField fx:id="nombreId" layoutX="33.0" layoutY="60.0" prefHeight="26.0" prefWidth="204.0" />
    </children>
 </AnchorPane>

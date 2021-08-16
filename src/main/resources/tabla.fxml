@@ -26,7 +26,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="añadirId" layoutX="38.0" layoutY="560.0" mnemonicParsing="false" onAction="#añadirClick" text="Añadir" />
+      <Button fx:id="añadirId" layoutX="38.0" layoutY="560.0" mnemonicParsing="false" onAction="#anadirClick" text="Añadir" />
       <Button fx:id="buscarId" layoutX="138.0" layoutY="560.0" mnemonicParsing="false" onAction="#buscarClick" text="Buscar" />
       <Button fx:id="inventarioId" layoutX="773.0" layoutY="560.0" mnemonicParsing="false" onAction="#inventarioClick" text="Inventario" />
       <TextField fx:id="buscarTextId" layoutX="212.0" layoutY="560.0" prefHeight="26.0" prefWidth="240.0" />

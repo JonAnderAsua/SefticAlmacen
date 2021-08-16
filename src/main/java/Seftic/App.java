@@ -26,12 +26,12 @@ public class App extends Application {
     private Parent root8; //Parent para hacer el login
 
     private Stage stage;
-    private Stage stageAñadir;
+    private Stage stageAnadir;
     private Stage stageStock;
-    private Stage stageAñadirStock;
+    private Stage stageAnadirStock;
     private Stage stageModificarProducto;
     private Stage stageTrabajadores;
-    private Stage stageAñadirTrabajador;
+    private Stage stageAnadirTrabajador;
     private Stage stageLogin;
 
     private Scene escena;
@@ -44,12 +44,12 @@ public class App extends Application {
     private Scene escena8; //Escena del login
 
     private TableController tCont;
-    private AñadirController añadirCont;
+    private AnadirController anadirCont;
     private TableStockController stockCont;
-    private AñadirStockController añadirStockCont;
+    private AnadirStock anadirStockCont;
     private ModificarProducto modificarProductoCont;
     private TrabajadoresContr trabContr;
-    private AñadirTrabajadorController añadirTrabContr;
+    private AnadirTrabajadorController anadirTrabContr;
     private Login loginContr;
 
     @Override
@@ -58,14 +58,14 @@ public class App extends Application {
         stage = primaryStage;
         stage.setTitle("Lista de recursos");
         stage.getIcons().add(img);
-        stageAñadir = primaryStage;
-        stageAñadir.setTitle("Añadir un nuevo registro");
-        stageAñadir.getIcons().add(img);
+        stageAnadir = primaryStage;
+        stageAnadir.setTitle("Añadir un nuevo registro");
+        stageAnadir.getIcons().add(img);
         stageStock = primaryStage;
         stageStock.setTitle("Lista de los productos");
         stageStock.getIcons().add(img);
-        stageAñadirStock = primaryStage;
-        stageAñadirStock.setTitle("Añadir un nuevo producto");
+        stageAnadirStock = primaryStage;
+        stageAnadirStock.setTitle("Añadir un nuevo producto");
         stageLogin = primaryStage;
         stageLogin.setTitle("Login");
 
@@ -75,8 +75,8 @@ public class App extends Application {
         stageTrabajadores = primaryStage;
         stageTrabajadores.setTitle("Lista de trabajadores");
 
-        stageAñadirTrabajador = primaryStage;
-        stageAñadirTrabajador.setTitle("Añadir un nuevo trabajador");
+        stageAnadirTrabajador = primaryStage;
+        stageAnadirTrabajador.setTitle("Añadir un nuevo trabajador");
 
         pantailakKargatu();
 
@@ -92,15 +92,14 @@ public class App extends Application {
     private void pantailakKargatu() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/tabla.fxml"));
         root = loader.load();
-        escena = new Scene(root);
         tCont = loader.getController();
         tCont.setMainApp(this);
 
         FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/Añadir.fxml"));
         root2 = loader2.load();
         escena2 = new Scene(root2);
-        añadirCont = loader2.getController();
-        añadirCont.setMainApp(this);
+        anadirCont = loader2.getController();
+        anadirCont.setMainApp(this);
 
         FXMLLoader loader3 = new FXMLLoader(getClass().getResource("/tablaStock.fxml"));
         root3 = loader3.load();
@@ -111,8 +110,8 @@ public class App extends Application {
         FXMLLoader loader4 = new FXMLLoader(getClass().getResource("/añadirProducto.fxml"));
         root4 = loader4.load();
         escena4 = new Scene(root4);
-        añadirStockCont = loader4.getController();
-        añadirStockCont.setMainApp(this);
+        anadirStockCont = loader4.getController();
+        anadirStockCont.setMainApp(this);
 
         FXMLLoader loader5 = new FXMLLoader(getClass().getResource("/modificarProducto.fxml"));
         root5 = loader5.load();
@@ -129,8 +128,8 @@ public class App extends Application {
         FXMLLoader loader7 = new FXMLLoader(getClass().getResource("/añadirTrabajador.fxml"));
         root7 = loader7.load();
         escena7 = new Scene(root7);
-        añadirTrabContr = loader7.getController();
-        añadirTrabContr.setMainApp(this);
+        anadirTrabContr = loader7.getController();
+        anadirTrabContr.setMainApp(this);
 
         FXMLLoader loader8 = new FXMLLoader(getClass().getResource("/admin.fxml"));
         root8 = loader8.load();
@@ -141,20 +140,19 @@ public class App extends Application {
 
     }
 
-    public void enseñarAñadir() throws ParseException, SQLException {
-        stageAñadir.setScene(escena2);
-        stageAñadir.show();
-        Registro r = new Registro("","","","","","","Salida","","",0); //Hacer esto es un poco feo pero es que no se me ocurre otra cosa
-        añadirCont.hasieratu(r);
+    public void ensenarAnadir() throws ParseException, SQLException {
+        stageAnadir.setScene(escena2);
+        stageAnadir.show();
+        Registro r = new Registro("","","","","","","","","",0); //Hacer esto es un poco feo pero es que no se me ocurre otra cosa
+        anadirCont.hasieratu(r);
     }
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    public void enseñarTabla() {
+    public void ensenarTabla() {
         stage.setScene(escena);
-        stage.show();
     }
 
     public void mostrarInventario() {
@@ -162,9 +160,9 @@ public class App extends Application {
         stageStock.show();
     }
 
-    public void enseñarAñadirStock() {
-        stageAñadirStock.setScene(escena4);
-        stageAñadirStock.show();
+    public void ensenarAnadirStock() {
+        stageAnadirStock.setScene(escena4);
+        stageAnadirStock.show();
     }
 
     public void modificarProducto(Producto p){
@@ -174,9 +172,9 @@ public class App extends Application {
     }
 
     public void modificarRegistro(Registro r) throws SQLException {
-        stageAñadir.setScene(escena2);
-        stageAñadir.show();
-        añadirCont.hasieratu(r);
+        stageAnadir.setScene(escena2);
+        stageAnadir.show();
+        anadirCont.hasieratu(r);
     }
 
     public void cargarTablaTrab() throws SQLException {
@@ -186,9 +184,9 @@ public class App extends Application {
     }
 
     public void cargarNuevoTrab(String s){
-        stageAñadirTrabajador.setScene(escena7);
-        stageAñadirTrabajador.show();
-        añadirTrabContr.iniciar(s);
+        stageAnadirTrabajador.setScene(escena7);
+        stageAnadirTrabajador.show();
+        anadirTrabContr.iniciar(s);
     }
 
 
@@ -209,12 +207,10 @@ public class App extends Application {
 
 
     public void setAdmin(){
-        añadirCont.setAdmin();
+        anadirCont.setAdmin();
     }
 
     public void cargarLogin(){
-        loginContr.borrarPass();
-        añadirCont.adminFalse();
         stageLogin.setScene(escena8);
         stageLogin.show();
     }

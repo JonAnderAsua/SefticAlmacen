@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'org.beryx.jlink' version '2.24.1'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
 }
 
 application{
@@ -13,6 +14,10 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+}
+
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml','javafx.base' ]
 }
 
 dependencies {
