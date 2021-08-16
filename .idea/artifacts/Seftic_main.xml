@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="Seftic.main">
+    <output-path>$PROJECT_DIR$/out/artifacts/Seftic_main</output-path>
+    <root id="root">
+      <element id="archive" name="Seftic_main.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="module-output" name="Seftic.main" />
+      </element>
+    </root>
+  </artifact>
+</component>
